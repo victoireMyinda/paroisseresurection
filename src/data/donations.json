@@ -1,0 +1,28 @@
+{
+  "mobileMoney": [
+    { "id": "orange", "name": "Orange Money", "number": "081 664 4420" },
+    { "id": "mpesa", "name": "M-Pesa", "number": "081 664 4420" },
+    { "id": "airtel", "name": "Airtel Money", "number": "099 664 4420" },
+    { "id": "afrimoney", "name": "Afrimoney", "number": "081 664 4420" }
+  ],
+  "bank": [
+    { "id": "equity", "name": "Equity BCDC", "number": "00012-3456789-01" },
+    { "id": "illicocash", "name": "Illico Cash", "number": "081 664 4420" },
+    { "id": "pepele", "name": "Pepele Mobile", "number": "081 664 4420" },
+    { "id": "visa", "name": "Visa", "number": "Paiement par carte" }
+  ],
+  "spiritualText": {
+    "title": "Le don dans la tradition biblique",
+    "verses": [
+      {
+        "reference": "2 Corinthiens 9, 7",
+        "text": "Que chacun donne comme il l'a résolu en son cœur, sans tristesse ni contrainte ; car Dieu aime celui qui donne avec joie."
+      },
+      {
+        "reference": "Luc 6, 38",
+        "text": "Donnez, et il vous sera donné : on versera dans votre sein une bonne mesure, serrée, secouée et débordante."
+      }
+    ],
+    "message": "Votre générosité permet à notre paroisse de poursuivre sa mission spirituelle et sociale : entretien du lieu de culte, formation des jeunes, aide aux plus démunis de Salongo-Sud. Chaque don, quel que soit son montant, est un acte de foi et de solidarité fraternelle. Que Dieu vous bénisse pour votre offrande."
+  }
+}

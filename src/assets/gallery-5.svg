@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#D4AF37" opacity="0.08"/>
+  <path d="M160 200 L200 120 L240 200 Z" fill="#0D47A1" opacity="0.3"/>
+  <circle cx="200" cy="160" r="25" fill="#D4AF37" opacity="0.5"/>
+  <text x="200" y="250" text-anchor="middle" fill="#0D47A1" font-size="14" font-family="serif">Famille</text>
+</svg>

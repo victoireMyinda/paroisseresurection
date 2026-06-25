@@ -1,0 +1,98 @@
+[
+  {
+    "id": "1",
+    "title": "Retraite paroissiale de Carême 2026",
+    "category": "retraites",
+    "date": "2026-03-15",
+    "excerpt": "Retraite spirituelle de trois jours pour toute la communauté paroissiale, animée par un prédicateur invité.",
+    "content": "La Paroisse de la Résurrection organise sa retraite paroissiale annuelle du vendredi 15 au dimanche 17 mars 2026. Thème : « Marchez à la lumière du Christ ressuscité ». Inscriptions au secrétariat paroissial."
+  },
+  {
+    "id": "2",
+    "title": "Veillée de prière pour la paix en RDC",
+    "category": "veillees",
+    "date": "2026-06-20",
+    "excerpt": "Veillée de prière intercessionnelle pour la paix et la réconciliation en République Démocratique du Congo.",
+    "content": "Rejoignez-nous le vendredi 20 juin à 19h00 pour une veillée de prière en faveur de la paix dans notre pays. Chapelet, adoration et témoignages."
+  },
+  {
+    "id": "3",
+    "title": "Bans de mariage — Juin 2026",
+    "category": "bans",
+    "date": "2026-06-08",
+    "excerpt": "Publication des bans de mariage pour le mois de juin 2026.",
+    "content": "Conformément à la discipline ecclésiastique, les bans de mariage seront publiés les dimanches 8, 15 et 22 juin 2026 lors des messes dominicales."
+  },
+  {
+    "id": "4",
+    "title": "Célébration des baptêmes — Juillet",
+    "category": "baptemes",
+    "date": "2026-07-12",
+    "excerpt": "Session de baptêmes d'enfants prévue le dimanche 12 juillet 2026.",
+    "content": "Les parents souhaitant faire baptiser leur enfant sont invités à s'inscrire auprès de la Commission Catéchèse et à suivre la préparation obligatoire."
+  },
+  {
+    "id": "5",
+    "title": "Journée caritative de la paroisse",
+    "category": "evenements",
+    "date": "2026-06-28",
+    "excerpt": "Grande collecte de vivres et de vêtements au profit des familles vulnérables de Salongo-Sud.",
+    "content": "La Commission Caritas organise une journée de solidarité le samedi 28 juin. Dépôt des dons à la salle paroissiale de 8h00 à 16h00."
+  },
+  {
+    "id": "6",
+    "title": "Pèlerinage diocésain à Kisantu",
+    "category": "pelerinages",
+    "date": "2026-08-15",
+    "excerpt": "Pèlerinage annuel de l'Archidiocèse de Kinshasa à la Basilique de Kisantu pour la fête de l'Assomption.",
+    "content": "Départ du parvis de la paroisse à 5h00. Inscription : 15 USD par personne. Contactez la Commission Jeunesse."
+  },
+  {
+    "id": "7",
+    "title": "Communiqué : Horaires d'été",
+    "category": "communiques",
+    "date": "2026-06-01",
+    "excerpt": "Modification des horaires de certains offices pendant la saison estivale.",
+    "content": "Du 1er juin au 31 août 2026, la messe du soir du vendredi est avancée à 17h30. Les autres horaires restent inchangés."
+  },
+  {
+    "id": "8",
+    "title": "Ordination diaconale — Félicitations",
+    "category": "ordinations",
+    "date": "2026-05-25",
+    "excerpt": "La paroisse félicite notre frère en Christ ordonné diacre lors de la célébration diocésaine.",
+    "content": "Une messe d'action de grâces sera célébrée le dimanche 1er juin à 11h00 en l'église paroissiale. Tous les fidèles sont conviés."
+  },
+  {
+    "id": "9",
+    "title": "Funérailles — Annonce paroissiale",
+    "category": "funerailles",
+    "date": "2026-06-10",
+    "excerpt": "La paroisse accompagne une famille en deuil et invite à la prière pour le repos de l'âme du défunt.",
+    "content": "Les funérailles auront lieu le mardi 10 juin à 10h00. Les fidèles sont invités à prier pour le défunt et à soutenir la famille éprouvée."
+  },
+  {
+    "id": "10",
+    "title": "Fête paroissiale de la Résurrection",
+    "category": "evenements",
+    "date": "2026-04-20",
+    "excerpt": "Célébration solennelle de la fête patronale de notre paroisse.",
+    "content": "Le dimanche 20 avril, la paroisse célèbre sa fête patronale avec une messe solennelle à 10h00, suivie d'un agape paroissiale sur le parvis."
+  },
+  {
+    "id": "11",
+    "title": "Session de confession collective",
+    "category": "communiques",
+    "date": "2026-06-14",
+    "excerpt": "Confessions collectives avant la fête du Sacré-Cœur.",
+    "content": "Le vendredi 14 juin, confessions de 15h00 à 18h00. Prêtres supplémentaires présents pour accompagner les fidèles."
+  },
+  {
+    "id": "12",
+    "title": "Formation des lecteurs liturgiques",
+    "category": "evenements",
+    "date": "2026-07-05",
+    "excerpt": "Journée de formation pour les nouveaux lecteurs de la Parole.",
+    "content": "La Commission Liturgique organise une formation le samedi 5 juillet de 9h00 à 15h00. Inscription obligatoire."
+  }
+]

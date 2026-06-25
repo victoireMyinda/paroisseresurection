@@ -1,0 +1,99 @@
+{
+  "statistics": {
+    "commissions": 10,
+    "subCommissions": 42,
+    "events": 48,
+    "faithful": 3500
+  },
+  "curateMessage": {
+    "title": "Mot du Curé",
+    "name": "Ndeko Jean Delly",
+    "role": "Curé de la Paroisse",
+    "greeting": "Chers frères et sœurs en Christ,",
+    "content": "C'est avec une profonde joie pastorale que je vous accueille sur le site officiel de notre paroisse. La Paroisse Catholique de la Résurrection, située au cœur de Lemba Salongo, est une communauté vivante où la foi se célèbre, se partage et se met en œuvre au service de nos frères et sœurs.\n\nDans un quartier dynamique de Kinshasa, marqué par la vitalité de sa jeunesse et la richesse de ses traditions, notre paroisse se veut un lieu de rencontre avec le Christ ressuscité — source d'espérance pour tous. Que vous soyez de longue date fidèle ou en quête de sens, vous trouverez ici une famille spirituelle prête à vous accompagner.\n\nJe vous invite à participer activement à la vie paroissiale : célébrations dominicales, catéchèse, œuvres de charité, activités des commissions. Ensemble, construisons une Église synodale, accueillante et missionnaire.\n\nQue la paix du Christ ressuscité demeure en vos cœurs.",
+    "signature": "Ndeko Jean Delly",
+    "date": "2026-06-01"
+  },
+  "history": {
+    "title": "Notre Histoire",
+    "sections": [
+      {
+        "title": "Naissance dans le tissu paroissial de Lemba",
+        "content": "La Paroisse Catholique de la Résurrection s'inscrit dans l'histoire riche de l'Église catholique à Kinshasa, capitale spirituelle de la République Démocratique du Congo. Située dans le quartier Salongo-Sud, au sein de la commune de Lemba, elle répond à un besoin pastoral croissant dans un secteur urbanisé en pleine expansion."
+      },
+      {
+        "title": "Un nom porteur d'espérance",
+        "content": "Le nom « Résurrection » rappelle le cœur de la foi chrétienne : le Christ vainqueur de la mort, promesse de vie éternelle. Dans un contexte congolais où les défis quotidiens peuvent peser sur l'espérance, notre paroisse entend être un signe visible de la victoire de la lumière sur les ténèbres."
+      },
+      {
+        "title": "Au service de la communauté de Salongo",
+        "content": "Lemba, l'une des communes les plus peuplées de Kinshasa, abrite une population jeune et active. Salongo-Sud, quartier résidentiel et commercial, accueille des familles, des commerçants et des étudiants. La paroisse accompagne les fidèles dans les sacrements, la formation à la foi et l'engagement social, en lien avec l'Archidiocèse de Kinshasa."
+      },
+      {
+        "title": "Une Église en marche",
+        "content": "Structurée en commissions pastorales, notre communauté paroissiale œuvre dans les domaines de la liturgie, de la catéchèse, de la jeunesse, de la famille, de la justice et de la paix, de la charité, des finances, de la communication et de l'évangélisation. Chaque fidèle est appelé à y trouver sa place selon ses charismes."
+      }
+    ]
+  },
+  "liturgySchedule": [
+    {
+      "category": "Messes dominicales",
+      "items": [
+        { "day": "Dimanche", "time": "6h30", "description": "Messe matinale" },
+        { "day": "Dimanche", "time": "9h00", "description": "Messe principale avec chorale" },
+        { "day": "Dimanche", "time": "11h00", "description": "Messe familiale" },
+        { "day": "Dimanche", "time": "18h00", "description": "Messe du soir" }
+      ]
+    },
+    {
+      "category": "Messes quotidiennes",
+      "items": [
+        { "day": "Lundi – Samedi", "time": "6h30", "description": "Messe du matin" },
+        { "day": "Lundi – Vendredi", "time": "18h00", "description": "Messe du soir" }
+      ]
+    },
+    {
+      "category": "Confessions",
+      "items": [
+        { "day": "Samedi", "time": "15h00 – 17h30", "description": "Confessions avant le dimanche" },
+        { "day": "Sur rendez-vous", "time": "—", "description": "Contacter le secrétariat paroissial" }
+      ]
+    },
+    {
+      "category": "Adoration",
+      "items": [
+        { "day": "Jeudi", "time": "17h00 – 18h00", "description": "Adoration eucharistique" },
+        { "day": "Premier vendredi", "time": "18h00 – 20h00", "description": "Veillée d'adoration mensuelle" }
+      ]
+    },
+    {
+      "category": "Catéchèse",
+      "items": [
+        { "day": "Samedi", "time": "9h00 – 11h00", "description": "Catéchèse des enfants et des jeunes" },
+        { "day": "Mercredi", "time": "18h00 – 19h30", "description": "Formation biblique des adultes" }
+      ]
+    }
+  ],
+  "parishLife": {
+    "title": "Vie paroissiale",
+    "description": "Notre paroisse est un lieu de vie communautaire où la prière, la formation et la solidarité s'entrelacent. Des groupes de prière aux activités sportives, des retraites spirituelles aux actions caritatives, chaque semaine offre de nouvelles occasions de grandir dans la foi et de servir le prochain.",
+    "highlights": [
+      {
+        "title": "Célébrations vivantes",
+        "description": "Des liturgies soignées, animées par une chorale dynamique et une participation active des fidèles."
+      },
+      {
+        "title": "Formation continue",
+        "description": "Catéchèse pour tous les âges, sessions bibliques et préparation aux sacrements tout au long de l'année."
+      },
+      {
+        "title": "Solidarité active",
+        "description": "Visites aux malades, aide aux familles vulnérables et soutien aux orphelins du quartier."
+      },
+      {
+        "title": "Jeunesse engagée",
+        "description": "Groupes de jeunes, scouts catholiques et activités culturelles pour accompagner la nouvelle génération."
+      }
+    ]
+  }
+}

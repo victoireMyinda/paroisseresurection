@@ -1,0 +1,24 @@
+{
+  "title": "Messes en direct",
+  "subtitle": "Suivez nos célébrations en live, où que vous soyez",
+  "description": "La Paroisse de la Résurrection diffuse ses messes dominicales et certaines célébrations festives en direct. Rejoignez la communauté des fidèles sur YouTube ou Facebook pour prier avec nous.",
+  "scheduleNote": "Diffusion habituelle les dimanches à 9h00 (messe principale) et lors des grandes fêtes liturgiques.",
+  "featuredVideo": {
+    "title": "Célébration paroissiale",
+    "description": "Revivez un moment de la vie liturgique de notre communauté."
+  },
+  "platforms": [
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "watchUrl": "https://youtube.com/@paroisseresurrection/live",
+      "embedUrl": "https://www.youtube.com/embed/FxMDSUhFgSk"
+    },
+    {
+      "id": "facebook",
+      "name": "Facebook",
+      "watchUrl": "https://facebook.com/paroisseresurrection/live",
+      "embedUrl": ""
+    }
+  ]
+}

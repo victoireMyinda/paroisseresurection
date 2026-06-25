@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" fill="none">
+  <rect width="400" height="300" fill="#1F2937" opacity="0.05"/>
+  <path d="M200 80 L220 140 L280 140 L230 175 L250 235 L200 200 L150 235 L170 175 L120 140 L180 140 Z" fill="#D4AF37" opacity="0.5"/>
+  <text x="200" y="270" text-anchor="middle" fill="#0D47A1" font-size="14" font-family="serif">Caritas</text>
+</svg>

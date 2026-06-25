@@ -1,0 +1,153 @@
+[
+  {
+    "id": "liturgique",
+    "name": "Commission Liturgique",
+    "mission": "Organisation et animation des célébrations liturgiques.",
+    "description": "La Commission Liturgique veille à la dignité et à la beauté des célébrations eucharistiques et sacramentelles. Elle coordonne les différents ministères au service de l'autel pour que chaque messe soit une expérience de rencontre authentique avec le Christ.",
+    "responsible": "À confirmer",
+    "contact": "liturgie@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-1.svg",
+    "subCommissions": [
+      { "name": "Chorale", "description": "Animation musicale et chant liturgique lors des célébrations dominicales et festives." },
+      { "name": "Lecteurs", "description": "Proclamation de la Parole de Dieu avec clarté et recueillement." },
+      { "name": "Servants d'autel", "description": "Service au pied de l'autel, assistance au célébrant lors des messes." },
+      { "name": "Accueil et protocole", "description": "Accueil chaleureux des fidèles, orientation et gestion du protocole liturgique." },
+      { "name": "Fleurissement et décoration liturgique", "description": "Décoration de l'église selon le temps liturgique et les fêtes." },
+      { "name": "Sonorisation", "description": "Gestion technique du son et de la diffusion des célébrations." }
+    ]
+  },
+  {
+    "id": "catechese",
+    "name": "Commission Catéchèse",
+    "mission": "Formation chrétienne et transmission de la foi.",
+    "description": "La Commission Catéchèse assure la formation doctrinale et spirituelle de tous les membres de la paroisse, des enfants aux adultes, en fidélité à la tradition de l'Église catholique.",
+    "responsible": "À confirmer",
+    "contact": "catechese@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-2.svg",
+    "subCommissions": [
+      { "name": "Catéchèse des enfants", "description": "Initiation à la foi pour les enfants de 6 à 12 ans." },
+      { "name": "Catéchèse des jeunes", "description": "Accompagnement spirituel des adolescents et jeunes adultes." },
+      { "name": "Catéchuménat des adultes", "description": "Parcours d'initiation chrétienne pour les adultes en quête de baptême." },
+      { "name": "Formation biblique", "description": "Étude approfondie des Écritures en groupes de partage." },
+      { "name": "Préparation aux sacrements", "description": "Préparation au baptême, à la première communion, à la confirmation et au mariage." }
+    ]
+  },
+  {
+    "id": "jeunesse",
+    "name": "Commission Jeunesse",
+    "mission": "Encadrement spirituel et humain des jeunes.",
+    "description": "La Commission Jeunesse accompagne les jeunes de Lemba Salongo dans leur croissance humaine et spirituelle, en leur offrant des espaces de prière, de formation et d'engagement solidaire.",
+    "responsible": "À confirmer",
+    "contact": "jeunesse@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-3.svg",
+    "subCommissions": [
+      { "name": "Jeunesse paroissiale", "description": "Coordination des activités et de la vie spirituelle des jeunes de la paroisse." },
+      { "name": "Scouts", "description": "Éducation par le scoutisme catholique : discipline, service et amitié." },
+      { "name": "Groupes vocationnels", "description": "Accompagnement des jeunes en discernement de vocation sacerdotale ou religieuse." },
+      { "name": "Activités sportives et culturelles", "description": "Tournois, spectacles et activités récréatives à visée éducative." }
+    ]
+  },
+  {
+    "id": "famille",
+    "name": "Commission Famille",
+    "mission": "Accompagnement des familles chrétiennes.",
+    "description": "La Commission Famille soutient les couples et les familles dans leur vocation de sanctification et de service, en proposant des accompagnements adaptés aux réalités congolaises.",
+    "responsible": "À confirmer",
+    "contact": "famille@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-4.svg",
+    "subCommissions": [
+      { "name": "Préparation au mariage", "description": "Sessions de préparation au sacrement du mariage pour les fiancés." },
+      { "name": "Accompagnement des couples", "description": "Soutien pastoral aux couples dans les moments de joie et d'épreuve." },
+      { "name": "Pastorale des veuves et veufs", "description": "Accompagnement spirituel et matériel des personnes en deuil." },
+      { "name": "Pastorale des enfants", "description": "Soutien aux parents dans l'éducation chrétienne de leurs enfants." }
+    ]
+  },
+  {
+    "id": "justice-paix",
+    "name": "Commission Justice et Paix",
+    "mission": "Promotion de la justice sociale et de la paix.",
+    "description": "Inspirée par l'enseignement social de l'Église, cette commission œuvre pour la promotion des droits humains, la réconciliation et la paix dans le quartier et au-delà.",
+    "responsible": "À confirmer",
+    "contact": "justice-paix@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-5.svg",
+    "subCommissions": [
+      { "name": "Droits humains", "description": "Sensibilisation aux droits fondamentaux et lutte contre les injustices." },
+      { "name": "Médiation et résolution des conflits", "description": "Accompagnement des familles et communautés en situation de conflit." },
+      { "name": "Sensibilisation civique", "description": "Éducation à la citoyenneté responsable et à la participation démocratique." }
+    ]
+  },
+  {
+    "id": "caritas",
+    "name": "Commission Caritas",
+    "mission": "Solidarité et aide sociale.",
+    "description": "Bras charitatif de la paroisse, la Commission Caritas répond aux besoins des plus démunis de Salongo-Sud par des actions concrètes de solidarité et de compassion.",
+    "responsible": "À confirmer",
+    "contact": "caritas@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-6.svg",
+    "subCommissions": [
+      { "name": "Visite des malades", "description": "Visites régulières aux malades à domicile et à l'hôpital." },
+      { "name": "Assistance aux pauvres", "description": "Distribution de vivres et soutien matériel aux familles nécessiteuses." },
+      { "name": "Soutien aux orphelins", "description": "Accompagnement éducatif et spirituel des enfants orphelins du quartier." },
+      { "name": "Urgences et catastrophes", "description": "Intervention rapide en cas de sinistre ou de catastrophe naturelle." }
+    ]
+  },
+  {
+    "id": "finance",
+    "name": "Commission Finance et Patrimoine",
+    "mission": "Gestion financière et patrimoine paroissial.",
+    "description": "Cette commission assure une gestion transparente et responsable des ressources de la paroisse, veillant à la pérennité du patrimoine immobilier et mobilier.",
+    "responsible": "À confirmer",
+    "contact": "finance@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-1.svg",
+    "subCommissions": [
+      { "name": "Comptabilité", "description": "Tenue des livres comptables et rapports financiers périodiques." },
+      { "name": "Collecte de fonds", "description": "Organisation des quêtes, campagnes de dons et levées de fonds." },
+      { "name": "Gestion immobilière", "description": "Entretien et administration des biens immobiliers paroissiaux." },
+      { "name": "Inventaire du patrimoine", "description": "Recensement et conservation du patrimoine mobilier et artistique." }
+    ]
+  },
+  {
+    "id": "communication",
+    "name": "Commission Communication",
+    "mission": "Communication interne et externe.",
+    "description": "La Commission Communication assure la visibilité de la paroisse à travers les médias traditionnels et numériques, en veillant à la qualité et à la cohérence des messages.",
+    "responsible": "À confirmer",
+    "contact": "communication@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-2.svg",
+    "subCommissions": [
+      { "name": "Médias sociaux", "description": "Animation des pages Facebook, Instagram, TikTok et YouTube." },
+      { "name": "Site web", "description": "Gestion et mise à jour du site officiel de la paroisse." },
+      { "name": "Relations publiques", "description": "Liaison avec les médias locaux et les institutions diocésaines." },
+      { "name": "Photographie et audiovisuel", "description": "Couverture photo et vidéo des événements paroissiaux." }
+    ]
+  },
+  {
+    "id": "evangelisation",
+    "name": "Commission Évangélisation et Mission",
+    "mission": "Annonce de l'Évangile.",
+    "description": "Au cœur de la mission de l'Église, cette commission organise des campagnes d'évangélisation, des missions paroissiales et l'accueil des nouveaux convertis.",
+    "responsible": "À confirmer",
+    "contact": "evangelisation@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-3.svg",
+    "subCommissions": [
+      { "name": "Missions paroissiales", "description": "Organisation de missions spirituelles annuelles avec prédicateurs invités." },
+      { "name": "Nouveaux convertis", "description": "Accompagnement des personnes nouvellement accueillies dans la foi." },
+      { "name": "Évangélisation de proximité", "description": "Visites porte-à-porte et témoignage dans le quartier." }
+    ]
+  },
+  {
+    "id": "mouvements",
+    "name": "Commission des Mouvements et Associations",
+    "mission": "Coordination des groupes spirituels.",
+    "description": "Cette commission fédère les différents mouvements et associations catholiques présents dans la paroisse, favorisant la communion et la complémentarité des charismes.",
+    "responsible": "À confirmer",
+    "contact": "mouvements@paroisseresurrection-kinshasa.org",
+    "image": "/src/assets/gallery-4.svg",
+    "subCommissions": [
+      { "name": "Légion de Marie", "description": "Groupe de prière et d'action apostolique sous la protection de la Vierge Marie." },
+      { "name": "Renouveau Charismatique Catholique", "description": "Groupe de prière en l'Esprit Saint et formation charismatique." },
+      { "name": "Mouvement Eucharistique des Jeunes", "description": "Adoration eucharistique et engagement missionnaire des jeunes." },
+      { "name": "Scouts Catholiques", "description": "Coordination des troupes scoutes de la paroisse." }
+    ]
+  }
+]

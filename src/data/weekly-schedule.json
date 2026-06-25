@@ -1,0 +1,33 @@
+{
+  "lundi": [
+    { "type": "Réunion", "title": "Conseil paroissial", "time": "18h00", "responsible": "Secrétariat" },
+    { "type": "Messe", "title": "Messe du soir", "time": "18h00", "responsible": "—" }
+  ],
+  "mardi": [
+    { "type": "Activité", "title": "Groupe de prière du Renouveau", "time": "17h30", "responsible": "Commission Mouvements" },
+    { "type": "Messe", "title": "Messe du soir", "time": "18h00", "responsible": "—" }
+  ],
+  "mercredi": [
+    { "type": "Activité", "title": "Formation biblique des adultes", "time": "18h00", "responsible": "Commission Catéchèse" },
+    { "type": "Messe", "title": "Messe du soir", "time": "18h00", "responsible": "—" }
+  ],
+  "jeudi": [
+    { "type": "Activité", "title": "Adoration eucharistique", "time": "17h00", "responsible": "Commission Liturgique" },
+    { "type": "Messe", "title": "Messe du soir", "time": "18h00", "responsible": "—" }
+  ],
+  "vendredi": [
+    { "type": "Réunion", "title": "Coordination des commissions", "time": "17h00", "responsible": "Curé" },
+    { "type": "Messe", "title": "Messe du soir", "time": "18h00", "responsible": "—" }
+  ],
+  "samedi": [
+    { "type": "Activité", "title": "Catéchèse des enfants et jeunes", "time": "9h00", "responsible": "Commission Catéchèse" },
+    { "type": "Activité", "title": "Confessions", "time": "15h00", "responsible": "Curé" },
+    { "type": "Réunion", "title": "Chorale paroissiale", "time": "16h00", "responsible": "Commission Liturgique" }
+  ],
+  "dimanche": [
+    { "type": "Messe", "title": "Messe matinale", "time": "6h30", "responsible": "—" },
+    { "type": "Messe", "title": "Messe principale", "time": "9h00", "responsible": "Chorale" },
+    { "type": "Messe", "title": "Messe familiale", "time": "11h00", "responsible": "—" },
+    { "type": "Messe", "title": "Messe du soir", "time": "18h00", "responsible": "—" }
+  ]
+}
