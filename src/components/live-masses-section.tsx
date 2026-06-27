@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import liveData from '@/data/live.json'
 import { socialLogos } from '@/assets/social'
 import { siteConfig } from '@/config/site'
+import { useLanguage } from '@/i18n/language-provider'
 
 const platformLogos: Record<string, string> = {
   youtube: socialLogos.youtube,
@@ -14,6 +15,8 @@ const platformLogos: Record<string, string> = {
 }
 
 export function LiveMassesSection() {
+  const { t } = useLanguage()
+
   const platforms = liveData.platforms.map((platform) => ({
     ...platform,
     watchUrl:
@@ -31,7 +34,7 @@ export function LiveMassesSection() {
   return (
     <section id="direct" className="section-padding bg-muted/50">
       <div className="container-wide">
-        <SectionHeading title={liveData.title} subtitle={liveData.subtitle} />
+        <SectionHeading title={t('live.title')} subtitle={t('live.subtitle')} />
 
         <FadeIn>
           <div className="mb-8 flex flex-wrap items-center justify-center gap-3">
@@ -40,7 +43,7 @@ export function LiveMassesSection() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-600" />
               </span>
-              LIVE
+              {t('live.liveBadge')}
             </Badge>
             <p className="text-sm text-muted-foreground">{liveData.scheduleNote}</p>
           </div>
@@ -64,10 +67,8 @@ export function LiveMassesSection() {
             </div>
             <CardContent className="flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="font-semibold">{liveData.featuredVideo.title}</p>
-                <p className="text-sm text-muted-foreground">
-                  {liveData.featuredVideo.description}
-                </p>
+                <p className="font-semibold">{t('live.featuredTitle')}</p>
+                <p className="text-sm text-muted-foreground">{t('live.featuredDesc')}</p>
               </div>
               <Button asChild variant="outline" size="sm">
                 <a
@@ -75,7 +76,7 @@ export function LiveMassesSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Voir sur YouTube
+                  {t('live.watchYoutube')}
                   <ExternalLink className="h-3.5 w-3.5" />
                 </a>
               </Button>
@@ -90,7 +91,7 @@ export function LiveMassesSection() {
                 <div className="relative aspect-video bg-foreground/5">
                   {platform.embedUrl ? (
                     <iframe
-                      title={`Messe en direct — ${platform.name}`}
+                      title={`${t('live.title')} — ${platform.name}`}
                       src={platform.embedUrl}
                       className="h-full w-full"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -107,10 +108,14 @@ export function LiveMassesSection() {
                         height={56}
                       />
                       <div>
-                        <p className="font-semibold">Diffusion sur {platform.name}</p>
-                        <p className="mt-1 text-sm text-muted-foreground">
-                          Le flux vidéo apparaît ici lorsque la messe est en cours.
+                        <p className="font-semibold">
+                          {platform.id === 'youtube'
+                            ? t('live.onYoutube')
+                            : platform.id === 'facebook'
+                              ? t('live.onFacebook')
+                              : `${t('live.title')} — ${platform.name}`}
                         </p>
+                        <p className="mt-1 text-sm text-muted-foreground">{t('live.streamHint')}</p>
                       </div>
                       <Button asChild variant="default" size="lg">
                         <a
@@ -119,7 +124,11 @@ export function LiveMassesSection() {
                           rel="noopener noreferrer"
                         >
                           <Radio className="h-4 w-4" />
-                          Voir sur {platform.name}
+                          {platform.id === 'youtube'
+                            ? t('live.watchYoutube')
+                            : platform.id === 'facebook'
+                              ? t('live.watchFacebook')
+                              : `${t('common.open')} ${platform.name}`}
                           <ExternalLink className="h-4 w-4" />
                         </a>
                       </Button>
@@ -137,7 +146,7 @@ export function LiveMassesSection() {
                     />
                     <div>
                       <p className="font-semibold">{platform.name}</p>
-                      <p className="text-xs text-muted-foreground">Messes en direct</p>
+                      <p className="text-xs text-muted-foreground">{t('live.directMasses')}</p>
                     </div>
                   </div>
                   <Button asChild variant="outline" size="sm">
@@ -146,7 +155,7 @@ export function LiveMassesSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Ouvrir
+                      {t('common.open')}
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </Button>
@@ -163,8 +172,7 @@ export function LiveMassesSection() {
             viewport={{ once: true }}
             className="mt-8 text-center text-sm text-muted-foreground"
           >
-            Activez les notifications sur nos pages YouTube et Facebook pour être alerté dès le
-            début de chaque diffusion.
+            {t('live.notifyHint')}
           </motion.p>
         </FadeIn>
       </div>

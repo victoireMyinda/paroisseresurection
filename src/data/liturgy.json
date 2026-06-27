@@ -1,0 +1,34 @@
+{
+  "featuredTheme": {
+    "title": "Portons la croix avec espérance",
+    "subtitle": "13e dimanche du Temps Ordinaire — Année A",
+    "description": "Comme Jésus nous l'enseigne, suivre le Christ demande courage et confiance. La Paroisse de la Résurrection vous invite à vivre cette parole au cœur de Lemba Salongo.",
+    "ctaLabel": "Lire l'homélie du dimanche",
+    "ctaHref": "#homelie"
+  },
+  "nextEvent": {
+    "title": "Fête paroissiale de la Résurrection",
+    "date": "2026-04-20T10:00:00",
+    "location": "Église paroissiale"
+  },
+  "homily": {
+    "title": "Homélie du dimanche",
+    "liturgicalDay": "13e dimanche du Temps Ordinaire — Année A",
+    "date": "2026-06-28",
+    "heading": "Aimer Jésus et porter sa croix",
+    "excerpt": "Frères et sœurs, le Christ nous appelle à un amour sans calcul, un amour qui ne recule pas devant le sacrifice. Dans notre contexte de Kinshasa, porter sa croix signifie aussi rester fidèles à l'espérance lorsque la vie devient lourde.",
+    "content": "Le disciple de Jésus n'est pas appelé à une vie sans épreuves, mais à une vie transformée par la foi. À Lemba Salongo comme ailleurs, nous sommes invités à accueillir nos frères et sœurs, à pardonner, à servir les plus fragiles. C'est ainsi que la Résurrection devient une réalité vécue au quotidien dans notre paroisse."
+  },
+  "wordOfDay": {
+    "title": "Parole du jour",
+    "reference": "Matthieu 10, 38",
+    "text": "Celui qui ne prend pas sa croix et ne me suit pas n'est pas digne de moi."
+  },
+  "saintOfDay": {
+    "title": "Saint du jour",
+    "name": "Saint Irénée de Lyon",
+    "date": "2026-06-28",
+    "feast": "Mémoire",
+    "excerpt": "Évêque et martyr, Irénée fut un grand témoin de la foi des premiers chrétiens. Il rappelle que la tradition vivante de l'Église transmet fidèlement l'Évangile de Jésus-Christ."
+  }
+}

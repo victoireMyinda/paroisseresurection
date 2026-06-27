@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button'
 import { galleryImages, galleryVideos } from '@/data'
 import { pageBanners } from '@/assets/parish-images'
 import { siteConfig } from '@/config/site'
+import { useLanguage } from '@/i18n/language-provider'
 
 export function MediaPage() {
+  const { t, content } = useLanguage()
   const [lightbox, setLightbox] = useState<{
     title: string
     src?: string
@@ -34,23 +36,16 @@ export function MediaPage() {
 
   return (
     <>
-      <SEO
-        title="Médias"
-        description="Galerie photos et vidéos de la Paroisse de la Résurrection."
-        path="/medias"
-      />
-      <PageHeader
-        title="Médias"
-        subtitle="Galerie photos et vidéos de la vie paroissiale"
-        image={pageBanners.medias}
-      />
+      <SEO title={t('nav.media')} description={t('home.gallery')} path="/medias" />
+      <PageHeader title={t('nav.media')} subtitle={t('home.gallery')} image={pageBanners.medias} />
 
       <section className="section-padding">
         <div className="container-wide">
           <Tabs defaultValue="images">
             <TabsList className="mb-8">
-              <TabsTrigger value="images">Images</TabsTrigger>
-              <TabsTrigger value="videos">Vidéos</TabsTrigger>
+              <TabsTrigger value="images">{t('common.photos')}</TabsTrigger>
+              <TabsTrigger value="videos">{t('common.videos')}</TabsTrigger>
+              <TabsTrigger value="albums">{t('common.albums')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="images">
@@ -72,8 +67,8 @@ export function MediaPage() {
                         />
                       </button>
                       <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-3">
-                        <p className="text-sm font-medium text-white">{img.title}</p>
-                        <p className="text-xs text-white/70">{img.category}</p>
+                        <p className="text-sm font-medium text-white">{content.media.imageTitles[img.id] ?? img.title}</p>
+                        <p className="text-xs text-white/70">{content.media.galleryCategories[img.category] ?? img.category}</p>
                       </div>
                       <div className="absolute right-2 top-2 flex gap-1 opacity-0 transition-opacity group-hover:opacity-100">
                         <Button
@@ -137,6 +132,29 @@ export function MediaPage() {
                         </p>
                       </div>
                     </button>
+                  </FadeIn>
+                ))}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="albums">
+              <div className="grid gap-8 md:grid-cols-3">
+                {content.media.albums.map((album, i) => (
+                  <FadeIn key={album.id} delay={i * 0.08}>
+                    <div className="overflow-hidden rounded-xl border">
+                      <div className="grid grid-cols-2 gap-0.5">
+                        {album.imageIds.slice(0, 4).map((id) => {
+                          const img = galleryImages.find((g) => g.id === id)
+                          return img ? (
+                            <img key={id} src={img.src} alt="" className="aspect-square object-cover" />
+                          ) : null
+                        })}
+                      </div>
+                      <div className="p-4">
+                        <h3 className="font-semibold">{album.title}</h3>
+                        <p className="mt-1 text-sm text-muted-foreground">{album.description}</p>
+                      </div>
+                    </div>
                   </FadeIn>
                 ))}
               </div>

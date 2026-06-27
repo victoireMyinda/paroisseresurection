@@ -1,0 +1,106 @@
+export interface NavItem {
+  key: string
+  href: string
+  children?: NavItem[]
+}
+
+export const mainNavigation: NavItem[] = [
+  { key: 'nav.home', href: '/' },
+  {
+    key: 'nav.parish',
+    href: '/notre-paroisse/histoire',
+    children: [
+      { key: 'nav.parish.history', href: '/notre-paroisse/histoire' },
+      { key: 'nav.parish.curates', href: '/notre-paroisse/cures' },
+      { key: 'nav.parish.weekly', href: '/notre-paroisse/annonces-semaine' },
+      { key: 'nav.parish.masses', href: '/notre-paroisse/messes' },
+      { key: 'nav.parish.commissions', href: '/notre-paroisse/commissions' },
+      { key: 'nav.parish.groups', href: '/notre-paroisse/groupes' },
+    ],
+  },
+  {
+    key: 'nav.events',
+    href: '/evenements/annonces',
+    children: [
+      { key: 'nav.events.announcements', href: '/evenements/annonces' },
+      { key: 'nav.events.all', href: '/evenements/calendrier' },
+      { key: 'nav.events.works', href: '/evenements/travaux' },
+    ],
+  },
+  {
+    key: 'nav.liturgy',
+    href: '/liturgie/calendrier',
+    children: [
+      { key: 'nav.liturgy.calendar', href: '/liturgie/calendrier' },
+      { key: 'nav.liturgy.homily', href: '/liturgie/homelie' },
+      { key: 'nav.liturgy.daily', href: '/liturgie/parole-saint' },
+    ],
+  },
+  { key: 'nav.live', href: '/messe-en-direct' },
+  { key: 'nav.media', href: '/medias' },
+  {
+    key: 'nav.church',
+    href: '/eglise/histoire',
+    children: [
+      { key: 'nav.church.history', href: '/eglise/histoire' },
+      { key: 'nav.church.sacraments', href: '/eglise/sacrements' },
+      { key: 'nav.church.liturgy', href: '/eglise/liturgie' },
+      { key: 'nav.church.seasons', href: '/eglise/temps-liturgique' },
+      { key: 'nav.church.feasts', href: '/eglise/fetes' },
+      { key: 'nav.church.saints', href: '/eglise/saints' },
+      { key: 'nav.church.prayers', href: '/eglise/prieres' },
+      { key: 'nav.church.catechism', href: '/eglise/catechisme' },
+      { key: 'nav.church.documents', href: '/eglise/documents' },
+      { key: 'nav.church.bible', href: '/eglise/bible' },
+      { key: 'nav.church.councils', href: '/eglise/conciles' },
+      { key: 'nav.church.popes', href: '/eglise/papes' },
+      { key: 'nav.church.vocations', href: '/eglise/vocations' },
+      { key: 'nav.church.faq', href: '/eglise/faq' },
+    ],
+  },
+]
+
+export const parishSubNav = mainNavigation.find((n) => n.key === 'nav.parish')!.children!
+export const eventsSubNav = mainNavigation.find((n) => n.key === 'nav.events')!.children!
+export const liturgySubNav = mainNavigation.find((n) => n.key === 'nav.liturgy')!.children!
+export const churchSubNav = mainNavigation.find((n) => n.key === 'nav.church')!.children!
+
+export type ChurchSectionId =
+  | 'histoire'
+  | 'sacrements'
+  | 'liturgie'
+  | 'temps-liturgique'
+  | 'fetes'
+  | 'saints'
+  | 'prieres'
+  | 'catechisme'
+  | 'documents'
+  | 'bible'
+  | 'conciles'
+  | 'papes'
+  | 'vocations'
+  | 'faq'
+
+export const churchSectionIds: ChurchSectionId[] = [
+  'histoire',
+  'sacrements',
+  'liturgie',
+  'temps-liturgique',
+  'fetes',
+  'saints',
+  'prieres',
+  'catechisme',
+  'documents',
+  'bible',
+  'conciles',
+  'papes',
+  'vocations',
+  'faq',
+]
+
+export const legacyRedirects: Record<string, string> = {
+  '/commissions': '/notre-paroisse/commissions',
+  '/annonces-hebdomadaires': '/notre-paroisse/annonces-semaine',
+  '/annonces': '/evenements/annonces',
+  '/contact': '/#contact',
+}

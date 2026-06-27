@@ -12,13 +12,31 @@ const socialNetworks: { id: SocialNetwork; name: string; url: string }[] = [
 
 interface SocialLinksProps {
   variant?: 'footer' | 'icons'
+  size?: 'sm' | 'md'
+  tone?: 'default' | 'onDark'
   className?: string
 }
 
-export function SocialLinks({ variant = 'footer', className }: SocialLinksProps) {
+const iconSizes = {
+  sm: { button: 'h-7 w-7', img: 'h-3.5 w-3.5', imgPx: 14 },
+  md: { button: 'h-10 w-10', img: 'h-5 w-5', imgPx: 20 },
+} as const
+
+export function SocialLinks({
+  variant = 'footer',
+  size = 'md',
+  tone = 'default',
+  className,
+}: SocialLinksProps) {
+  const dims = iconSizes[size]
+  const iconButtonClass =
+    tone === 'onDark'
+      ? 'bg-white/10 ring-white/20 hover:bg-white/20 hover:ring-white/40'
+      : 'bg-background ring-border hover:shadow-md'
+
   if (variant === 'icons') {
     return (
-      <div className={cn('flex flex-wrap items-center gap-3', className)}>
+      <div className={cn('flex flex-wrap items-center gap-2', className)}>
         {socialNetworks.map((network) => (
           <a
             key={network.id}
@@ -26,14 +44,18 @@ export function SocialLinks({ variant = 'footer', className }: SocialLinksProps)
             target="_blank"
             rel="noopener noreferrer"
             aria-label={network.name}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-background shadow-sm ring-1 ring-border transition-transform hover:scale-110 hover:shadow-md"
+            className={cn(
+              'flex items-center justify-center rounded-full shadow-sm ring-1 transition-transform hover:scale-105',
+              dims.button,
+              iconButtonClass
+            )}
           >
             <img
               src={socialLogos[network.id]}
               alt=""
-              className="h-5 w-5"
-              width={20}
-              height={20}
+              className={dims.img}
+              width={dims.imgPx}
+              height={dims.imgPx}
             />
           </a>
         ))}

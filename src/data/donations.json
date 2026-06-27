@@ -1,15 +1,17 @@
 {
+  "accountDisplayName": "paroisseresurection",
   "mobileMoney": [
-    { "id": "orange", "name": "Orange Money", "number": "081 664 4420" },
-    { "id": "mpesa", "name": "M-Pesa", "number": "081 664 4420" },
-    { "id": "airtel", "name": "Airtel Money", "number": "099 664 4420" },
-    { "id": "afrimoney", "name": "Afrimoney", "number": "081 664 4420" }
+    { "id": "orange", "name": "Orange Money", "accountName": "paroisseresurection", "number": "081 664 4420", "currency": "CDF" },
+    { "id": "mpesa", "name": "M-Pesa", "accountName": "paroisseresurection", "number": "081 664 4420", "currency": "CDF" },
+    { "id": "airtel", "name": "Airtel Money", "accountName": "paroisseresurection", "number": "099 664 4420", "currency": "CDF" },
+    { "id": "afrimoney", "name": "Afrimoney", "accountName": "paroisseresurection", "number": "081 664 4420", "currency": "CDF" }
   ],
   "bank": [
-    { "id": "equity", "name": "Equity BCDC", "number": "00012-3456789-01" },
-    { "id": "illicocash", "name": "Illico Cash", "number": "081 664 4420" },
-    { "id": "pepele", "name": "Pepele Mobile", "number": "081 664 4420" },
-    { "id": "visa", "name": "Visa", "number": "Paiement par carte" }
+    { "id": "equity", "name": "Equity BCDC", "accountName": "Paroisse Catholique Resurrection", "number": "00012-3456789-01", "currency": "USD" },
+    { "id": "equity_cdf", "name": "Equity BCDC", "accountName": "Paroisse Catholique Resurrection", "number": "00098-7654321-02", "currency": "CDF" },
+    { "id": "illicocash", "name": "Illico Cash", "accountName": "paroisseresurection", "number": "081 664 4420", "currency": "CDF" },
+    { "id": "pepele", "name": "Pepele Mobile", "accountName": "paroisseresurection", "number": "081 664 4420", "currency": "CDF" },
+    { "id": "visa", "name": "Visa", "accountName": "Paroisse Catholique Resurrection", "number": "Paiement par carte bancaire", "currency": "USD" }
   ],
   "spiritualText": {
     "title": "Le don dans la tradition biblique",

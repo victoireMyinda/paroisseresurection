@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { Heart, Download, CheckCircle } from 'lucide-react'
+import { Heart, Download, CheckCircle, Copy, Check, Smartphone, Building2 } from 'lucide-react'
 import { SEO } from '@/components/seo'
 import { PageHeader, FadeIn } from '@/components/section-heading'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Badge } from '@/components/ui/badge'
 import {
   Dialog,
   DialogContent,
@@ -15,38 +16,131 @@ import {
 } from '@/components/ui/dialog'
 import { donations } from '@/data'
 import { siteConfig } from '@/config/site'
-import { formatCurrency, generateReceiptNumber } from '@/lib/utils'
+import { useLanguage } from '@/i18n/language-provider'
+import { cn, formatCurrency, generateReceiptNumber } from '@/lib/utils'
 import { paymentLogos } from '@/assets/payment-logos'
 import { pageBanners } from '@/assets/parish-images'
 
+type Currency = 'USD' | 'CDF'
+
+interface PaymentMethod {
+  id: string
+  name: string
+  accountName: string
+  number: string
+  currency: Currency
+}
+
 interface ReceiptData {
   receiptNumber: string
-  name: string
+  phone: string
   amount: number
+  currency: Currency
   method: string
   date: string
 }
 
+function CurrencyBadge({ currency }: { currency: Currency }) {
+  return (
+    <Badge
+      variant="outline"
+      className={cn(
+        'shrink-0 px-1.5 py-0 text-[10px] font-semibold',
+        currency === 'USD'
+          ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400'
+          : 'border-blue-500/40 bg-blue-500/10 text-blue-700 dark:text-blue-400'
+      )}
+    >
+      {currency}
+    </Badge>
+  )
+}
+
+function PaymentMethodCard({
+  method,
+  type,
+  onCopy,
+  copiedId,
+}: {
+  method: PaymentMethod
+  type: 'mobile' | 'bank'
+  onCopy: (id: string, text: string) => void
+  copiedId: string | null
+}) {
+  const { t } = useLanguage()
+  const logo = paymentLogos[method.id] ?? paymentLogos.equity
+  const numberLabel = type === 'mobile' ? t('donationsPage.mobileNumber') : t('donationsPage.accountNumber')
+  const isCopied = copiedId === method.id
+
+  return (
+    <div className="group rounded-lg border bg-card p-3 shadow-sm transition-colors hover:border-gold/35">
+      <div className="flex gap-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border bg-white p-1.5 dark:bg-white/95">
+          <img src={logo} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
+        </div>
+        <div className="min-w-0 flex-1 space-y-1.5">
+          <div className="flex items-center justify-between gap-2">
+            <h4 className="truncate text-sm font-semibold leading-tight">{method.name}</h4>
+            <CurrencyBadge currency={method.currency} />
+          </div>
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+              {t('donationsPage.accountName')}
+            </p>
+            <p className="truncate text-xs font-medium text-foreground">{method.accountName}</p>
+          </div>
+          <div>
+            <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
+              {numberLabel}
+            </p>
+            <div className="flex items-center gap-1">
+              <p className="truncate font-mono text-xs font-medium text-primary dark:text-gold">
+                {method.number}
+              </p>
+              <button
+                type="button"
+                onClick={() => onCopy(method.id, method.number)}
+                className="shrink-0 rounded p-0.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                aria-label={t('donationsPage.copy')}
+              >
+                {isCopied ? (
+                  <Check className="h-3 w-3 text-green-600" />
+                ) : (
+                  <Copy className="h-3 w-3" />
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function DonationsPage() {
+  const { t, content } = useLanguage()
   const [form, setForm] = useState({
-    name: '',
     phone: '',
-    email: '',
     amount: '',
+    currency: 'USD' as Currency,
     method: '',
   })
   const [receipt, setReceipt] = useState<ReceiptData | null>(null)
   const [submitted, setSubmitted] = useState(false)
+  const [copiedId, setCopiedId] = useState<string | null>(null)
 
-  const allMethods = [...donations.mobileMoney, ...donations.bank]
+  const mobileMethods = donations.mobileMoney as PaymentMethod[]
+  const bankMethods = donations.bank as PaymentMethod[]
+  const allMethods = [...mobileMethods, ...bankMethods]
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     const methodName = allMethods.find((m) => m.id === form.method)?.name ?? form.method
-    const receiptData: ReceiptData = {
+    setReceipt({
       receiptNumber: generateReceiptNumber(),
-      name: form.name,
+      phone: form.phone,
       amount: parseFloat(form.amount) || 0,
+      currency: form.currency,
       method: methodName,
       date: new Date().toLocaleDateString('fr-FR', {
         day: 'numeric',
@@ -55,33 +149,41 @@ export function DonationsPage() {
         hour: '2-digit',
         minute: '2-digit',
       }),
-    }
-    setReceipt(receiptData)
+    })
     setSubmitted(true)
+  }
+
+  const handleCopy = async (id: string, text: string) => {
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedId(id)
+      setTimeout(() => setCopiedId(null), 2000)
+    } catch {
+      /* ignore */
+    }
   }
 
   const downloadReceipt = () => {
     if (!receipt) return
-    const content = `
+    const body = `
 REÇU DE DON
 Paroisse Catholique de la Résurrection
 ${siteConfig.address.full}
 
 N° de reçu : ${receipt.receiptNumber}
 Date : ${receipt.date}
-Donateur : ${receipt.name}
-Montant : ${formatCurrency(receipt.amount)}
+Téléphone : ${receipt.phone}
+Montant : ${formatCurrency(receipt.amount, receipt.currency)}
 Moyen de paiement : ${receipt.method}
 
-Merci pour votre générosité.
-Que Dieu vous bénisse abondamment.
+${content.donations.thankYou}
 
 ---
 ${siteConfig.name}
 ${siteConfig.contact.email}
     `.trim()
 
-    const blob = new Blob([content], { type: 'text/plain' })
+    const blob = new Blob([body], { type: 'text/plain' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
@@ -92,119 +194,126 @@ ${siteConfig.contact.email}
 
   return (
     <>
-      <SEO
-        title="Faire un don"
-        description="Soutenez la mission de la Paroisse de la Résurrection par votre générosité."
-        path="/dons"
-      />
+      <SEO title={t('common.donate')} description={content.donations.spiritualIntro} path="/dons" />
       <PageHeader
-        title="Faire un don"
-        subtitle="« Dieu aime celui qui donne avec joie » — 2 Co 9, 7"
+        title={t('common.donate')}
+        subtitle={content.donations.verses[0]?.text.slice(0, 80) + '…'}
         image={pageBanners.dons}
       />
 
       <section className="section-padding">
-        <div className="container-wide">
+        <div className="container-wide space-y-16">
           <div className="grid gap-12 lg:grid-cols-2">
             <FadeIn>
               <div>
-                <h2 className="text-2xl font-bold mb-6">{donations.spiritualText.title}</h2>
+                <h2 className="mb-6 text-2xl font-bold">{content.donations.spiritualTitle}</h2>
                 <div className="space-y-6">
-                  {donations.spiritualText.verses.map((verse) => (
+                  {content.donations.verses.map((verse) => (
                     <blockquote
                       key={verse.reference}
                       className="border-l-4 border-gold pl-4 italic text-muted-foreground"
                     >
                       <p>&laquo; {verse.text} &raquo;</p>
-                      <cite className="mt-2 block text-sm not-italic font-semibold text-primary dark:text-gold">
+                      <cite className="mt-2 block text-sm font-semibold not-italic text-primary dark:text-gold">
                         — {verse.reference}
                       </cite>
                     </blockquote>
                   ))}
                 </div>
                 <p className="mt-6 leading-relaxed text-muted-foreground">
-                  {donations.spiritualText.message}
+                  {content.donations.spiritualMessage}
                 </p>
               </div>
             </FadeIn>
 
             <FadeIn delay={0.1}>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+              <Card className="border-gold/20 shadow-lg">
+                <CardHeader className="pb-4">
+                  <CardTitle className="flex items-center gap-2 text-lg">
                     <Heart className="h-5 w-5 text-gold" />
-                    Formulaire de don
+                    {t('donationsPage.formTitle')}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-4">
+                  <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                      <Label htmlFor="name">Nom complet</Label>
-                      <Input
-                        id="name"
-                        required
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone">Téléphone</Label>
+                      <Label htmlFor="phone">{t('donationsPage.phone')}</Label>
                       <Input
                         id="phone"
                         type="tel"
+                        placeholder="081 000 0000"
                         required
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                        className="mt-1.5"
                       />
                     </div>
+
                     <div>
-                      <Label htmlFor="email">Email</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="amount">Montant (USD)</Label>
+                      <Label htmlFor="amount">{t('donationsPage.amount')}</Label>
                       <Input
                         id="amount"
                         type="number"
                         min="1"
+                        step="any"
+                        placeholder="0"
                         required
                         value={form.amount}
                         onChange={(e) => setForm({ ...form, amount: e.target.value })}
+                        className="mt-1.5"
                       />
                     </div>
+
                     <div>
-                      <Label htmlFor="method">Moyen de paiement</Label>
+                      <Label>{t('donationsPage.currency')}</Label>
+                      <div className="mt-1.5 grid grid-cols-2 gap-2">
+                        {(['USD', 'CDF'] as const).map((cur) => (
+                          <button
+                            key={cur}
+                            type="button"
+                            onClick={() => setForm({ ...form, currency: cur })}
+                            className={cn(
+                              'rounded-lg border px-4 py-2.5 text-sm font-semibold transition-all',
+                              form.currency === cur
+                                ? 'border-gold bg-gold/15 text-primary dark:text-gold'
+                                : 'border-input bg-background text-muted-foreground hover:border-gold/40'
+                            )}
+                          >
+                            {cur === 'USD' ? 'USD — Dollar' : 'CDF — Franc congolais'}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="method">{t('donationsPage.method')}</Label>
                       <select
                         id="method"
                         required
                         value={form.method}
                         onChange={(e) => setForm({ ...form, method: e.target.value })}
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        className="mt-1.5 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                       >
-                        <option value="">Sélectionner...</option>
-                        <optgroup label="Mobile Money">
-                          {donations.mobileMoney.map((m) => (
+                        <option value="">{t('donationsPage.selectMethod')}</option>
+                        <optgroup label={t('donationsPage.mobileMoney')}>
+                          {mobileMethods.map((m) => (
                             <option key={m.id} value={m.id}>
-                              {m.name}
+                              {m.name} ({m.currency})
                             </option>
                           ))}
                         </optgroup>
-                        <optgroup label="Banque">
-                          {donations.bank.map((m) => (
+                        <optgroup label={t('donationsPage.bank')}>
+                          {bankMethods.map((m) => (
                             <option key={m.id} value={m.id}>
-                              {m.name}
+                              {m.name} ({m.currency})
                             </option>
                           ))}
                         </optgroup>
                       </select>
                     </div>
+
                     <Button type="submit" variant="gold" className="w-full" size="lg">
-                      Confirmer mon don
+                      {t('donationsPage.submit')}
                     </Button>
                   </form>
                 </CardContent>
@@ -212,49 +321,48 @@ ${siteConfig.contact.email}
             </FadeIn>
           </div>
 
-          {/* Mobile Money */}
           <FadeIn>
-            <h3 className="mt-16 mb-6 text-xl font-bold">Mobile Money</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {donations.mobileMoney.map((method) => (
-                <Card key={method.id}>
-                  <CardContent className="flex items-center gap-4 p-4">
-                    <img
-                      src={paymentLogos[method.id]}
-                      alt={method.name}
-                      className="h-12 w-20 shrink-0 rounded-md object-contain"
-                      loading="lazy"
-                    />
-                    <div>
-                      <p className="font-semibold text-sm">{method.name}</p>
-                      <p className="text-sm text-muted-foreground">{method.number}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="text-center">
+              <h2 className="text-2xl font-bold md:text-3xl">{t('donationsPage.methodsTitle')}</h2>
+              <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">{t('donationsPage.methodsSub')}</p>
             </div>
-          </FadeIn>
 
-          {/* Bank */}
-          <FadeIn>
-            <h3 className="mt-12 mb-6 text-xl font-bold">Banque</h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {donations.bank.map((method) => (
-                <Card key={method.id}>
-                  <CardContent className="flex items-center gap-4 p-4">
-                    <img
-                      src={paymentLogos[method.id]}
-                      alt={method.name}
-                      className="h-12 w-20 shrink-0 rounded-md object-contain"
-                      loading="lazy"
+            <div className="mt-10 space-y-10">
+              <div>
+                <div className="mb-5 flex items-center gap-2">
+                  <Smartphone className="h-5 w-5 text-gold" />
+                  <h3 className="text-lg font-semibold">{t('donationsPage.mobileMoney')}</h3>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {mobileMethods.map((method) => (
+                    <PaymentMethodCard
+                      key={method.id}
+                      method={method}
+                      type="mobile"
+                      onCopy={handleCopy}
+                      copiedId={copiedId}
                     />
-                    <div>
-                      <p className="font-semibold text-sm">{method.name}</p>
-                      <p className="text-sm text-muted-foreground">{method.number}</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div className="mb-5 flex items-center gap-2">
+                  <Building2 className="h-5 w-5 text-gold" />
+                  <h3 className="text-lg font-semibold">{t('donationsPage.bank')}</h3>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {bankMethods.map((method) => (
+                    <PaymentMethodCard
+                      key={method.id}
+                      method={method}
+                      type="bank"
+                      onCopy={handleCopy}
+                      copiedId={copiedId}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </FadeIn>
         </div>
@@ -265,25 +373,33 @@ ${siteConfig.contact.email}
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <CheckCircle className="h-6 w-6 text-green-600" />
-              Don enregistré
+              {t('donationsPage.registered')}
             </DialogTitle>
-            <DialogDescription>
-              Votre intention de don a été enregistrée. Veuillez effectuer le transfert vers le
-              compte indiqué.
-            </DialogDescription>
+            <DialogDescription>{t('donationsPage.registeredDesc')}</DialogDescription>
           </DialogHeader>
           {receipt && (
             <div className="space-y-4">
-              <div className="rounded-lg border bg-muted/50 p-4 text-sm space-y-2">
-                <p><strong>N° de reçu :</strong> {receipt.receiptNumber}</p>
-                <p><strong>Donateur :</strong> {receipt.name}</p>
-                <p><strong>Montant :</strong> {formatCurrency(receipt.amount)}</p>
-                <p><strong>Paiement :</strong> {receipt.method}</p>
-                <p><strong>Date :</strong> {receipt.date}</p>
+              <div className="space-y-2 rounded-lg border bg-muted/50 p-4 text-sm">
+                <p>
+                  <strong>N° :</strong> {receipt.receiptNumber}
+                </p>
+                <p>
+                  <strong>{t('donationsPage.donor')} :</strong> {receipt.phone}
+                </p>
+                <p>
+                  <strong>{t('donationsPage.amount')} :</strong>{' '}
+                  {formatCurrency(receipt.amount, receipt.currency)}
+                </p>
+                <p>
+                  <strong>{t('donationsPage.payment')} :</strong> {receipt.method}
+                </p>
+                <p>
+                  <strong>Date :</strong> {receipt.date}
+                </p>
               </div>
               <Button onClick={downloadReceipt} className="w-full">
                 <Download className="h-4 w-4" />
-                Télécharger le reçu
+                {t('donationsPage.downloadReceipt')}
               </Button>
             </div>
           )}

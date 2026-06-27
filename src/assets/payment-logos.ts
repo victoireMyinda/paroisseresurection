@@ -13,6 +13,7 @@ export const paymentLogos: Record<string, string> = {
   airtel: airtelmoney,
   afrimoney,
   equity: equityBcdc,
+  equity_cdf: equityBcdc,
   illicocash,
   visa,
   pepele,

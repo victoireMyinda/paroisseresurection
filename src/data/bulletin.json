@@ -1,0 +1,24 @@
+{
+  "title": "Ma semaine à la Résurrection",
+  "subtitle": "Bulletin paroissial d'informations",
+  "items": [
+    {
+      "id": "b1",
+      "title": "Bulletin du 23 au 29 juin 2026 — n°12",
+      "date": "2026-06-23",
+      "excerpt": "Programme des messes, activités des commissions, annonces de la chorale et collecte caritative du dimanche."
+    },
+    {
+      "id": "b2",
+      "title": "Bulletin du 16 au 22 juin 2026 — n°11",
+      "date": "2026-06-16",
+      "excerpt": "Retraite de prière des jeunes, préparation à la fête paroissiale et horaires du secrétariat."
+    },
+    {
+      "id": "b3",
+      "title": "Bulletin du 9 au 15 juin 2026 — n°10",
+      "date": "2026-06-09",
+      "excerpt": "Veillée eucharistique du jeudi, catéchèse des enfants et réunion du conseil paroissial."
+    }
+  ]
+}

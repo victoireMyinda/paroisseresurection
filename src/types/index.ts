@@ -21,7 +21,12 @@ export interface Announcement {
   date: string
   excerpt: string
   content: string
+  media?: EventMedia
 }
+
+export type EventMedia =
+  | { type: 'image'; imageKey: string }
+  | { type: 'video'; youtubeId: string }
 
 export interface WeeklyActivity {
   type: string

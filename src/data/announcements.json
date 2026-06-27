@@ -5,7 +5,8 @@
     "category": "retraites",
     "date": "2026-03-15",
     "excerpt": "Retraite spirituelle de trois jours pour toute la communauté paroissiale, animée par un prédicateur invité.",
-    "content": "La Paroisse de la Résurrection organise sa retraite paroissiale annuelle du vendredi 15 au dimanche 17 mars 2026. Thème : « Marchez à la lumière du Christ ressuscité ». Inscriptions au secrétariat paroissial."
+    "content": "La Paroisse de la Résurrection organise sa retraite paroissiale annuelle du vendredi 15 au dimanche 17 mars 2026. Thème : « Marchez à la lumière du Christ ressuscité ». Inscriptions au secrétariat paroissial.",
+    "media": { "type": "image", "imageKey": "grotte" }
   },
   {
     "id": "2",
@@ -13,7 +14,8 @@
     "category": "veillees",
     "date": "2026-06-20",
     "excerpt": "Veillée de prière intercessionnelle pour la paix et la réconciliation en République Démocratique du Congo.",
-    "content": "Rejoignez-nous le vendredi 20 juin à 19h00 pour une veillée de prière en faveur de la paix dans notre pays. Chapelet, adoration et témoignages."
+    "content": "Rejoignez-nous le vendredi 20 juin à 19h00 pour une veillée de prière en faveur de la paix dans notre pays. Chapelet, adoration et témoignages.",
+    "media": { "type": "image", "imageKey": "eglise" }
   },
   {
     "id": "3",
@@ -29,7 +31,8 @@
     "category": "baptemes",
     "date": "2026-07-12",
     "excerpt": "Session de baptêmes d'enfants prévue le dimanche 12 juillet 2026.",
-    "content": "Les parents souhaitant faire baptiser leur enfant sont invités à s'inscrire auprès de la Commission Catéchèse et à suivre la préparation obligatoire."
+    "content": "Les parents souhaitant faire baptiser leur enfant sont invités à s'inscrire auprès de la Commission Catéchèse et à suivre la préparation obligatoire.",
+    "media": { "type": "image", "imageKey": "statutmarie" }
   },
   {
     "id": "5",
@@ -37,7 +40,8 @@
     "category": "evenements",
     "date": "2026-06-28",
     "excerpt": "Grande collecte de vivres et de vêtements au profit des familles vulnérables de Salongo-Sud.",
-    "content": "La Commission Caritas organise une journée de solidarité le samedi 28 juin. Dépôt des dons à la salle paroissiale de 8h00 à 16h00."
+    "content": "La Commission Caritas organise une journée de solidarité le samedi 28 juin. Dépôt des dons à la salle paroissiale de 8h00 à 16h00.",
+    "media": { "type": "image", "imageKey": "fidele" }
   },
   {
     "id": "6",
@@ -45,7 +49,8 @@
     "category": "pelerinages",
     "date": "2026-08-15",
     "excerpt": "Pèlerinage annuel de l'Archidiocèse de Kinshasa à la Basilique de Kisantu pour la fête de l'Assomption.",
-    "content": "Départ du parvis de la paroisse à 5h00. Inscription : 15 USD par personne. Contactez la Commission Jeunesse."
+    "content": "Départ du parvis de la paroisse à 5h00. Inscription : 15 USD par personne. Contactez la Commission Jeunesse.",
+    "media": { "type": "image", "imageKey": "nouvellegrotte" }
   },
   {
     "id": "7",
@@ -61,7 +66,8 @@
     "category": "ordinations",
     "date": "2026-05-25",
     "excerpt": "La paroisse félicite notre frère en Christ ordonné diacre lors de la célébration diocésaine.",
-    "content": "Une messe d'action de grâces sera célébrée le dimanche 1er juin à 11h00 en l'église paroissiale. Tous les fidèles sont conviés."
+    "content": "Une messe d'action de grâces sera célébrée le dimanche 1er juin à 11h00 en l'église paroissiale. Tous les fidèles sont conviés.",
+    "media": { "type": "video", "youtubeId": "FxMDSUhFgSk" }
   },
   {
     "id": "9",
@@ -77,7 +83,8 @@
     "category": "evenements",
     "date": "2026-04-20",
     "excerpt": "Célébration solennelle de la fête patronale de notre paroisse.",
-    "content": "Le dimanche 20 avril, la paroisse célèbre sa fête patronale avec une messe solennelle à 10h00, suivie d'un agape paroissiale sur le parvis."
+    "content": "Le dimanche 20 avril, la paroisse célèbre sa fête patronale avec une messe solennelle à 10h00, suivie d'un agape paroissiale sur le parvis.",
+    "media": { "type": "image", "imageKey": "chorale" }
   },
   {
     "id": "11",
@@ -93,6 +100,7 @@
     "category": "evenements",
     "date": "2026-07-05",
     "excerpt": "Journée de formation pour les nouveaux lecteurs de la Parole.",
-    "content": "La Commission Liturgique organise une formation le samedi 5 juillet de 9h00 à 15h00. Inscription obligatoire."
+    "content": "La Commission Liturgique organise une formation le samedi 5 juillet de 9h00 à 15h00. Inscription obligatoire.",
+    "media": { "type": "image", "imageKey": "paroisse" }
   }
 ]

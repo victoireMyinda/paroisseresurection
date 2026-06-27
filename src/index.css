@@ -121,4 +121,13 @@
       rgba(10, 10, 10, 0.85) 100%
     );
   }
+
+  select.lang-on-dark {
+    color-scheme: dark;
+  }
+
+  select.lang-on-dark option {
+    background-color: #0d47a1;
+    color: #ffffff;
+  }
 }
