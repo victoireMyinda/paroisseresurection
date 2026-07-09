@@ -1,0 +1,72 @@
+{
+  "categories": [
+    "Tout",
+    "Paroisse",
+    "Messe",
+    "Chorales",
+    "Neuvaine",
+    "Ordination",
+    "Autre"
+  ],
+  "photos": [
+    { "id": "1", "title": "Notre église", "category": "Paroisse", "imageKey": "eglise", "order": 10 },
+    { "id": "2", "title": "Vue de la paroisse", "category": "Paroisse", "imageKey": "paroisse", "order": 20 },
+    { "id": "3", "title": "Chorale paroissiale", "category": "Chorales", "imageKey": "chorale", "order": 30 },
+    { "id": "4", "title": "Communauté des fidèles", "category": "Messe", "imageKey": "fidele", "order": 40 },
+    { "id": "5", "title": "Cloche paroissiale", "category": "Paroisse", "imageKey": "cloche", "order": 50 },
+    { "id": "6", "title": "Clocher", "category": "Paroisse", "imageKey": "cloche2", "order": 60 },
+    { "id": "7", "title": "Grotte mariale", "category": "Neuvaine", "imageKey": "grotte", "order": 70 },
+    { "id": "8", "title": "Ancienne grotte", "category": "Ordination", "imageKey": "anciennegrotte", "order": 80 },
+    { "id": "9", "title": "Nouvelle grotte", "category": "Neuvaine", "imageKey": "nouvellegrotte", "order": 90 },
+    { "id": "10", "title": "Statue de la Vierge Marie", "category": "Neuvaine", "imageKey": "statutmarie", "order": 100 }
+  ],
+  "videos": [
+    {
+      "id": "v1",
+      "title": "Célébration paroissiale",
+      "description": "YouTube — Paroisse de la Résurrection",
+      "category": "Messe",
+      "youtubeId": "FxMDSUhFgSk",
+      "order": 10
+    },
+    {
+      "id": "v2",
+      "title": "Chorale — Chants liturgiques",
+      "description": "Vidéo à venir",
+      "category": "Chorales",
+      "youtubeId": "",
+      "order": 20
+    },
+    {
+      "id": "v3",
+      "title": "Grotte mariale — Prière",
+      "description": "Vidéo à venir",
+      "category": "Neuvaine",
+      "youtubeId": "",
+      "order": 30
+    }
+  ],
+  "albums": [
+    {
+      "id": "eglise",
+      "title": "Notre église",
+      "description": "Architecture, clocher et espaces sacrés de la paroisse.",
+      "photoIds": ["1", "2", "5", "6"],
+      "order": 10
+    },
+    {
+      "id": "liturgie",
+      "title": "Vie liturgique",
+      "description": "Chorale, célébrations et moments de louange.",
+      "photoIds": ["3", "4"],
+      "order": 20
+    },
+    {
+      "id": "devotion",
+      "title": "Dévotion mariale",
+      "description": "Grotte, statues et lieux de prière.",
+      "photoIds": ["7", "8", "9", "10"],
+      "order": 30
+    }
+  ]
+}

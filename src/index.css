@@ -33,8 +33,8 @@
 :root {
   --font-inter: "Inter", system-ui, sans-serif;
   --font-playfair: "Playfair Display", Georgia, serif;
-  --background: #FFFFFF;
-  --foreground: #1F2937;
+  --background: #fafbfc;
+  --foreground: #0f172a;
   --card: #FFFFFF;
   --card-foreground: #1F2937;
   --popover: #FFFFFF;
@@ -48,7 +48,7 @@
   --accent: #F5F5F5;
   --accent-foreground: #0D47A1;
   --destructive: #DC2626;
-  --border: #E5E7EB;
+  --border: #e8ecf1;
   --input: #E5E7EB;
   --ring: #D4AF37;
   --radius: 0.75rem;
@@ -129,5 +129,17 @@
   select.lang-on-dark option {
     background-color: #0d47a1;
     color: #ffffff;
+  }
+}
+
+@keyframes live-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.35);
+    border-color: rgb(239 68 68);
+  }
+  50% {
+    box-shadow: 0 0 18px 4px rgba(239, 68, 68, 0.55);
+    border-color: rgb(220 38 38);
   }
 }

@@ -1,5 +1,5 @@
-import type { ChurchSectionId } from '@/config/navigation'
-import type { ChurchSectionContent } from '@/i18n/content/types'
+import type { ChurchSectionId } from '../../../config/navigation'
+import type { ChurchSectionContent } from '../types'
 
 export const churchFr: Record<ChurchSectionId, ChurchSectionContent> = {
   histoire: {

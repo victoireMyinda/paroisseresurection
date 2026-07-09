@@ -5,13 +5,13 @@ import {
   type Locale,
   languages,
 } from '@/i18n/locales'
-import { getContent, type SiteContent } from '@/i18n/content'
+import { useSiteData } from '@/contexts/site-data-provider'
 
 interface LanguageContextValue {
   locale: Locale
   setLocale: (locale: Locale) => void
   t: (key: string) => string
-  content: SiteContent
+  content: ReturnType<typeof useSiteData>['content']
   languages: typeof languages
 }
 
@@ -20,6 +20,7 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(undefine
 const STORAGE_KEY = 'locale'
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
+  const { content } = useSiteData()
   const [locale, setLocaleState] = useState<Locale>(() => {
     if (typeof window === 'undefined') return defaultLocale
     const stored = localStorage.getItem(STORAGE_KEY) as Locale | null
@@ -34,7 +35,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const setLocale = (newLocale: Locale) => setLocaleState(newLocale)
   const t = (key: string) => translate(locale, key)
-  const content = getContent(locale)
 
   return (
     <LanguageContext.Provider value={{ locale, setLocale, t, content, languages }}>

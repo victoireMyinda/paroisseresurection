@@ -2,17 +2,19 @@ import { parishSubNav } from '@/config/navigation'
 import { PageShell, ContentBlocks } from '@/components/content/page-shell'
 import { FadeIn } from '@/components/section-heading'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { parishImages } from '@/assets/parish-images'
 
 export function ParishHistoryPage() {
   const { content } = useLanguage()
+  const { getBanner } = useSiteData()
   const { history } = content.parish
 
   return (
     <PageShell
       title={history.title}
       subtitle={content.parish.historySummary}
-      image={parishImages.paroisse}
+      image={getBanner('/notre-paroisse/histoire', parishImages.paroisse)}
       path="/notre-paroisse/histoire"
       subNav={parishSubNav}
     >
@@ -23,12 +25,13 @@ export function ParishHistoryPage() {
 
 export function ParishCuratesPage() {
   const { t, content } = useLanguage()
+  const { getBanner } = useSiteData()
 
   return (
     <PageShell
       title={t('nav.parish.curates')}
       subtitle={t('site.description')}
-      image={parishImages.eglise}
+      image={getBanner('/notre-paroisse/cures', parishImages.eglise)}
       path="/notre-paroisse/cures"
       subNav={parishSubNav}
     >

@@ -7,17 +7,19 @@ import { FadeIn } from '@/components/section-heading'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/i18n/language-provider'
-import { commissionImageMap, pageBanners, parishImages } from '@/assets/parish-images'
+import { useSiteData } from '@/contexts/site-data-provider'
+import { parishImages } from '@/assets/parish-images'
 
 export function ParishCommissionsPage() {
   const { t, content } = useLanguage()
+  const { commissionImageMap, getBanner } = useSiteData()
   const [expanded, setExpanded] = useState<string | null>(null)
 
   return (
     <PageShell
       title={t('nav.parish.commissions')}
       subtitle={t('home.discoverCommissions')}
-      image={pageBanners.commissions ?? parishImages.chorale}
+      image={getBanner('/notre-paroisse/commissions', parishImages.chorale)}
       path="/notre-paroisse/commissions"
       subNav={parishSubNav}
     >

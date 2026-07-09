@@ -3,6 +3,7 @@ import type { EventMedia } from '@/types'
 
 export function resolveEventImage(imageKey?: string): string | undefined {
   if (!imageKey) return undefined
+  if (/^https?:\/\//i.test(imageKey) || imageKey.startsWith('//')) return imageKey
   const key = imageKey as keyof typeof parishImages
   return parishImages[key] ?? undefined
 }

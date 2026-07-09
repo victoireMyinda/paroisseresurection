@@ -1,24 +1,50 @@
 {
   "title": "Messes en direct",
   "subtitle": "Suivez nos célébrations en live, où que vous soyez",
-  "description": "La Paroisse de la Résurrection diffuse ses messes dominicales et certaines célébrations festives en direct. Rejoignez la communauté des fidèles sur YouTube ou Facebook pour prier avec nous.",
+  "description": "La Paroisse de la Résurrection diffuse ses messes dominicales et certaines célébrations festives en direct. Rejoignez la communauté des fidèles sur YouTube, Facebook ou TikTok pour prier avec nous.",
   "scheduleNote": "Diffusion habituelle les dimanches à 9h00 (messe principale) et lors des grandes fêtes liturgiques.",
+  "notifyHint": "Activez les notifications sur nos pages YouTube, Facebook et TikTok pour être alerté dès le début de chaque diffusion.",
   "featuredVideo": {
     "title": "Célébration paroissiale",
-    "description": "Revivez un moment de la vie liturgique de notre communauté."
+    "description": "Revivez un moment de la vie liturgique de notre communauté.",
+    "watchUrl": "https://www.youtube.com/watch?v=FxMDSUhFgSk",
+    "embedUrl": "https://www.youtube.com/embed/FxMDSUhFgSk"
   },
+  "upcoming": [
+    { "title": "Messe dominicale", "date": "Dimanche 9h00", "platform": "YouTube" },
+    { "title": "Messe du soir", "date": "Dimanche 18h00", "platform": "Facebook" },
+    { "title": "Veillée d'adoration", "date": "Premier vendredi 18h00", "platform": "TikTok" }
+  ],
   "platforms": [
     {
       "id": "youtube",
       "name": "YouTube",
+      "order": 1,
       "watchUrl": "https://youtube.com/@paroisseresurrection/live",
-      "embedUrl": "https://www.youtube.com/embed/FxMDSUhFgSk"
+      "embedUrl": "https://www.youtube.com/embed/FxMDSUhFgSk",
+      "offlineTitle": "Diffusion sur YouTube",
+      "offlineDescription": "Le flux vidéo apparaît ici lorsque la messe est en cours sur notre chaîne YouTube.",
+      "isLive": false
     },
     {
       "id": "facebook",
       "name": "Facebook",
+      "order": 2,
       "watchUrl": "https://facebook.com/paroisseresurrection/live",
-      "embedUrl": ""
+      "embedUrl": "",
+      "offlineTitle": "Diffusion sur Facebook",
+      "offlineDescription": "Suivez nos célébrations en direct sur la page Facebook de la paroisse.",
+      "isLive": false
+    },
+    {
+      "id": "tiktok",
+      "name": "TikTok",
+      "order": 3,
+      "watchUrl": "https://www.tiktok.com/@paroisseresurrection/live",
+      "embedUrl": "",
+      "offlineTitle": "Diffusion sur TikTok",
+      "offlineDescription": "Rejoignez-nous en direct sur TikTok lors des messes et veillées retransmises.",
+      "isLive": false
     }
   ]
 }

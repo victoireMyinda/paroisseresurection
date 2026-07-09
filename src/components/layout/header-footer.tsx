@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Sun, Moon, MapPin, Phone, Mail, Clock, ExternalLink, ArrowRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
 import { useLanguage } from '@/i18n/language-provider'
-import { siteConfig, usefulLinks } from '@/config/site'
+import { useSiteData } from '@/contexts/site-data-provider'
+import { siteConfig, usefulLinks, footerNavLinkDefs } from '@/config/site'
 import { parishImages } from '@/assets/parish-images'
 import { SocialLinks } from '@/components/social-links'
 import { MainNav, MobileNav } from '@/components/navigation/main-nav'
@@ -14,23 +15,26 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
   const { t } = useLanguage()
+  const { siteInfo } = useSiteData()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-      <div className="container-wide flex h-16 items-center justify-between gap-2 px-4 md:px-8">
-        <Link to="/" className="flex shrink-0 items-center gap-3" aria-label={t('common.home')}>
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-md supports-[backdrop-filter]:bg-background/85">
+      <div className="container-wide flex h-[4.25rem] items-center justify-between gap-3 px-4 md:px-8">
+        <Link to="/" className="group flex shrink-0 items-center gap-3" aria-label={t('common.home')}>
           <img
-            src={parishImages.logo}
+            src={siteInfo.logoUrl || parishImages.logo}
             alt={t('site.shortName')}
-            className="h-11 w-11 rounded-full object-cover ring-2 ring-gold/50"
+            className="h-11 w-11 rounded-full object-cover ring-2 ring-gold/40 transition-shadow group-hover:ring-gold/70"
             width={44}
             height={44}
           />
           <div className="hidden sm:block">
-            <p className="font-display text-sm font-bold leading-tight text-primary dark:text-gold">
-              {t('site.shortName')}
+            <p className="font-display text-sm font-bold leading-tight tracking-tight text-primary dark:text-gold">
+              {siteInfo.primaryTitle || t('site.shortName')}
             </p>
-            <p className="text-xs text-muted-foreground">{t('site.locationShort')}</p>
+            <p className="text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground">
+              {siteInfo.secondaryTitle || t('site.locationShort')}
+            </p>
           </div>
         </Link>
 
@@ -45,9 +49,11 @@ export function Header() {
           >
             {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
           </Button>
+          {/* Désactivé temporairement — relance prévue
           <Button variant="gold" size="sm" className="hidden sm:inline-flex" asChild>
             <Link to="/dons">{t('common.donate')}</Link>
           </Button>
+          */}
           <Button
             variant="ghost"
             size="icon"
@@ -72,11 +78,13 @@ export function Header() {
           >
             <div className="container-wide space-y-1 px-4 py-4">
               <MobileNav onNavigate={() => setMobileOpen(false)} />
+              {/* Désactivé temporairement — relance prévue
               <Button variant="gold" className="mt-4 w-full" asChild>
                 <Link to="/dons" onClick={() => setMobileOpen(false)}>
                   {t('common.donate')}
                 </Link>
               </Button>
+              */}
             </div>
           </motion.nav>
         )}
@@ -85,47 +93,136 @@ export function Header() {
   )
 }
 
-export function Footer() {
-  const { t } = useLanguage()
+function FooterHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h3 className="mb-5 font-display text-base font-semibold text-gold">
+      {children}
+      <span className="mt-2.5 block h-0.5 w-10 rounded-full bg-gradient-to-r from-gold/80 to-gold/20" aria-hidden />
+    </h3>
+  )
+}
+
+function FooterLink({
+  href,
+  children,
+  external,
+}: {
+  href: string
+  children: React.ReactNode
+  external?: boolean
+}) {
+  const className =
+    'group inline-flex items-center gap-1.5 text-sm text-white/72 transition-colors hover:text-white'
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer" className={className}>
+        <span>{children}</span>
+        <ExternalLink className="h-3.5 w-3.5 opacity-50 transition-opacity group-hover:opacity-100" aria-hidden />
+      </a>
+    )
+  }
 
   return (
-    <footer className="relative mt-auto border-t border-[#d4dce8] bg-[#eef1f6] text-[#3d4f63] dark:border-[#2a3344] dark:bg-[#141a24] dark:text-[#c8d0dc]">
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
-      <div className="container-wide section-padding">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <h3 className="mb-4 font-semibold text-[#1a3a6b] dark:text-gold">{t('footer.aboutUs')}</h3>
-            <p className="text-sm leading-relaxed text-[#5a6d82] dark:text-[#9aa8b8]">
+    <Link to={href} className={className}>
+      <span>{children}</span>
+      <ArrowRight className="h-3.5 w-3.5 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-70" aria-hidden />
+    </Link>
+  )
+}
+
+export function Footer() {
+  const { t } = useLanguage()
+  const { siteInfo } = useSiteData()
+
+  return (
+    <footer className="relative mt-auto overflow-hidden bg-gradient-to-b from-[#0c1929] via-royal to-[#0a3d8f] text-white">
+      <div
+        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.07]"
+        style={{ backgroundImage: `url(${parishImages.paroisse})` }}
+        aria-hidden
+      />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(212,175,55,0.12),transparent)]" aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+
+      <div className="container-wide relative px-4 py-14 md:px-8 md:py-16 lg:px-12">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-10">
+          <div className="sm:col-span-2 lg:col-span-4">
+            <Link to="/" className="group mb-5 inline-flex items-center gap-3.5">
+              <img
+                src={siteInfo.logoUrl || parishImages.logo}
+                alt=""
+                className="h-14 w-14 rounded-full object-cover ring-2 ring-gold/50 transition-shadow group-hover:ring-gold/80"
+                width={56}
+                height={56}
+              />
+              <div>
+                <p className="font-display text-lg font-bold leading-tight text-white">
+                  {siteInfo.primaryTitle || t('site.shortName')}
+                </p>
+                <p className="mt-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-white/55">
+                  {siteInfo.secondaryTitle || t('site.locationShort')}
+                </p>
+              </div>
+            </Link>
+
+            <p className="max-w-sm text-sm leading-relaxed text-white/72">
               {t('site.description')} {t('site.aboutExtra')}
             </p>
+
             <Link
               to="/notre-paroisse/histoire"
-              className="mt-4 inline-block text-sm font-medium text-[#1a3a6b] hover:underline dark:text-gold"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold/80"
             >
               {t('common.readMore')}
+              <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
+
+            <div className="mt-8">
+              <p className="mb-3 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-gold/90">
+                {t('footer.followUs')}
+              </p>
+              <SocialLinks variant="icons" size="md" tone="onDark" />
+            </div>
           </div>
 
-          <div>
-            <h3 className="mb-4 font-semibold text-[#1a3a6b] dark:text-gold">{t('footer.contactAddress')}</h3>
-            <ul className="space-y-3 text-sm text-[#5a6d82] dark:text-[#9aa8b8]">
-              <li>{siteConfig.address.full}</li>
-              <li>
-                <a href={`tel:${siteConfig.contact.phone}`} className="hover:text-[#1a3a6b] dark:hover:text-gold">
-                  {siteConfig.contact.phoneDisplay}
+          <div className="lg:col-span-2">
+            <FooterHeading>{t('footer.navigation')}</FooterHeading>
+            <ul className="space-y-2.5">
+              {footerNavLinkDefs.map((link) => (
+                <li key={link.href}>
+                  <FooterLink href={link.href}>{t(link.key)}</FooterLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-3">
+            <FooterHeading>{t('footer.contactAddress')}</FooterHeading>
+            <ul className="space-y-4 text-sm">
+              <li className="flex gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
+                <span className="text-white/72 leading-relaxed">{siteInfo.address}</span>
+              </li>
+              <li className="flex gap-3">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
+                <a href={`tel:${siteInfo.phone}`} className="text-white/72 transition-colors hover:text-white">
+                  {siteInfo.phoneDisplay}
                 </a>
               </li>
-              <li>
-                <a href={`mailto:${siteConfig.contact.email}`} className="hover:text-[#1a3a6b] dark:hover:text-gold">
-                  {siteConfig.contact.email}
+              <li className="flex gap-3">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
+                <a href={`mailto:${siteInfo.email}`} className="break-all text-white/72 transition-colors hover:text-white">
+                  {siteInfo.email}
                 </a>
               </li>
-              <li>
+              <li className="flex gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
                 <a
                   href={siteConfig.map.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#1a3a6b] dark:hover:text-gold"
+                  className="text-white/72 transition-colors hover:text-white"
                 >
                   {t('home.visitUs')}
                 </a>
@@ -133,41 +230,35 @@ export function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="mb-4 font-semibold text-[#1a3a6b] dark:text-gold">{t('footer.visitHours')}</h3>
-            <p className="text-sm font-medium text-[#3d4f63] dark:text-[#c8d0dc]">{t('footer.parishOffice')}</p>
-            <p className="mt-2 text-sm leading-relaxed text-[#5a6d82] dark:text-[#9aa8b8]">
-              {siteConfig.contact.officeHours}
-            </p>
-          </div>
-
-          <div>
-            <h3 className="mb-4 font-semibold text-[#1a3a6b] dark:text-gold">{t('footer.usefulLinks')}</h3>
-            <ul className="space-y-2 text-sm">
+          <div className="lg:col-span-3">
+            <FooterHeading>{t('footer.usefulLinks')}</FooterHeading>
+            <ul className="space-y-2.5">
               {usefulLinks.map((link) => (
                 <li key={link.url}>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#5a6d82] transition-colors hover:text-[#1a3a6b] dark:text-[#9aa8b8] dark:hover:text-gold"
-                  >
+                  <FooterLink href={link.url} external>
                     {link.name}
-                  </a>
+                  </FooterLink>
                 </li>
               ))}
             </ul>
+
+            <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+              <div className="flex items-start gap-3">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+                <div>
+                  <p className="text-sm font-semibold text-white">{t('footer.parishOffice')}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-white/65">{siteInfo.officeHours}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-6 border-t border-[#d4dce8] pt-8 dark:border-[#2a3344]">
-          <SocialLinks variant="icons" size="sm" />
-          <div className="text-center text-sm text-[#7a8c9e] dark:text-[#7a8796]">
-            <p>
-              © {new Date().getFullYear()} {t('site.name')}. {t('site.copyright')}
-            </p>
-            <p className="mt-1">{t('site.archdiocese')}</p>
-          </div>
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-center text-sm text-white/50 md:flex-row md:text-left">
+          <p>
+            © {new Date().getFullYear()} {t('site.name')}. {t('site.copyright')}
+          </p>
+          <p className="max-w-xl md:text-right">{t('site.archdiocese')}</p>
         </div>
       </div>
     </footer>

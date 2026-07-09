@@ -4,16 +4,18 @@ import { FadeIn } from '@/components/section-heading'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { parishImages } from '@/assets/parish-images'
 
 export function ParishWeeklyPage() {
   const { t, content } = useLanguage()
+  const { getBanner } = useSiteData()
 
   return (
     <PageShell
       title={t('nav.parish.weekly')}
       subtitle={t('bulletin.subtitle')}
-      image={parishImages.fidele}
+      image={getBanner('/notre-paroisse/annonces-semaine', parishImages.fidele)}
       path="/notre-paroisse/annonces-semaine"
       subNav={parishSubNav}
     >
@@ -50,12 +52,13 @@ export function ParishWeeklyPage() {
 
 export function ParishMassesPage() {
   const { t, content } = useLanguage()
+  const { getBanner } = useSiteData()
 
   return (
     <PageShell
       title={t('nav.parish.masses')}
       subtitle={t('home.schedulesSub')}
-      image={parishImages.chorale}
+      image={getBanner('/notre-paroisse/messes', parishImages.chorale)}
       path="/notre-paroisse/messes"
       subNav={parishSubNav}
     >
@@ -85,12 +88,13 @@ export function ParishMassesPage() {
 
 export function ParishGroupsPage() {
   const { t, content } = useLanguage()
+  const { getBanner } = useSiteData()
 
   return (
     <PageShell
       title={t('nav.parish.groups')}
       subtitle={content.parish.parishLife.description}
-      image={parishImages.grotte}
+      image={getBanner('/notre-paroisse/groupes', parishImages.grotte)}
       path="/notre-paroisse/groupes"
       subNav={parishSubNav}
     >

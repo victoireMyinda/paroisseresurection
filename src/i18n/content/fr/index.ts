@@ -5,6 +5,7 @@ import announcementsData from '@/data/announcements.json'
 import weeklyScheduleData from '@/data/weekly-schedule.json'
 import donationsData from '@/data/donations.json'
 import parishData from '@/data/parish.json'
+import mediaData from '@/data/media.json'
 import liveData from '@/data/live.json'
 import liturgyData from '@/data/liturgy.json'
 import { parishImages } from '@/assets/parish-images'
@@ -227,56 +228,20 @@ export const frContent: SiteContent = {
   },
   church: churchFr,
   media: {
-    albums: [
-      {
-        id: 'eglise',
-        title: 'Notre église',
-        description: 'Architecture, clocher et espaces sacrés de la paroisse.',
-        imageIds: ['1', '2', '5', '6'],
-      },
-      {
-        id: 'liturgie',
-        title: 'Vie liturgique',
-        description: 'Chorale, célébrations et moments de louange.',
-        imageIds: ['3', '4'],
-      },
-      {
-        id: 'devotion',
-        title: 'Dévotion mariale',
-        description: 'Grotte, statues et lieux de prière.',
-        imageIds: ['7', '8', '9', '10'],
-      },
-    ],
-    galleryCategories: {
-      'Église': 'Église',
-      Liturgie: 'Liturgie',
-      'Vie paroissiale': 'Vie paroissiale',
-      Patrimoine: 'Patrimoine',
-      Dévotion: 'Dévotion',
-      Histoire: 'Histoire',
-    },
-    imageTitles: {
-      '1': 'Notre église',
-      '2': 'Vue de la paroisse',
-      '3': 'Chorale paroissiale',
-      '4': 'Communauté des fidèles',
-      '5': 'Cloche paroissiale',
-      '6': 'Clocher',
-      '7': 'Grotte mariale',
-      '8': 'Ancienne grotte',
-      '9': 'Nouvelle grotte',
-      '10': 'Statue de la Vierge Marie',
-    },
+    albums: mediaData.albums.map((a) => ({
+      id: a.id,
+      title: a.title,
+      description: a.description,
+      imageIds: a.photoIds,
+    })),
+    galleryCategories: Object.fromEntries(mediaData.categories.map((c) => [c, c])),
+    imageTitles: Object.fromEntries(mediaData.photos.map((p) => [p.id, p.title])),
   },
   live: {
     title: liveData.title,
     subtitle: liveData.subtitle,
     description: liveData.description,
     scheduleNote: liveData.scheduleNote,
-    upcoming: [
-      { title: 'Messe dominicale', date: 'Dimanche 9h00', platform: 'YouTube' },
-      { title: 'Messe du soir', date: 'Dimanche 18h00', platform: 'Facebook' },
-      { title: 'Veillée d\'adoration', date: 'Premier vendredi 18h00', platform: 'YouTube' },
-    ],
+    upcoming: liveData.upcoming,
   },
 }

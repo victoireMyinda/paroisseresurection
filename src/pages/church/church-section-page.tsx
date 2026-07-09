@@ -2,6 +2,7 @@ import { useParams, Navigate } from 'react-router-dom'
 import { churchSubNav, churchSectionIds, type ChurchSectionId } from '@/config/navigation'
 import { PageShell, ContentBlocks } from '@/components/content/page-shell'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { parishImages } from '@/assets/parish-images'
 
 const sectionBanners: Partial<Record<ChurchSectionId, string>> = {
@@ -14,7 +15,8 @@ const sectionBanners: Partial<Record<ChurchSectionId, string>> = {
 
 export function ChurchSectionPage() {
   const { section } = useParams<{ section: string }>()
-  const { t, content } = useLanguage()
+  const { content } = useLanguage()
+  const { getBanner } = useSiteData()
 
   if (!section || !churchSectionIds.includes(section as ChurchSectionId)) {
     return <Navigate to="/eglise/histoire" replace />
@@ -27,7 +29,7 @@ export function ChurchSectionPage() {
     <PageShell
       title={data.title}
       subtitle={data.subtitle}
-      image={sectionBanners[sectionId] ?? parishImages.eglise}
+      image={getBanner(`/eglise/${sectionId}`, sectionBanners[sectionId] ?? parishImages.eglise)}
       path={`/eglise/${sectionId}`}
       subNav={churchSubNav}
     >

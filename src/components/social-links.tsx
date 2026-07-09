@@ -1,8 +1,9 @@
 import { siteConfig } from '@/config/site'
 import { socialLogos, type SocialNetwork } from '@/assets/social'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { cn } from '@/lib/utils'
 
-const socialNetworks: { id: SocialNetwork; name: string; url: string }[] = [
+const defaultNetworks: { id: SocialNetwork; name: string; url: string }[] = [
   { id: 'facebook', name: 'Facebook', url: siteConfig.social.facebook },
   { id: 'whatsapp', name: 'WhatsApp', url: siteConfig.social.whatsapp },
   { id: 'youtube', name: 'YouTube', url: siteConfig.social.youtube },
@@ -28,6 +29,12 @@ export function SocialLinks({
   tone = 'default',
   className,
 }: SocialLinksProps) {
+  const { siteInfo } = useSiteData()
+  const socialNetworks = defaultNetworks.map((network) => ({
+    ...network,
+    url: siteInfo.social[network.id] ?? network.url,
+  }))
+
   const dims = iconSizes[size]
   const iconButtonClass =
     tone === 'onDark'

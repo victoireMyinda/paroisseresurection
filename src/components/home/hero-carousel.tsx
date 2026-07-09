@@ -6,50 +6,43 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { parishImages } from '@/assets/parish-images'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
 
 export function HeroCarousel() {
   const { t } = useLanguage()
+  const { heroSlides, siteInfo } = useSiteData()
   const [current, setCurrent] = useState(0)
 
-  const slides = useMemo(
-    () => [
+  const slides = useMemo(() => {
+    if (heroSlides.length > 0) {
+      return heroSlides.map((slide) => ({
+        image: slide.imageUrl || parishImages.eglise,
+        title: slide.title,
+        titleLine2: slide.titleLine2,
+        subtitle: slide.description,
+        ctaLabel: slide.ctaLabel,
+        href: slide.ctaHref,
+        featured: slide.featured ?? false,
+      }))
+    }
+
+    return [
       {
-        image: parishImages.eglise,
-        titleKey: 'site.name',
-        subtitleKey: 'home.heroFaith',
-        ctaKey: 'home.discoverParish',
+        image: siteInfo.logoUrl || parishImages.eglise,
+        title: siteInfo.primaryTitle || t('site.name'),
+        titleLine2: siteInfo.secondaryTitle || undefined,
+        subtitle: t('home.heroFaith'),
+        ctaLabel: t('home.discoverParish'),
         href: '#mot-du-cure',
         featured: true,
       },
-      {
-        image: parishImages.chorale,
-        titleKey: 'home.heroLiturgy',
-        subtitleKey: 'home.heroLiturgySub',
-        ctaKey: 'home.ourSchedules',
-        href: '#horaires',
-      },
-      {
-        image: parishImages.fidele,
-        titleKey: 'home.heroCommunity',
-        subtitleKey: 'home.heroCommunitySub',
-        ctaKey: 'home.ourCommissions',
-        href: '/notre-paroisse/commissions',
-      },
-      {
-        image: parishImages.grotte,
-        titleKey: 'home.heroPrayer',
-        subtitleKey: 'home.heroPrayerSub',
-        ctaKey: 'common.liveMass',
-        href: '#direct',
-      },
-    ],
-    []
-  )
+    ]
+  }, [heroSlides, siteInfo, t])
 
   const next = useCallback(() => setCurrent((c) => (c + 1) % slides.length), [slides.length])
   const prev = useCallback(
     () => setCurrent((c) => (c - 1 + slides.length) % slides.length),
-    [slides.length]
+    [slides.length],
   )
 
   useEffect(() => {
@@ -57,10 +50,11 @@ export function HeroCarousel() {
     return () => clearInterval(timer)
   }, [next])
 
-  const slide = slides[current]
-  const title = t(slide.titleKey)
-  const subtitle = t(slide.subtitleKey)
-  const ctaLabel = t(slide.ctaKey)
+  useEffect(() => {
+    if (current >= slides.length) setCurrent(0)
+  }, [current, slides.length])
+
+  const slide = slides[current] ?? slides[0]
 
   return (
     <section className="relative min-h-[88vh] overflow-hidden">
@@ -92,28 +86,34 @@ export function HeroCarousel() {
           className="max-w-4xl"
         >
           <Badge className="mb-6 border-gold/50 bg-gold/20 text-gold">
-            {t('site.location')}
+            {siteInfo.secondaryTitle || t('site.location')}
           </Badge>
           <h1 className="text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
-            {slide.featured ? (
+            {slide.featured && heroSlides.length === 0 ? (
               <>
                 {t('home.heroTitleLine1')}
                 <br />
                 <span className="gold-gradient">{t('home.heroTitleLine2')}</span>
               </>
+            ) : slide.titleLine2 ? (
+              <>
+                {slide.title}
+                <br />
+                <span className="gold-gradient">{slide.titleLine2}</span>
+              </>
             ) : (
-              title
+              slide.title
             )}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 md:text-xl">
-            {subtitle}
+            {slide.subtitle}
           </p>
           <div className="mt-10">
             <Button variant="gold" size="lg" asChild>
               {slide.href.startsWith('/') ? (
-                <Link to={slide.href}>{ctaLabel}</Link>
+                <Link to={slide.href}>{slide.ctaLabel}</Link>
               ) : (
-                <a href={slide.href}>{ctaLabel}</a>
+                <a href={slide.href}>{slide.ctaLabel}</a>
               )}
             </Button>
           </div>

@@ -7,18 +7,20 @@ import { QuickAccessBar } from '@/components/home/quick-access-bar'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { galleryImages } from '@/assets/parish-images'
-import { parishImages, parishLifeImages, commissionImageMap } from '@/assets/parish-images'
+import { parishImages } from '@/assets/parish-images'
 import { formatDate } from '@/lib/utils'
 import { siteConfig } from '@/config/site'
 import { EventMediaThumb } from '@/components/events/event-media'
 import { Clock, Users, Calendar, Church } from 'lucide-react'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
+import { VisitorMessageSection } from '@/components/contact/visitor-message-section'
 
 const statIcons = [Users, Calendar, Heart, Church]
 
 export function HomePage() {
   const { t, content } = useLanguage()
+  const { galleryImages: photos, commissionImageMap, curateMessageImage, aboutImage, siteInfo } = useSiteData()
   const today = new Date().toISOString().slice(0, 10)
 
   const stats = [
@@ -45,7 +47,7 @@ export function HomePage() {
           <div className="grid items-start gap-8 lg:grid-cols-5">
             <FadeIn className="lg:col-span-2">
               <img
-                src={parishImages.eglise}
+                src={curateMessageImage}
                 alt={t('home.churchAlt')}
                 className="aspect-[4/5] w-full rounded-2xl object-cover"
               />
@@ -85,7 +87,7 @@ export function HomePage() {
             </Button>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <img src={parishImages.paroisse} alt="" className="h-full min-h-[280px] rounded-2xl object-cover" />
+            <img src={aboutImage} alt="" className="h-full min-h-[280px] rounded-2xl object-cover" />
           </FadeIn>
         </div>
       </section>
@@ -146,6 +148,9 @@ export function HomePage() {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground">{ann.excerpt}</p>
+                    <Button variant="link" className="mt-3 h-auto p-0" asChild>
+                      <Link to={`/annonces/toutes/${ann.id}`}>{t('common.readMore')}</Link>
+                    </Button>
                   </CardContent>
                 </Card>
               </FadeIn>
@@ -153,7 +158,7 @@ export function HomePage() {
           </div>
           <div className="mt-8 text-center">
             <Button asChild>
-              <Link to="/evenements/annonces">{t('home.allNews')} <ArrowRight className="h-4 w-4" /></Link>
+              <Link to="/annonces/toutes">{t('home.allNews')} <ArrowRight className="h-4 w-4" /></Link>
             </Button>
           </div>
         </div>
@@ -185,7 +190,7 @@ export function HomePage() {
           </div>
           <div className="mt-8 text-center">
             <Button variant="outline" asChild>
-              <Link to="/evenements/calendrier">{t('common.allEvents')}</Link>
+              <Link to="/annonces/toutes">{t('common.allEvents')}</Link>
             </Button>
           </div>
         </div>
@@ -243,7 +248,7 @@ export function HomePage() {
         <div className="container-wide">
           <SectionHeading title={t('home.gallery')} />
           <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            {galleryImages.slice(0, 8).map((img, i) => (
+            {photos.slice(0, 8).map((img, i) => (
               <FadeIn key={img.id} delay={i * 0.04}>
                 <Link to="/medias" className="group relative block overflow-hidden rounded-xl">
                   <img
@@ -264,7 +269,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Donation CTA */}
+      {/* Donation CTA — désactivé temporairement, relance prévue
       <section className="section-padding bg-gold/10">
         <div className="container-wide text-center">
           <Heart className="mx-auto h-10 w-10 text-gold" />
@@ -275,6 +280,7 @@ export function HomePage() {
           </Button>
         </div>
       </section>
+      */}
 
       {/* Contact rapide */}
       <section id="contact" className="section-padding">
@@ -286,8 +292,8 @@ export function HomePage() {
                 <CardContent className="pt-6">
                   <Phone className="mx-auto h-8 w-8 text-gold" />
                   <p className="mt-4 font-semibold">{t('footer.contactHours')}</p>
-                  <a href={`tel:${siteConfig.contact.phone}`} className="mt-2 block text-sm text-muted-foreground hover:text-foreground">
-                    {siteConfig.contact.phoneDisplay}
+                  <a href={`tel:${siteInfo.phone}`} className="mt-2 block text-sm text-muted-foreground hover:text-foreground">
+                    {siteInfo.phoneDisplay}
                   </a>
                 </CardContent>
               </Card>
@@ -297,8 +303,8 @@ export function HomePage() {
                 <CardContent className="pt-6">
                   <Mail className="mx-auto h-8 w-8 text-gold" />
                   <p className="mt-4 font-semibold">{t('common.sendMessage')}</p>
-                  <a href={`mailto:${siteConfig.contact.email}`} className="mt-2 block text-sm text-muted-foreground hover:text-foreground">
-                    {siteConfig.contact.email}
+                  <a href="#laisser-un-message" className="mt-2 block text-sm text-muted-foreground hover:text-foreground">
+                    {t('visitorMessage.title')}
                   </a>
                 </CardContent>
               </Card>
@@ -309,7 +315,7 @@ export function HomePage() {
                   <MapPin className="mx-auto h-8 w-8 text-gold" />
                   <p className="mt-4 font-semibold">{t('home.visitUs')}</p>
                   <a href={siteConfig.map.link} target="_blank" rel="noopener noreferrer" className="mt-2 block text-sm text-muted-foreground hover:text-foreground">
-                    {siteConfig.address.full}
+                    {siteInfo.address}
                   </a>
                 </CardContent>
               </Card>
@@ -317,6 +323,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <VisitorMessageSection />
     </>
   )
 }

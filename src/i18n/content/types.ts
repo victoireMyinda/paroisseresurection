@@ -1,4 +1,4 @@
-import type { ChurchSectionId } from '@/config/navigation'
+import type { ChurchSectionId } from '../../config/navigation'
 
 export interface ContentBlock {
   heading?: string
@@ -60,6 +60,19 @@ export interface WeeklyDay {
   activities: { time: string; title: string; location: string }[]
 }
 
+export interface LiturgyCalendarContent {
+  liturgicalDay: string
+  nextEventTitle: string
+  nextEventDate: string
+  nextEventLocation: string
+  featuredTitle: string
+  featuredSubtitle: string
+  featuredDescription: string
+  featuredCtaLabel: string
+  featuredCtaHref: string
+  seasons: { name: string; note?: string }[]
+}
+
 export interface LiturgyDayContent {
   season: string
   color: string
@@ -68,6 +81,16 @@ export interface LiturgyDayContent {
   psalm: { reference: string; text: string }
   saint: { name: string; feast: string; meditation: string }
   homily: { title: string; liturgicalDay: string; heading: string; excerpt: string; content: string }
+  calendar?: LiturgyCalendarContent
+}
+
+export interface VisitSlot {
+  id: string
+  name: string
+  day: string
+  timeRange: string
+  location: string
+  phone: string
 }
 
 export interface SiteContent {
@@ -119,5 +142,9 @@ export interface SiteContent {
     description: string
     scheduleNote: string
     upcoming: { title: string; date: string; platform: string }[]
+  }
+  visitHours: {
+    secretary: VisitSlot[]
+    curate: VisitSlot[]
   }
 }

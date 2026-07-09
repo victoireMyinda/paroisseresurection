@@ -4,17 +4,20 @@ import { FadeIn } from '@/components/section-heading'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { parishImages } from '@/assets/parish-images'
 
 export function LiturgyCalendarPage() {
   const { t, content } = useLanguage()
   const { liturgy } = content
+  const { getBanner } = useSiteData()
+  const seasons = liturgy.calendar?.seasons ?? []
 
   return (
     <PageShell
       title={t('nav.liturgy.calendar')}
       subtitle={liturgy.season}
-      image={parishImages.chorale}
+      image={getBanner('/liturgie/calendrier', parishImages.chorale)}
       path="/liturgie/calendrier"
       subNav={liturgySubNav}
     >
@@ -22,19 +25,17 @@ export function LiturgyCalendarPage() {
         <Badge variant="gold" className="mb-4">{liturgy.color}</Badge>
         <h2 className="text-2xl font-bold">{liturgy.season}</h2>
         <p className="mt-4 text-muted-foreground leading-relaxed">
-          {t('liturgy.nextEvent')}: {liturgy.homily.liturgicalDay}
+          {liturgy.calendar?.nextEventTitle ?? t('liturgy.nextEvent')}: {liturgy.calendar?.nextEventDate ?? liturgy.homily.liturgicalDay}
         </p>
         <div className="mt-10 grid gap-4 text-left sm:grid-cols-2">
-          {['Avent', 'Noël', 'Carême', 'Pâques', 'Temps ordinaire', 'Pentecôte'].map((season) => (
-            <FadeIn key={season}>
+          {(seasons.length ? seasons : [{ name: liturgy.season }]).map((season) => (
+            <FadeIn key={season.name}>
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base">{season}</CardTitle>
+                  <CardTitle className="text-base">{season.name}</CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
-                  {season === liturgy.season.split(' ').slice(-2).join(' ') || season === 'Temps ordinaire'
-                    ? t('nav.liturgy.calendar')
-                    : '—'}
+                  {season.note ?? (season.name === liturgy.season ? t('nav.liturgy.calendar') : '—')}
                 </CardContent>
               </Card>
             </FadeIn>
@@ -48,12 +49,13 @@ export function LiturgyCalendarPage() {
 export function LiturgyHomilyPage() {
   const { t, content } = useLanguage()
   const { homily } = content.liturgy
+  const { getBanner } = useSiteData()
 
   return (
     <PageShell
       title={t('nav.liturgy.homily')}
       subtitle={homily.liturgicalDay}
-      image={parishImages.eglise}
+      image={getBanner('/liturgie/homelie', parishImages.eglise)}
       path="/liturgie/homelie"
       subNav={liturgySubNav}
     >
@@ -72,12 +74,13 @@ export function LiturgyHomilyPage() {
 export function LiturgyDailyPage() {
   const { t, content } = useLanguage()
   const { liturgy } = content
+  const { getBanner } = useSiteData()
 
   return (
     <PageShell
       title={t('nav.liturgy.daily')}
       subtitle={liturgy.saint.feast}
-      image={parishImages.statutmarie}
+      image={getBanner('/liturgie/parole-saint', parishImages.statutmarie)}
       path="/liturgie/parole-saint"
       subNav={liturgySubNav}
     >

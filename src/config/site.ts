@@ -51,24 +51,35 @@ export const siteConfig = {
 export const navLinkDefs = [
   { href: '/', key: 'nav.home' },
   { href: '/commissions', key: 'nav.commissions' },
-  { href: '/annonces-hebdomadaires', key: 'nav.weekly' },
-  { href: '/annonces', key: 'nav.news' },
-  { href: '/dons', key: 'nav.donations' },
+  { href: '/annonces/semaine', key: 'nav.weekly' },
+  { href: '/annonces/toutes', key: 'nav.news' },
+  // { href: '/dons', key: 'nav.donations' }, // Désactivé temporairement — relance prévue
   { href: '/medias', key: 'nav.media' },
   { href: '/contact', key: 'nav.contact' },
 ] as const
 
 export const quickLinkDefs = [
-  { href: '/annonces', key: 'quick.announcements' },
-  { href: '/annonces-hebdomadaires', key: 'quick.calendar' },
+  { href: '/annonces/toutes', key: 'quick.announcements' },
+  { href: '/annonces/semaine', key: 'quick.calendar' },
   { href: '/#direct', key: 'quick.live' },
-  { href: '/annonces-hebdomadaires', key: 'quick.myWeek' },
+  { href: '/annonces/semaine', key: 'quick.myWeek' },
 ] as const
 
 /** @deprecated use navLinkDefs with useLanguage().t() */
 export const navLinks = navLinkDefs.map((l) => ({ href: l.href, label: l.key }))
 /** @deprecated use quickLinkDefs with useLanguage().t() */
 export const quickLinks = quickLinkDefs.map((l) => ({ href: l.href, label: l.key }))
+
+export const footerNavLinkDefs = [
+  { href: '/', key: 'nav.home' },
+  { href: '/notre-paroisse/histoire', key: 'nav.parish.history' },
+  { href: '/visites-horaires', key: 'nav.parish.visits' },
+  { href: '/annonces/semaine', key: 'nav.weekly' },
+  { href: '/annonces/toutes', key: 'nav.news' },
+  { href: '/messe-en-direct', key: 'nav.live' },
+  { href: '/medias', key: 'nav.media' },
+  { href: '/contact', key: 'nav.contact' },
+] as const
 
 export const usefulLinks = [
   { name: 'Vatican News', url: 'https://www.vaticannews.va/fr.html' },

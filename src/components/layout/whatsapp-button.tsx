@@ -1,9 +1,11 @@
 import { MessageCircle } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { siteConfig } from '@/config/site'
+import { useSiteData } from '@/contexts/site-data-provider'
 
 export function WhatsAppButton() {
-  const url = `https://wa.me/${siteConfig.whatsapp.number}?text=${encodeURIComponent(siteConfig.whatsapp.message)}`
+  const { siteInfo } = useSiteData()
+  const number = siteInfo.whatsappNumber.replace(/\D/g, '')
+  const url = `https://wa.me/${number}?text=${encodeURIComponent(siteInfo.whatsappMessage)}`
 
   return (
     <motion.a

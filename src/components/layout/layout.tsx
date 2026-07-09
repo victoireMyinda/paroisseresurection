@@ -3,6 +3,7 @@ import { TopBar } from '@/components/layout/top-bar'
 import { Header, Footer } from '@/components/layout/header-footer'
 import { WhatsAppButton } from '@/components/layout/whatsapp-button'
 import { ScrollToTop } from '@/components/scroll-to-top'
+import { PageViewTracker } from '@/components/page-view-tracker'
 import { useLanguage } from '@/i18n/language-provider'
 
 export function Layout() {
@@ -18,6 +19,7 @@ export function Layout() {
       </a>
       <TopBar />
       <Header />
+      <PageViewTracker />
       <main id="main-content" className="flex-1">
         <Outlet />
       </main>

@@ -4,7 +4,7 @@ import { FadeIn } from '@/components/section-heading'
 import { useLanguage } from '@/i18n/language-provider'
 
 const quickItems = [
-  { href: '/notre-paroisse/annonces-semaine', key: 'nav.parish.weekly', icon: Bell },
+  { href: '/annonces/semaine', key: 'nav.announcements.weekly', icon: Bell },
   { href: '/liturgie/calendrier', key: 'nav.liturgy.calendar', icon: Calendar },
   { href: '/messe-en-direct', key: 'nav.live', icon: Radio },
   { href: '/eglise/histoire', key: 'nav.church', icon: BookOpen },

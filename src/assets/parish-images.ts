@@ -8,10 +8,13 @@ import grotte from './grotte.webp'
 import anciennegrotte from './anciennegrotte.webp'
 import nouvellegrotte from './nouvellegrotte.webp'
 import statutmarie from './statutmarie.webp'
+import mediaData from '@/data/media.json'
+import { resolvePhotoFullSrc, resolvePhotoSrc, resolveYoutubeUrls } from '@/lib/media-utils'
+import type { MediaPhotoData } from '@/lib/media-utils'
 
 export const parishImages = {
   hero: eglise,
-  logo: eglise,
+  logo: paroisse,
   eglise,
   paroisse,
   chorale,
@@ -27,34 +30,33 @@ export const parishImages = {
 export interface GalleryImage {
   id: string
   src: string
+  thumbSrc: string
   title: string
   category: string
 }
 
-export const galleryImages: GalleryImage[] = [
-  { id: '1', src: eglise, title: 'Notre église', category: 'Église' },
-  { id: '2', src: paroisse, title: 'Vue de la paroisse', category: 'Église' },
-  { id: '3', src: chorale, title: 'Chorale paroissiale', category: 'Liturgie' },
-  { id: '4', src: fidele, title: 'Communauté des fidèles', category: 'Vie paroissiale' },
-  { id: '5', src: cloche, title: 'Cloche paroissiale', category: 'Patrimoine' },
-  { id: '6', src: cloche2, title: 'Clocher', category: 'Patrimoine' },
-  { id: '7', src: grotte, title: 'Grotte mariale', category: 'Dévotion' },
-  { id: '8', src: anciennegrotte, title: 'Ancienne grotte', category: 'Histoire' },
-  { id: '9', src: nouvellegrotte, title: 'Nouvelle grotte', category: 'Dévotion' },
-  { id: '10', src: statutmarie, title: 'Statue de la Vierge Marie', category: 'Dévotion' },
-]
+export const galleryImages: GalleryImage[] = mediaData.photos.map((photo) => {
+  const p = photo as MediaPhotoData
+  return {
+    id: p.id,
+    src: resolvePhotoFullSrc(p),
+    thumbSrc: resolvePhotoSrc(p, true),
+    title: p.title,
+    category: p.category,
+  }
+})
 
-export const galleryVideos = [
-  {
-    id: 'v1',
-    title: 'Célébration paroissiale',
-    thumbnail: 'https://img.youtube.com/vi/FxMDSUhFgSk/hqdefault.jpg',
-    watchUrl: 'https://www.youtube.com/watch?v=FxMDSUhFgSk',
-    embedUrl: 'https://www.youtube.com/embed/FxMDSUhFgSk',
-  },
-  { id: 'v2', title: 'Chorale — Chants liturgiques', thumbnail: chorale, watchUrl: '#', embedUrl: '' },
-  { id: 'v3', title: 'Grotte mariale — Prière', thumbnail: grotte, watchUrl: '#', embedUrl: '' },
-]
+export const galleryVideos = mediaData.videos.map((video) => {
+  const urls = resolveYoutubeUrls(video.youtubeId)
+  return {
+    id: video.id,
+    title: video.title,
+    description: video.description,
+    thumbnail: urls.thumbnail || chorale,
+    watchUrl: urls.watchUrl || '#',
+    embedUrl: urls.embedUrl,
+  }
+})
 
 export const commissionImageMap: Record<string, string> = {
   liturgique: chorale,

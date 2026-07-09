@@ -12,19 +12,18 @@ export const mainNavigation: NavItem[] = [
     children: [
       { key: 'nav.parish.history', href: '/notre-paroisse/histoire' },
       { key: 'nav.parish.curates', href: '/notre-paroisse/cures' },
-      { key: 'nav.parish.weekly', href: '/notre-paroisse/annonces-semaine' },
       { key: 'nav.parish.masses', href: '/notre-paroisse/messes' },
       { key: 'nav.parish.commissions', href: '/notre-paroisse/commissions' },
       { key: 'nav.parish.groups', href: '/notre-paroisse/groupes' },
+      { key: 'nav.parish.visits', href: '/visites-horaires' },
     ],
   },
   {
-    key: 'nav.events',
-    href: '/evenements/annonces',
+    key: 'nav.announcements',
+    href: '/annonces/semaine',
     children: [
-      { key: 'nav.events.announcements', href: '/evenements/annonces' },
-      { key: 'nav.events.all', href: '/evenements/calendrier' },
-      { key: 'nav.events.works', href: '/evenements/travaux' },
+      { key: 'nav.announcements.weekly', href: '/annonces/semaine' },
+      { key: 'nav.announcements.all', href: '/annonces/toutes' },
     ],
   },
   {
@@ -61,7 +60,9 @@ export const mainNavigation: NavItem[] = [
 ]
 
 export const parishSubNav = mainNavigation.find((n) => n.key === 'nav.parish')!.children!
-export const eventsSubNav = mainNavigation.find((n) => n.key === 'nav.events')!.children!
+export const announcementsSubNav = mainNavigation.find((n) => n.key === 'nav.announcements')!.children!
+/** @deprecated Utiliser announcementsSubNav */
+export const eventsSubNav = announcementsSubNav
 export const liturgySubNav = mainNavigation.find((n) => n.key === 'nav.liturgy')!.children!
 export const churchSubNav = mainNavigation.find((n) => n.key === 'nav.church')!.children!
 
@@ -100,7 +101,10 @@ export const churchSectionIds: ChurchSectionId[] = [
 
 export const legacyRedirects: Record<string, string> = {
   '/commissions': '/notre-paroisse/commissions',
-  '/annonces-hebdomadaires': '/notre-paroisse/annonces-semaine',
-  '/annonces': '/evenements/annonces',
-  '/contact': '/#contact',
+  '/annonces-hebdomadaires': '/annonces/semaine',
+  '/notre-paroisse/annonces-semaine': '/annonces/semaine',
+  '/annonces': '/annonces/toutes',
+  '/evenements/annonces': '/annonces/toutes',
+  '/evenements/calendrier': '/annonces/toutes',
+  '/evenements/travaux': '/annonces/toutes',
 }

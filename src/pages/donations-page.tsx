@@ -14,12 +14,11 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { donations } from '@/data'
-import { siteConfig } from '@/config/site'
 import { useLanguage } from '@/i18n/language-provider'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { cn, formatCurrency, generateReceiptNumber } from '@/lib/utils'
 import { paymentLogos } from '@/assets/payment-logos'
-import { pageBanners } from '@/assets/parish-images'
+import { parishImages } from '@/assets/parish-images'
 
 type Currency = 'USD' | 'CDF'
 
@@ -29,6 +28,7 @@ interface PaymentMethod {
   accountName: string
   number: string
   currency: Currency
+  imageUrl?: string
 }
 
 interface ReceiptData {
@@ -68,7 +68,8 @@ function PaymentMethodCard({
   copiedId: string | null
 }) {
   const { t } = useLanguage()
-  const logo = paymentLogos[method.id] ?? paymentLogos.equity
+  const logo =
+    (method.imageUrl && method.imageUrl.trim()) || paymentLogos[method.id] || paymentLogos.equity
   const numberLabel = type === 'mobile' ? t('donationsPage.mobileNumber') : t('donationsPage.accountNumber')
   const isCopied = copiedId === method.id
 
@@ -119,6 +120,7 @@ function PaymentMethodCard({
 
 export function DonationsPage() {
   const { t, content } = useLanguage()
+  const { paymentMethods, getBanner } = useSiteData()
   const [form, setForm] = useState({
     phone: '',
     amount: '',
@@ -129,8 +131,24 @@ export function DonationsPage() {
   const [submitted, setSubmitted] = useState(false)
   const [copiedId, setCopiedId] = useState<string | null>(null)
 
-  const mobileMethods = donations.mobileMoney as PaymentMethod[]
-  const bankMethods = donations.bank as PaymentMethod[]
+  const mobileMethods: PaymentMethod[] = paymentMethods.mobile.map((m) => ({
+    id: m.id,
+    name: m.name,
+    accountName: m.accountName,
+    number: m.number,
+    currency: m.currency,
+    imageUrl: m.imageUrl,
+  }))
+
+  const bankMethods: PaymentMethod[] = paymentMethods.bank.map((m) => ({
+    id: m.id,
+    name: m.name,
+    accountName: m.accountName,
+    number: m.number,
+    currency: m.currency,
+    imageUrl: m.imageUrl,
+  }))
+
   const allMethods = [...mobileMethods, ...bankMethods]
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -198,7 +216,7 @@ ${siteConfig.contact.email}
       <PageHeader
         title={t('common.donate')}
         subtitle={content.donations.verses[0]?.text.slice(0, 80) + '…'}
-        image={pageBanners.dons}
+        image={getBanner('/dons', parishImages.statutmarie)}
       />
 
       <section className="section-padding">
