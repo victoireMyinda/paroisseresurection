@@ -142,15 +142,15 @@ const fr: TranslationDict = {
     myWeek: 'Ma semaine',
   },
   site: {
-    name: 'Paroisse Catholique de la Résurrection',
-    shortName: 'Paroisse de la Résurrection',
-    tagline: 'Une communauté de foi, d\'espérance et de charité au cœur de Lemba Salongo.',
-    location: 'Lemba Salongo — Kinshasa, RDC',
-    locationShort: 'Lemba Salongo, Kinshasa',
+    name: 'Portail paroissial',
+    shortName: 'Portail paroissial',
+    tagline: 'Une communauté de foi, d\'espérance et de charité au cœur de la Paroisse, Kinshasa (RDC).',
+    location: 'Kinshasa, RDC',
+    locationShort: 'Kinshasa, RDC',
     description:
-      'Une communauté de foi, d\'espérance et de charité au cœur de Lemba Salongo, Kinshasa (RDC).',
+      'Une communauté de foi, d\'espérance et de charité au cœur de la Paroisse, Kinshasa (RDC).',
     aboutExtra:
-      'Une paroisse de l\'Archidiocèse de Kinshasa au service des fidèles de Salongo-Sud.',
+      'Une paroisse de l\'Archidiocèse de Kinshasa au service des fidèles de la Paroisse.',
     copyright: 'Tous droits réservés.',
     archdiocese: 'Archidiocèse de Kinshasa — République Démocratique du Congo',
   },

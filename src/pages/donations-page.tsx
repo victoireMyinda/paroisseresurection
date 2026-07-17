@@ -186,7 +186,7 @@ export function DonationsPage() {
     if (!receipt) return
     const body = `
 REÇU DE DON
-Paroisse Catholique de la Résurrection
+Portail paroissial
 ${siteConfig.address.full}
 
 N° de reçu : ${receipt.receiptNumber}
