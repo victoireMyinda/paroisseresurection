@@ -1,7 +1,7 @@
 {
-  "name": "Paroisse Catholique de la Résurrection",
-  "short_name": "Paroisse Résurrection",
-  "description": "Une communauté de foi, d'espérance et de charité au cœur de Lemba Salongo, Kinshasa (RDC).",
+  "name": "Portail paroissial",
+  "short_name": "Portail paroissial",
+  "description": "Une communauté de foi, d'espérance et de charité au cœur de la Paroisse, Kinshasa (RDC).",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0D47A1",
@@ -10,9 +10,9 @@
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "/favicon.webp",
+      "src": "/favicon.svg",
       "sizes": "512x512",
-      "type": "image/webp",
+      "type": "image/svg+xml",
       "purpose": "any maskable"
     }
   ]

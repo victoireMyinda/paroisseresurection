@@ -1,8 +1,8 @@
 export const siteConfig = {
-  name: 'Paroisse Catholique de la Résurrection',
-  shortName: 'Paroisse de la Résurrection',
+  name: 'Portail paroissial',
+  shortName: 'Portail paroissial',
   description:
-    'Une communauté de foi, d\'espérance et de charité au cœur de Lemba Salongo, Kinshasa (RDC).',
+    'Une communauté de foi, d\'espérance et de charité au cœur de la Paroisse, Kinshasa (RDC).',
   url: 'https://paroisseresurrection-kinshasa.org',
   locale: 'fr_CD',
   address: {
@@ -53,7 +53,7 @@ export const navLinkDefs = [
   { href: '/commissions', key: 'nav.commissions' },
   { href: '/annonces/semaine', key: 'nav.weekly' },
   { href: '/annonces/toutes', key: 'nav.news' },
-  // { href: '/dons', key: 'nav.donations' }, // Désactivé temporairement — relance prévue
+  { href: '/dons', key: 'nav.donations' },
   { href: '/medias', key: 'nav.media' },
   { href: '/contact', key: 'nav.contact' },
 ] as const
