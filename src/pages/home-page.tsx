@@ -269,7 +269,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Donation CTA — désactivé temporairement, relance prévue
+      {/* Donation CTA */}
       <section className="section-padding bg-gold/10">
         <div className="container-wide text-center">
           <Heart className="mx-auto h-10 w-10 text-gold" />
@@ -280,7 +280,7 @@ export function HomePage() {
           </Button>
         </div>
       </section>
-      */}
+      
 
       {/* Contact rapide */}
       <section id="contact" className="section-padding">
