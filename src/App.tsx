@@ -5,6 +5,7 @@ import { SiteDataProvider, useSiteData } from '@/contexts/site-data-provider'
 import { LanguageProvider, useLanguage } from '@/i18n/language-provider'
 import { Layout } from '@/components/layout/layout'
 import { legacyRedirects } from '@/config/navigation'
+import { DonationsPage } from './pages/donations-page'
 
 const HomePage = lazy(() => import('@/pages/home-page').then((m) => ({ default: m.HomePage })))
 const ParishHistoryPage = lazy(() => import('@/pages/parish/history-page').then((m) => ({ default: m.ParishHistoryPage })))
@@ -111,7 +112,7 @@ function AppRoutes() {
 
             <Route path="messe-en-direct" element={<LiveStreamPage />} />
             <Route path="medias" element={<MediaPage />} />
-            {/* <Route path="dons" element={<DonationsPage />} /> */}
+            <Route path="dons" element={<DonationsPage />} /> 
             <Route path="contact" element={<ContactPage />} />
 
             <Route path="eglise/:section" element={<ChurchSectionPage />} />

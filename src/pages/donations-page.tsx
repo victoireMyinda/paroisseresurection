@@ -19,6 +19,7 @@ import { useSiteData } from '@/contexts/site-data-provider'
 import { cn, formatCurrency, generateReceiptNumber } from '@/lib/utils'
 import { paymentLogos } from '@/assets/payment-logos'
 import { parishImages } from '@/assets/parish-images'
+import { siteConfig } from '@/config/site'
 
 type Currency = 'USD' | 'CDF'
 
