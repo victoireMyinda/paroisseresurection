@@ -7,6 +7,14 @@ export interface NavItem {
 export const mainNavigation: NavItem[] = [
   { key: 'nav.home', href: '/' },
   {
+    key: 'nav.announcements',
+    href: '/annonces/semaine',
+    children: [
+      { key: 'nav.announcements.weekly', href: '/annonces/semaine' },
+      { key: 'nav.announcements.all', href: '/annonces/toutes' },
+    ],
+  },
+  {
     key: 'nav.parish',
     href: '/notre-paroisse/histoire',
     children: [
@@ -19,24 +27,17 @@ export const mainNavigation: NavItem[] = [
     ],
   },
   {
-    key: 'nav.announcements',
-    href: '/annonces/semaine',
-    children: [
-      { key: 'nav.announcements.weekly', href: '/annonces/semaine' },
-      { key: 'nav.announcements.all', href: '/annonces/toutes' },
-    ],
-  },
-  {
     key: 'nav.liturgy',
-    href: '/liturgie/calendrier',
+    href: '/liturgie/homelie',
     children: [
-      { key: 'nav.liturgy.calendar', href: '/liturgie/calendrier' },
       { key: 'nav.liturgy.homily', href: '/liturgie/homelie' },
       { key: 'nav.liturgy.daily', href: '/liturgie/parole-saint' },
+      { key: 'nav.liturgy.calendar', href: '/liturgie/calendrier' },
     ],
   },
   { key: 'nav.live', href: '/messe-en-direct' },
   { key: 'nav.media', href: '/medias' },
+  { key: 'nav.contact', href: '/contact' },
   {
     key: 'nav.church',
     href: '/eglise/histoire',
@@ -97,6 +98,70 @@ export const churchSectionIds: ChurchSectionId[] = [
   'papes',
   'vocations',
   'faq',
+]
+
+/** Liens essentiels — affichés en tête des menus mobile */
+export const priorityNavLinks: NavItem[] = [
+  { key: 'nav.home', href: '/' },
+  { key: 'nav.announcements.weekly', href: '/annonces/semaine' },
+  { key: 'nav.announcements.all', href: '/annonces/toutes' },
+  { key: 'nav.parish.history', href: '/notre-paroisse/histoire' },
+  { key: 'nav.liturgy.homily', href: '/liturgie/homelie' },
+  { key: 'nav.liturgy.daily', href: '/liturgie/parole-saint' },
+  { key: 'nav.live', href: '/messe-en-direct' },
+]
+
+/** Groupes complets pour plan du site et menus étendus */
+export interface SiteMenuGroup {
+  key: string
+  href?: string
+  priority?: boolean
+  children: NavItem[]
+}
+
+export const siteMenuGroups: SiteMenuGroup[] = [
+  {
+    key: 'nav.announcements',
+    href: '/annonces/semaine',
+    priority: true,
+    children: announcementsSubNav,
+  },
+  {
+    key: 'nav.parish',
+    href: '/notre-paroisse/histoire',
+    priority: true,
+    children: parishSubNav,
+  },
+  {
+    key: 'nav.liturgy',
+    href: '/liturgie/homelie',
+    priority: true,
+    children: liturgySubNav,
+  },
+  {
+    key: 'nav.live',
+    href: '/messe-en-direct',
+    priority: true,
+    children: [],
+  },
+  {
+    key: 'nav.media',
+    href: '/medias',
+    children: [],
+  },
+  {
+    key: 'nav.church',
+    href: '/eglise/histoire',
+    children: churchSubNav,
+  },
+  {
+    key: 'nav.services',
+    children: [
+      { key: 'nav.contact', href: '/contact' },
+      { key: 'nav.parish.visits', href: '/visites-horaires' },
+      { key: 'nav.donations', href: '/dons' },
+    ],
+  },
 ]
 
 export const legacyRedirects: Record<string, string> = {

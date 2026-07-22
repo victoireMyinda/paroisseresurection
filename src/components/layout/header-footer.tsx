@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button'
 import { useTheme } from '@/components/theme-provider'
 import { useLanguage } from '@/i18n/language-provider'
 import { useSiteData } from '@/contexts/site-data-provider'
-import { siteConfig, usefulLinks, footerNavLinkDefs } from '@/config/site'
+import { siteConfig, usefulLinks } from '@/config/site'
+import { siteMenuGroups } from '@/config/navigation'
 import { parishImages } from '@/assets/parish-images'
 import { SocialLinks } from '@/components/social-links'
 import { MainNav, MobileNav } from '@/components/navigation/main-nav'
@@ -76,15 +77,8 @@ export function Header() {
             className="border-t xl:hidden"
             aria-label={t('footer.navigation')}
           >
-            <div className="container-wide space-y-1 px-4 py-4">
+            <div className="container-wide max-h-[70vh] overflow-y-auto px-4 py-4">
               <MobileNav onNavigate={() => setMobileOpen(false)} />
-              {/* Désactivé temporairement — relance prévue
-              <Button variant="gold" className="mt-4 w-full" asChild>
-                <Link to="/dons" onClick={() => setMobileOpen(false)}>
-                  {t('common.donate')}
-                </Link>
-              </Button>
-              */}
             </div>
           </motion.nav>
         )}
@@ -147,7 +141,7 @@ export function Footer() {
 
       <div className="container-wide relative px-4 py-14 md:px-8 md:py-16 lg:px-12">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-10">
-          <div className="sm:col-span-2 lg:col-span-4">
+          <div className="sm:col-span-2 lg:col-span-3">
             <Link to="/" className="group mb-5 inline-flex items-center gap-3.5">
               <img
                 src={siteInfo.logoUrl || parishImages.logo}
@@ -178,6 +172,14 @@ export function Footer() {
               <ArrowRight className="h-4 w-4" aria-hidden />
             </Link>
 
+            <Link
+              to="/#explorer"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold/80"
+            >
+              {t('home.exploreSite')}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+
             <div className="mt-8">
               <p className="mb-3 text-[0.6875rem] font-bold uppercase tracking-[0.14em] text-gold/90">
                 {t('footer.followUs')}
@@ -187,17 +189,65 @@ export function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <FooterHeading>{t('footer.navigation')}</FooterHeading>
-            <ul className="space-y-2.5">
-              {footerNavLinkDefs.map((link) => (
-                <li key={link.href}>
-                  <FooterLink href={link.href}>{t(link.key)}</FooterLink>
+            <FooterHeading>{t('home.priorityNav')}</FooterHeading>
+            <ul className="space-y-2">
+              {siteMenuGroups
+                .filter((g) => g.priority)
+                .flatMap((group) =>
+                  group.children.length > 0
+                    ? group.children.map((child) => (
+                        <li key={child.href}>
+                          <FooterLink href={child.href}>{t(child.key)}</FooterLink>
+                        </li>
+                      ))
+                    : group.href
+                      ? [
+                          <li key={group.href}>
+                            <FooterLink href={group.href}>{t(group.key)}</FooterLink>
+                          </li>,
+                        ]
+                      : [],
+                )}
+            </ul>
+            <div className="mt-6">
+              <FooterHeading>{t('nav.media')}</FooterHeading>
+              <FooterLink href="/medias">{t('common.seeAll')}</FooterLink>
+            </div>
+          </div>
+
+          <div className="lg:col-span-2">
+            <FooterHeading>{t('nav.parish')}</FooterHeading>
+            <ul className="space-y-2">
+              {siteMenuGroups.find((g) => g.key === 'nav.parish')!.children.map((child) => (
+                <li key={child.href}>
+                  <FooterLink href={child.href}>{t(child.key)}</FooterLink>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-6">
+              <FooterHeading>{t('nav.services')}</FooterHeading>
+              <ul className="space-y-2">
+                {siteMenuGroups.find((g) => g.key === 'nav.services')!.children.map((child) => (
+                  <li key={child.href}>
+                    <FooterLink href={child.href}>{t(child.key)}</FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="lg:col-span-3">
+            <FooterHeading>{t('nav.church')}</FooterHeading>
+            <ul className="columns-1 gap-x-4 space-y-2 sm:columns-2">
+              {siteMenuGroups.find((g) => g.key === 'nav.church')!.children.map((child) => (
+                <li key={child.href} className="break-inside-avoid">
+                  <FooterLink href={child.href}>{t(child.key)}</FooterLink>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="lg:col-span-3">
+          <div className="sm:col-span-2 lg:col-span-2">
             <FooterHeading>{t('footer.contactAddress')}</FooterHeading>
             <ul className="space-y-4 text-sm">
               <li className="flex gap-3">
@@ -228,19 +278,19 @@ export function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
 
-          <div className="lg:col-span-3">
-            <FooterHeading>{t('footer.usefulLinks')}</FooterHeading>
-            <ul className="space-y-2.5">
-              {usefulLinks.map((link) => (
-                <li key={link.url}>
-                  <FooterLink href={link.url} external>
-                    {link.name}
-                  </FooterLink>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-8">
+              <FooterHeading>{t('footer.usefulLinks')}</FooterHeading>
+              <ul className="space-y-2.5">
+                {usefulLinks.map((link) => (
+                  <li key={link.url}>
+                    <FooterLink href={link.url} external>
+                      {link.name}
+                    </FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
               <div className="flex items-start gap-3">

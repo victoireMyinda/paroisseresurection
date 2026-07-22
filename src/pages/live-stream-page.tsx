@@ -12,8 +12,8 @@ import {
 } from '@/components/live/live-stream-ui'
 
 export function LiveStreamPage() {
-  const { t, content } = useLanguage()
-  const { liveStreamConfig, getBanner } = useSiteData()
+  const { t, content, liveStreamConfig } = useLanguage()
+  const { getBanner } = useSiteData()
   const { platforms, featuredVideo } = liveStreamConfig
   const isAnyLive = platforms.some((p) => p.isLive)
   const watchLabels = getWatchLabels(t)
@@ -74,7 +74,7 @@ export function LiveStreamPage() {
         streamHint={t('live.streamHint')}
       />
 
-      <p className="mt-8 text-center text-sm text-muted-foreground">{liveStreamConfig.notifyHint}</p>
+      <p className="mt-8 text-center text-sm text-muted-foreground">{t('live.notifyHint')}</p>
     </PageShell>
   )
 }

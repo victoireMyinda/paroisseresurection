@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { SectionHeading, FadeIn } from '@/components/section-heading'
 import { useLanguage } from '@/i18n/language-provider'
-import { useSiteData } from '@/contexts/site-data-provider'
 import {
   LiveFeaturedPlayer,
   LivePlatformCards,
@@ -10,8 +9,7 @@ import {
 } from '@/components/live/live-stream-ui'
 
 export function LiveMassesSection() {
-  const { t } = useLanguage()
-  const { liveStreamConfig } = useSiteData()
+  const { t, content, liveStreamConfig } = useLanguage()
   const { platforms, featuredVideo } = liveStreamConfig
   const isAnyLive = platforms.some((p) => p.isLive)
   const watchLabels = getWatchLabels(t)
@@ -28,12 +26,12 @@ export function LiveMassesSection() {
               liveLabel={t('live.liveBadge')}
               offlineLabel={t('common.noLiveNow')}
             />
-            <p className="text-sm text-muted-foreground">{liveStreamConfig.scheduleNote}</p>
+            <p className="text-sm text-muted-foreground">{content.live.scheduleNote}</p>
           </div>
         </FadeIn>
 
         <p className="mx-auto mb-10 max-w-2xl text-center text-muted-foreground leading-relaxed">
-          {liveStreamConfig.description}
+          {content.live.description}
         </p>
 
         <FadeIn>
@@ -62,7 +60,7 @@ export function LiveMassesSection() {
             viewport={{ once: true }}
             className="mt-8 text-center text-sm text-muted-foreground"
           >
-            {liveStreamConfig.notifyHint}
+            {t('live.notifyHint')}
           </motion.p>
         </FadeIn>
       </div>

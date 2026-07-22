@@ -1,35 +1,57 @@
 import { Link } from 'react-router-dom'
-import { Bell, Calendar, Radio, BookOpen } from 'lucide-react'
-import { FadeIn } from '@/components/section-heading'
+import { Bell, Church, Radio, BookOpen, Clock, Phone, LayoutGrid } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import { useLanguage } from '@/i18n/language-provider'
 
 const quickItems = [
-  { href: '/annonces/semaine', key: 'nav.announcements.weekly', icon: Bell },
-  { href: '/liturgie/calendrier', key: 'nav.liturgy.calendar', icon: Calendar },
-  { href: '/messe-en-direct', key: 'nav.live', icon: Radio },
-  { href: '/eglise/histoire', key: 'nav.church', icon: BookOpen },
+  { href: '/annonces/semaine', key: 'nav.announcements.weekly', icon: Bell, anchor: false },
+  { href: '#notre-paroisse', key: 'nav.parish', icon: Church, anchor: true },
+  { href: '/messe-en-direct', key: 'nav.live', icon: Radio, anchor: false },
+  { href: '#homelie', key: 'nav.liturgy.homily', icon: BookOpen, anchor: true },
+  { href: '#horaires', key: 'nav.parish.masses', icon: Clock, anchor: true },
+  { href: '/contact', key: 'nav.contact', icon: Phone, anchor: false },
+  { href: '#explorer', key: 'home.exploreSite', icon: LayoutGrid, anchor: true },
 ] as const
 
 export function QuickAccessBar() {
   const { t } = useLanguage()
 
   return (
-    <section className="relative z-20 -mt-10 px-4 md:px-8">
+    <section className="relative z-20 -mt-4 px-4 md:-mt-8 md:px-8" aria-label={t('home.quickAccess')}>
       <div className="container-wide">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {quickItems.map((link, i) => {
+        <div
+          className={cn(
+            'flex gap-3 overflow-x-auto pb-1',
+            'snap-x snap-mandatory scroll-px-4',
+            '[-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+          )}
+        >
+          {quickItems.map((link) => {
             const Icon = link.icon
-            return (
-              <FadeIn key={link.key} delay={i * 0.08}>
-                <Link to={link.href}>
-                  <div className="group flex items-center gap-4 rounded-xl border bg-card p-5 shadow-lg transition-all hover:-translate-y-1 hover:border-gold/40 hover:shadow-xl">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-gold/20 group-hover:text-gold dark:text-gold">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <p className="font-semibold text-sm leading-snug">{t(link.key)}</p>
-                  </div>
-                </Link>
-              </FadeIn>
+
+            const tile = (
+              <div
+                className={cn(
+                  'flex min-h-12 min-w-[7.5rem] snap-start flex-col items-center justify-center gap-1.5',
+                  'rounded-xl border bg-card px-3 py-3 shadow-md transition-colors',
+                  'hover:border-gold/40 hover:bg-accent/50 active:scale-[0.98]',
+                )}
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary dark:text-gold">
+                  <Icon className="h-5 w-5" aria-hidden />
+                </div>
+                <p className="text-center text-xs font-semibold leading-tight">{t(link.key)}</p>
+              </div>
+            )
+
+            return link.anchor ? (
+              <a key={link.key} href={link.href} className="shrink-0">
+                {tile}
+              </a>
+            ) : (
+              <Link key={link.key} to={link.href} className="shrink-0">
+                {tile}
+              </Link>
             )
           })}
         </div>

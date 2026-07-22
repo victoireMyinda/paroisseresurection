@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { mainNavigation } from '@/config/navigation'
 import { useLanguage } from '@/i18n/language-provider'
+import { SiteMenu } from '@/components/navigation/site-menu'
 
 function isActive(pathname: string, href: string) {
   if (href === '/') return pathname === '/'
@@ -36,7 +37,7 @@ export function MainNav() {
                 'flex items-center gap-1 rounded-md px-2.5 py-2 text-sm font-medium transition-colors hover:bg-accent',
                 isGroupActive(location.pathname, item)
                   ? 'text-primary dark:text-gold'
-                  : 'text-muted-foreground'
+                  : 'text-muted-foreground',
               )}
               aria-expanded={openKey === item.key}
             >
@@ -51,7 +52,7 @@ export function MainNav() {
                     to={child.href}
                     className={cn(
                       'block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent',
-                      isActive(location.pathname, child.href) && 'bg-accent font-medium'
+                      isActive(location.pathname, child.href) && 'bg-accent font-medium',
                     )}
                   >
                     {t(child.key)}
@@ -68,71 +69,17 @@ export function MainNav() {
               'rounded-md px-2.5 py-2 text-sm font-medium transition-colors hover:bg-accent',
               isActive(location.pathname, item.href)
                 ? 'bg-accent text-accent-foreground'
-                : 'text-muted-foreground'
+                : 'text-muted-foreground',
             )}
           >
             {t(item.key)}
           </Link>
-        )
+        ),
       )}
     </nav>
   )
 }
 
 export function MobileNav({ onNavigate }: { onNavigate?: () => void }) {
-  const { t } = useLanguage()
-  const location = useLocation()
-  const [expanded, setExpanded] = useState<string | null>(null)
-
-  return (
-    <div className="space-y-1">
-      {mainNavigation.map((item) =>
-        item.children ? (
-          <div key={item.key}>
-            <button
-              type="button"
-              onClick={() => setExpanded(expanded === item.key ? null : item.key)}
-              className="flex w-full items-center justify-between rounded-md px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-accent"
-            >
-              {t(item.key)}
-              <ChevronDown className={cn('h-4 w-4 transition-transform', expanded === item.key && 'rotate-180')} />
-            </button>
-            {expanded === item.key && (
-              <div className="ml-3 space-y-1 border-l pl-3">
-                {item.children.map((child) => (
-                  <Link
-                    key={child.href}
-                    to={child.href}
-                    onClick={onNavigate}
-                    className={cn(
-                      'block rounded-md px-3 py-2 text-sm',
-                      isActive(location.pathname, child.href)
-                        ? 'bg-accent font-medium text-accent-foreground'
-                        : 'text-muted-foreground hover:bg-accent'
-                    )}
-                  >
-                    {t(child.key)}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-        ) : (
-          <Link
-            key={item.href}
-            to={item.href}
-            onClick={onNavigate}
-            className={cn(
-              'block rounded-md px-3 py-2 text-sm font-medium',
-              isActive(location.pathname, item.href)
-                ? 'bg-accent text-accent-foreground'
-                : 'text-muted-foreground hover:bg-accent'
-            )}
-          >
-            {t(item.key)}
-          </Link>
-        )
-      )}
-    </div>
-  )
+  return <SiteMenu onNavigate={onNavigate} />
 }

@@ -33,7 +33,7 @@ export function HeroCarousel() {
         titleLine2: siteInfo.secondaryTitle || undefined,
         subtitle: t('home.heroFaith'),
         ctaLabel: t('home.discoverParish'),
-        href: '#mot-du-cure',
+        href: '#annonces',
         featured: true,
       },
     ]
@@ -57,7 +57,7 @@ export function HeroCarousel() {
   const slide = slides[current] ?? slides[0]
 
   return (
-    <section className="relative min-h-[88vh] overflow-hidden">
+    <section className="relative min-h-[40vh] max-h-[40vh] overflow-hidden md:min-h-[70vh] md:max-h-none lg:min-h-[88vh]">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -77,7 +77,7 @@ export function HeroCarousel() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="container-wide relative z-10 flex min-h-[88vh] flex-col items-center justify-center px-4 py-24 text-center text-white md:px-8">
+      <div className="container-wide relative z-10 flex min-h-[40vh] flex-col items-center justify-center px-4 py-10 text-center text-white md:min-h-[70vh] md:px-8 md:py-20 lg:min-h-[88vh] lg:py-24">
         <motion.div
           key={`content-${current}`}
           initial={{ opacity: 0, y: 24 }}
@@ -85,10 +85,10 @@ export function HeroCarousel() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="max-w-4xl"
         >
-          <Badge className="mb-6 border-gold/50 bg-gold/20 text-gold">
+          <Badge className="mb-3 border-gold/50 bg-gold/20 text-gold md:mb-6">
             {siteInfo.secondaryTitle || t('site.location')}
           </Badge>
-          <h1 className="text-4xl font-bold leading-tight md:text-6xl lg:text-7xl">
+          <h1 className="text-2xl font-bold leading-tight sm:text-3xl md:text-5xl lg:text-7xl">
             {slide.featured && heroSlides.length === 0 ? (
               <>
                 {t('home.heroTitleLine1')}
@@ -105,11 +105,11 @@ export function HeroCarousel() {
               slide.title
             )}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 md:text-xl">
+          <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/90 md:mt-6 md:text-xl">
             {slide.subtitle}
           </p>
-          <div className="mt-10">
-            <Button variant="gold" size="lg" asChild>
+          <div className="mt-5 md:mt-10">
+            <Button variant="gold" size="lg" className="min-h-11" asChild>
               {slide.href.startsWith('/') ? (
                 <Link to={slide.href}>{slide.ctaLabel}</Link>
               ) : (
