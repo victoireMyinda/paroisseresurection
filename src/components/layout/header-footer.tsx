@@ -19,22 +19,28 @@ export function Header() {
   const { siteInfo } = useSiteData()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-md supports-[backdrop-filter]:bg-background/85">
-      <div className="container-wide flex h-[4.25rem] items-center justify-between gap-3 px-4 md:px-8">
-        <Link to="/" className="group flex shrink-0 items-center gap-3" aria-label={t('common.home')}>
+    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/90 shadow-[0_1px_0_rgba(15,23,42,0.04)] backdrop-blur-md supports-[backdrop-filter]:bg-background/85 dark:shadow-[0_1px_0_rgba(255,255,255,0.05)]">
+      <div className="container-wide flex min-h-[4.25rem] items-center justify-between gap-2 px-3 py-1.5 sm:gap-3 sm:px-4 md:px-8">
+        <Link to="/" className="group flex min-w-0 flex-1 items-center gap-2 sm:gap-3" aria-label={t('common.home')}>
           <img
             src={siteInfo.logoUrl || parishImages.logo}
             alt={t('site.shortName')}
-            className="h-11 w-11 rounded-full object-cover ring-2 ring-gold/40 transition-shadow group-hover:ring-gold/70"
+            className="h-9 w-9 shrink-0 rounded-full object-cover ring-2 ring-gold/40 transition-shadow group-hover:ring-gold/60 dark:ring-gold/25 dark:group-hover:ring-gold/40 sm:h-11 sm:w-11"
             width={44}
             height={44}
           />
-          <div className="hidden sm:block">
-            <p className="font-display text-sm font-bold leading-tight tracking-tight text-primary dark:text-gold">
-              {siteInfo.primaryTitle || t('site.shortName')}
+          <div className="min-w-0 flex-1 space-y-px leading-none sm:space-y-0.5">
+            <p className="truncate text-[0.5625rem] font-medium uppercase tracking-wide text-muted-foreground sm:text-[0.625rem]">
+              {siteInfo.headerArchdiocese}
             </p>
-            <p className="text-[0.6875rem] font-medium uppercase tracking-wider text-muted-foreground">
-              {siteInfo.secondaryTitle || t('site.locationShort')}
+            <p className="truncate text-[0.5625rem] font-medium uppercase tracking-wide text-muted-foreground sm:text-[0.625rem]">
+              {siteInfo.headerDeanery}
+            </p>
+            <p className="truncate font-display text-[0.625rem] font-bold tracking-tight text-primary sm:text-sm">
+              {siteInfo.headerParish}
+            </p>
+            <p className="truncate text-[0.5625rem] font-medium uppercase tracking-wider text-muted-foreground sm:text-[0.6875rem]">
+              {siteInfo.headerLocation}
             </p>
           </div>
         </Link>
@@ -89,7 +95,7 @@ export function Header() {
 
 function FooterHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h3 className="mb-5 font-display text-base font-semibold text-gold">
+    <h3 className="footer-gold-accent mb-5 font-display text-base font-semibold text-gold">
       {children}
       <span className="mt-2.5 block h-0.5 w-10 rounded-full bg-gradient-to-r from-gold/80 to-gold/20" aria-hidden />
     </h3>
@@ -106,7 +112,7 @@ function FooterLink({
   external?: boolean
 }) {
   const className =
-    'group inline-flex items-center gap-1.5 text-sm text-white/72 transition-colors hover:text-white'
+    'group inline-flex items-center gap-1.5 text-sm text-[var(--chrome-muted)] transition-colors hover:text-[var(--chrome-fg)]'
 
   if (external) {
     return (
@@ -130,14 +136,14 @@ export function Footer() {
   const { siteInfo } = useSiteData()
 
   return (
-    <footer className="relative mt-auto overflow-hidden bg-gradient-to-b from-[#0c1929] via-royal to-[#0a3d8f] text-white">
+    <footer className="footer-chrome relative mt-auto overflow-hidden">
       <div
-        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.07]"
+        className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-[0.07] dark:opacity-[0.04]"
         style={{ backgroundImage: `url(${parishImages.paroisse})` }}
         aria-hidden
       />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(212,175,55,0.12),transparent)]" aria-hidden />
-      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-gold/70 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(212,175,55,0.12),transparent)] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(196,176,120,0.06),transparent)]" aria-hidden />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent dark:via-gold/30" />
 
       <div className="container-wide relative px-4 py-14 md:px-8 md:py-16 lg:px-12">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-10">
@@ -151,22 +157,22 @@ export function Footer() {
                 height={56}
               />
               <div>
-                <p className="font-display text-lg font-bold leading-tight text-white">
+                <p className="font-display text-lg font-bold leading-tight text-[var(--chrome-fg)]">
                   {siteInfo.primaryTitle || t('site.shortName')}
                 </p>
-                <p className="mt-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-white/55">
+                <p className="mt-0.5 text-[0.6875rem] font-semibold uppercase tracking-[0.14em] text-[var(--chrome-muted)]">
                   {siteInfo.secondaryTitle || t('site.locationShort')}
                 </p>
               </div>
             </Link>
 
-            <p className="max-w-sm text-sm leading-relaxed text-white/72">
+            <p className="max-w-sm text-sm leading-relaxed text-[var(--chrome-muted)]">
               {t('site.description')} {t('site.aboutExtra')}
             </p>
 
             <Link
               to="/notre-paroisse/histoire"
-              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold/80"
+              className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-gold/90 transition-colors hover:text-gold/80 dark:hover:text-primary"
             >
               {t('common.readMore')}
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -174,7 +180,7 @@ export function Footer() {
 
             <Link
               to="/#explorer"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold transition-colors hover:text-gold/80"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-gold/90 transition-colors hover:text-gold/80 dark:hover:text-primary"
             >
               {t('home.exploreSite')}
               <ArrowRight className="h-4 w-4" aria-hidden />
@@ -252,17 +258,17 @@ export function Footer() {
             <ul className="space-y-4 text-sm">
               <li className="flex gap-3">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
-                <span className="text-white/72 leading-relaxed">{siteInfo.address}</span>
+                <span className="text-[var(--chrome-muted)] leading-relaxed">{siteInfo.address}</span>
               </li>
               <li className="flex gap-3">
                 <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
-                <a href={`tel:${siteInfo.phone}`} className="text-white/72 transition-colors hover:text-white">
+                <a href={`tel:${siteInfo.phone}`} className="text-[var(--chrome-muted)] transition-colors hover:text-[var(--chrome-fg)]">
                   {siteInfo.phoneDisplay}
                 </a>
               </li>
               <li className="flex gap-3">
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
-                <a href={`mailto:${siteInfo.email}`} className="break-all text-white/72 transition-colors hover:text-white">
+                <a href={`mailto:${siteInfo.email}`} className="break-all text-[var(--chrome-muted)] transition-colors hover:text-[var(--chrome-fg)]">
                   {siteInfo.email}
                 </a>
               </li>
@@ -272,7 +278,7 @@ export function Footer() {
                   href={siteConfig.map.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/72 transition-colors hover:text-white"
+                  className="text-[var(--chrome-muted)] transition-colors hover:text-[var(--chrome-fg)]"
                 >
                   {t('home.visitUs')}
                 </a>
@@ -292,19 +298,19 @@ export function Footer() {
               </ul>
             </div>
 
-            <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+            <div className="mt-8 rounded-xl border border-[var(--chrome-border)] bg-[var(--chrome-pill)] p-4 backdrop-blur-sm">
               <div className="flex items-start gap-3">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold" aria-hidden />
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-gold/80" aria-hidden />
                 <div>
-                  <p className="text-sm font-semibold text-white">{t('footer.parishOffice')}</p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-white/65">{siteInfo.officeHours}</p>
+                  <p className="text-sm font-semibold text-[var(--chrome-fg)]">{t('footer.parishOffice')}</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-[var(--chrome-muted)]">{siteInfo.officeHours}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-8 text-center text-sm text-white/50 md:flex-row md:text-left">
+        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-[var(--chrome-border)] pt-8 text-center text-sm text-[var(--chrome-muted)] md:flex-row md:text-left">
           <p>
             © {new Date().getFullYear()} {t('site.name')}. {t('site.copyright')}
           </p>

@@ -76,7 +76,7 @@ export function SiteMenu({ onNavigate, showSearch = true, compact = false }: Sit
         <section aria-labelledby="site-menu-priority">
           <h2
             id="site-menu-priority"
-            className="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-primary dark:text-gold"
+            className="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-primary"
           >
             {t('home.priorityNav')}
           </h2>
@@ -89,7 +89,7 @@ export function SiteMenu({ onNavigate, showSearch = true, compact = false }: Sit
                 className={cn(
                   'flex min-h-11 items-center justify-between rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors',
                   isActive(location.pathname, link.href)
-                    ? 'border-primary/30 bg-primary/10 text-primary dark:border-gold/30 dark:bg-gold/10 dark:text-gold'
+                    ? 'border-primary/30 bg-primary/10 text-primary'
                     : 'bg-card hover:border-gold/30 hover:bg-accent',
                 )}
               >
@@ -116,7 +116,7 @@ export function SiteMenu({ onNavigate, showSearch = true, compact = false }: Sit
                   <Link
                     to={group.href}
                     onClick={onNavigate}
-                    className="mb-2 flex min-h-10 items-center gap-1 text-sm font-bold text-foreground hover:text-primary dark:hover:text-gold"
+                    className="mb-2 flex min-h-10 items-center gap-1 text-sm font-bold text-foreground hover:text-primary dark:hover:text-primary"
                   >
                     {t(group.key)}
                     <ChevronRight className="h-4 w-4 opacity-60" aria-hidden />
@@ -147,7 +147,7 @@ export function SiteMenu({ onNavigate, showSearch = true, compact = false }: Sit
                   <Link
                     to={group.href}
                     onClick={onNavigate}
-                    className="flex min-h-10 items-center text-sm font-medium text-primary hover:underline dark:text-gold"
+                    className="flex min-h-10 items-center text-sm font-medium text-primary hover:underline"
                   >
                     {t('common.seeAll')}
                   </Link>

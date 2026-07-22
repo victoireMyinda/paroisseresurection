@@ -77,7 +77,7 @@ function PaymentMethodCard({
   return (
     <div className="group rounded-lg border bg-card p-3 shadow-sm transition-colors hover:border-gold/35">
       <div className="flex gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border bg-white p-1.5 dark:bg-white/95">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border bg-card p-1.5">
           <img src={logo} alt="" className="max-h-full max-w-full object-contain" loading="lazy" />
         </div>
         <div className="min-w-0 flex-1 space-y-1.5">
@@ -96,7 +96,7 @@ function PaymentMethodCard({
               {numberLabel}
             </p>
             <div className="flex items-center gap-1">
-              <p className="truncate font-mono text-xs font-medium text-primary dark:text-gold">
+              <p className="truncate font-mono text-xs font-medium text-primary">
                 {method.number}
               </p>
               <button
@@ -218,6 +218,7 @@ ${siteConfig.contact.email}
         title={t('common.donate')}
         subtitle={content.donations.verses[0]?.text.slice(0, 80) + '…'}
         image={getBanner('/dons', parishImages.statutmarie)}
+        path="/dons"
       />
 
       <section className="section-padding">
@@ -233,7 +234,7 @@ ${siteConfig.contact.email}
                       className="border-l-4 border-gold pl-4 italic text-muted-foreground"
                     >
                       <p>&laquo; {verse.text} &raquo;</p>
-                      <cite className="mt-2 block text-sm font-semibold not-italic text-primary dark:text-gold">
+                      <cite className="mt-2 block text-sm font-semibold not-italic text-primary">
                         — {verse.reference}
                       </cite>
                     </blockquote>
@@ -294,7 +295,7 @@ ${siteConfig.contact.email}
                             className={cn(
                               'rounded-lg border px-4 py-2.5 text-sm font-semibold transition-all',
                               form.currency === cur
-                                ? 'border-gold bg-gold/15 text-primary dark:text-gold'
+                                ? 'border-gold bg-gold/15 text-primary'
                                 : 'border-input bg-background text-muted-foreground hover:border-gold/40'
                             )}
                           >

@@ -7,6 +7,7 @@ import { isFirebaseConfiguredForPublic, subscribeCmsData } from '@/firebase/site
 import {
   mapCmsToSiteData,
   getBannerForPath,
+  getPageBannerForPath,
   getCurateMessageImage,
   getAboutImage,
   emptyLiveConfig,
@@ -15,6 +16,7 @@ import {
   type SiteInfo,
   type PaymentMethodsGroup,
   type GalleryVideoItem,
+  type PageBannerContent,
 } from '@/firebase/map-to-content'
 import type { CmsDatabase, HomeHeroSlideRecord } from '@/types/cms'
 
@@ -27,11 +29,12 @@ interface SiteDataContextValue {
   heroSlides: HomeHeroSlideRecord[]
   galleryImages: GalleryImage[]
   galleryVideos: GalleryVideoItem[]
-  pageBanners: Record<string, string>
+  pageBanners: Record<string, PageBannerContent>
   commissionImageMap: Record<string, string>
   liveStreamConfig: LiveStreamConfig
   paymentMethods: PaymentMethodsGroup
   getBanner: (path: string, fallback?: string) => string
+  getPageBanner: (path: string) => PageBannerContent | undefined
   curateMessageImage: string
   aboutImage: string
 }
@@ -70,6 +73,7 @@ export function SiteDataProvider({ children }: { children: ReactNode }) {
       paymentMethods: mapped.paymentMethods,
       getBanner: (path, fallback = parishImages.chorale) =>
         getBannerForPath(mapped.pageBanners, path, fallback),
+      getPageBanner: (path) => getPageBannerForPath(mapped.pageBanners, path),
       curateMessageImage: getCurateMessageImage(rawData, parishImages.eglise),
       aboutImage: getAboutImage(rawData, parishImages.paroisse),
     }),

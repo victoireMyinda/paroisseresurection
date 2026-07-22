@@ -98,7 +98,7 @@ export function EventsCalendarPage() {
                 <div className="flex flex-1 flex-col gap-3 p-5 sm:flex-row sm:items-center sm:justify-between">
                   <div className="flex gap-4">
                     {!event.media && (
-                      <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-primary/10 text-primary dark:text-gold">
+                      <div className="flex h-14 w-14 shrink-0 flex-col items-center justify-center rounded-lg bg-primary/10 text-primary">
                         <span className="text-xs font-medium">
                           {new Date(event.date).toLocaleDateString(undefined, { month: 'short' })}
                         </span>

@@ -37,7 +37,7 @@ export function QuickAccessBar() {
                   'hover:border-gold/40 hover:bg-accent/50 active:scale-[0.98]',
                 )}
               >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary dark:text-gold">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Icon className="h-5 w-5" aria-hidden />
                 </div>
                 <p className="text-center text-xs font-semibold leading-tight">{t(link.key)}</p>

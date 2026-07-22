@@ -55,7 +55,7 @@ export function ParishCommissionsPage() {
                       </span>
                       <a
                         href={`mailto:${commission.contact}`}
-                        className="flex items-center gap-1 text-primary hover:underline dark:text-gold"
+                        className="flex items-center gap-1 text-primary hover:underline"
                       >
                         <Mail className="h-4 w-4" />
                         {commission.contact}
@@ -64,7 +64,7 @@ export function ParishCommissionsPage() {
                     <button
                       type="button"
                       onClick={() => setExpanded(expanded === commission.id ? null : commission.id)}
-                      className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:underline dark:text-gold"
+                      className="mt-4 flex items-center gap-2 text-sm font-medium text-primary hover:underline"
                       aria-expanded={expanded === commission.id}
                     >
                       {t('common.viewSubCommissions')}

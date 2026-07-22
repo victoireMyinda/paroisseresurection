@@ -18,7 +18,7 @@ export function VisitorMessageSection() {
           <FadeIn>
             <div className="flex h-full flex-col justify-center rounded-2xl border bg-card p-8 shadow-sm">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10">
-                <MessageSquare className="h-6 w-6 text-primary dark:text-gold" />
+                <MessageSquare className="h-6 w-6 text-primary" />
               </div>
               <h3 className="text-xl font-bold">{t('visitorMessage.cardTitle')}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

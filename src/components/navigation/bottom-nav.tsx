@@ -55,7 +55,7 @@ export function BottomNav() {
                   to={href}
                   className={cn(
                     'relative flex min-h-[56px] flex-col items-center justify-center gap-0.5 px-1 py-2 text-[0.6875rem] font-medium transition-colors',
-                    active ? 'text-primary dark:text-gold' : 'text-muted-foreground',
+                    active ? 'text-primary' : 'text-muted-foreground',
                   )}
                   aria-current={active ? 'page' : undefined}
                 >

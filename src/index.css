@@ -21,8 +21,8 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-royal: #0D47A1;
-  --color-gold: #D4AF37;
+  --color-royal: var(--royal);
+  --color-gold: var(--gold);
   --font-sans: var(--font-inter);
   --font-display: var(--font-playfair);
   --radius-lg: var(--radius);
@@ -52,27 +52,48 @@
   --input: #E5E7EB;
   --ring: #D4AF37;
   --radius: 0.75rem;
+  --royal: #0D47A1;
+  --gold: #D4AF37;
+  --chrome-bg: #0c1929;
+  --chrome-bg-end: #0a3d8f;
+  --chrome-fg: #ffffff;
+  --chrome-muted: rgba(255, 255, 255, 0.72);
+  --chrome-border: rgba(255, 255, 255, 0.12);
+  --chrome-pill: rgba(255, 255, 255, 0.1);
+  --chrome-pill-ring: rgba(255, 255, 255, 0.15);
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #F5F5F5;
-  --card: #141414;
-  --card-foreground: #F5F5F5;
-  --popover: #141414;
-  --popover-foreground: #F5F5F5;
-  --primary: #D4AF37;
-  --primary-foreground: #0a0a0a;
-  --secondary: #1F2937;
-  --secondary-foreground: #F5F5F5;
-  --muted: #1F2937;
-  --muted-foreground: #9CA3AF;
-  --accent: #1F2937;
-  --accent-foreground: #D4AF37;
-  --destructive: #EF4444;
-  --border: #374151;
-  --input: #374151;
-  --ring: #D4AF37;
+  /* Fond doux bleu-charbon — moins agressif que le noir pur */
+  --background: #111820;
+  --foreground: #E8EDF2;
+  --card: #1A2332;
+  --card-foreground: #E8EDF2;
+  --popover: #1A2332;
+  --popover-foreground: #E8EDF2;
+  /* Bleu adouci pour liens, titres et focus — bon contraste, peu saturé */
+  --primary: #8CB8E8;
+  --primary-foreground: #111820;
+  --secondary: #243044;
+  --secondary-foreground: #E8EDF2;
+  --muted: #243044;
+  --muted-foreground: #A8B5C6;
+  --accent: #243044;
+  --accent-foreground: #8CB8E8;
+  --destructive: #F07178;
+  --border: #2E3A4A;
+  --input: #2E3A4A;
+  --ring: #8CB8E8;
+  --royal: #7EB0DC;
+  --gold: #C4B078;
+  /* Chrome header/footer — harmonisé avec le fond, sans dégradé bleu vif */
+  --chrome-bg: #151C28;
+  --chrome-bg-end: #151C28;
+  --chrome-fg: #E8EDF2;
+  --chrome-muted: #94A3B8;
+  --chrome-border: #2A3544;
+  --chrome-pill: rgba(255, 255, 255, 0.06);
+  --chrome-pill-ring: rgba(255, 255, 255, 0.1);
 }
 
 @layer base {
@@ -88,8 +109,28 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
+  .dark body {
+    /* Légèrement plus aéré pour faciliter la lecture */
+    line-height: 1.65;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3 {
+    letter-spacing: 0.01em;
+  }
+
+  .dark a:focus-visible,
+  .dark button:focus-visible,
+  .dark select:focus-visible,
+  .dark input:focus-visible,
+  .dark textarea:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
@@ -100,6 +141,13 @@
 
   .gold-gradient {
     background: linear-gradient(135deg, #D4AF37 0%, #F5E6A3 50%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .gold-gradient {
+    background: linear-gradient(135deg, #C4B078 0%, #D8CFA8 50%, #C4B078 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -122,13 +170,51 @@
     );
   }
 
+  .dark .hero-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(17, 24, 32, 0.82) 0%,
+      rgba(17, 24, 32, 0.58) 50%,
+      rgba(10, 14, 20, 0.9) 100%
+    );
+  }
+
+  .topbar-chrome {
+    border-bottom: 1px solid var(--chrome-border);
+    background: linear-gradient(
+      to right,
+      var(--chrome-bg),
+      color-mix(in srgb, var(--royal) 40%, var(--chrome-bg)),
+      var(--chrome-bg-end)
+    );
+    color: var(--chrome-fg);
+  }
+
+  .footer-chrome {
+    background: linear-gradient(
+      to bottom,
+      var(--chrome-bg),
+      color-mix(in srgb, var(--royal) 35%, var(--chrome-bg)),
+      var(--chrome-bg-end)
+    );
+    color: var(--chrome-fg);
+  }
+
+  .dark .footer-chrome {
+    background: var(--chrome-bg);
+  }
+
+  .dark .footer-chrome .footer-gold-accent {
+    color: var(--gold);
+  }
+
   select.lang-on-dark {
     color-scheme: dark;
   }
 
   select.lang-on-dark option {
-    background-color: #0d47a1;
-    color: #ffffff;
+    background-color: var(--chrome-bg);
+    color: var(--chrome-fg);
   }
 }
 

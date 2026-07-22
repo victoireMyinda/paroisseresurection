@@ -61,7 +61,7 @@ export function LiturgyHomilyPage() {
     >
       <article className="mx-auto max-w-3xl">
         <Badge variant="gold" className="mb-4">{homily.liturgicalDay}</Badge>
-        <h2 className="text-3xl font-bold text-primary dark:text-gold">{homily.heading}</h2>
+        <h2 className="text-3xl font-bold text-primary">{homily.heading}</h2>
         <p className="mt-6 text-lg italic text-muted-foreground">{homily.excerpt}</p>
         <div className="mt-8 space-y-4 leading-relaxed text-muted-foreground">
           <p>{homily.content}</p>

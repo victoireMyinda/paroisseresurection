@@ -68,7 +68,7 @@ export function HomePage() {
             </FadeIn>
             <FadeIn delay={0.1} className="lg:col-span-3">
               <h2 className="text-2xl font-bold md:text-3xl">{content.parish.curateMessage.title}</h2>
-              <p className="mt-3 text-lg font-bold text-primary dark:text-gold">
+              <p className="mt-3 text-lg font-bold text-primary">
                 {content.parish.curateMessage.name}
               </p>
               <p className="text-sm font-medium text-muted-foreground">{content.parish.curateMessage.role}</p>
@@ -92,7 +92,7 @@ export function HomePage() {
                   {curateExpanded ? t('home.showLess') : t('common.readMore')}
                 </Button>
               </div>
-              <p className="mt-6 font-display text-lg italic text-primary dark:text-gold">
+              <p className="mt-6 font-display text-lg italic text-primary">
                 {content.parish.curateMessage.signature}
               </p>
             </FadeIn>
@@ -232,7 +232,7 @@ export function HomePage() {
                     </div>
                   ) : null}
                   <CardContent className={ev.media ? 'pt-4' : 'pt-6'}>
-                    <p className="text-2xl font-bold text-primary dark:text-gold">
+                    <p className="text-2xl font-bold text-primary">
                       {new Date(ev.date).getDate()}
                     </p>
                     <p className="text-xs text-muted-foreground">{formatDate(ev.date)}</p>
@@ -250,7 +250,7 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section-padding bg-primary text-primary-foreground">
+      <section className="section-padding bg-primary text-primary-foreground dark:border-y dark:border-border dark:bg-card dark:text-foreground">
         <div className="container-wide">
           <SectionHeading title={t('common.featuredCommissions')} subtitle={t('home.discoverCommissions')} />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -258,7 +258,7 @@ export function HomePage() {
               <FadeIn key={c.id} delay={i * 0.06}>
                 <Link
                   to="/notre-paroisse/commissions"
-                  className="group block overflow-hidden rounded-xl bg-white/10 backdrop-blur transition-colors hover:bg-white/15"
+                  className="group block overflow-hidden rounded-xl bg-white/10 backdrop-blur transition-colors hover:bg-white/15 dark:bg-muted/50 dark:hover:bg-muted/70"
                 >
                   <img
                     src={commissionImageMap[c.id] ?? parishImages.eglise}
@@ -266,7 +266,7 @@ export function HomePage() {
                     className="h-32 w-full object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="font-semibold group-hover:text-gold">{c.name}</h3>
+                    <h3 className="font-semibold group-hover:text-gold dark:group-hover:text-primary">{c.name}</h3>
                     <p className="mt-1 line-clamp-2 text-sm opacity-80">{c.mission}</p>
                   </div>
                 </Link>

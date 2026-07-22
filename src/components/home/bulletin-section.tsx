@@ -20,7 +20,7 @@ export function BulletinSection() {
               <Card className="group flex h-full flex-col transition-shadow hover:shadow-md">
                 <CardHeader>
                   <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10">
-                    <FileText className="h-5 w-5 text-primary dark:text-gold" />
+                    <FileText className="h-5 w-5 text-primary" />
                   </div>
                   <CardTitle className="text-base leading-snug group-hover:text-primary dark:group-hover:text-gold">
                     {item.title}

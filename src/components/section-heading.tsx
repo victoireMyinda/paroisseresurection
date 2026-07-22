@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { BannerArchdioceseTitle } from '@/components/banner-archdiocese-title'
+import { BannerHeadingTitle } from '@/components/banner-heading-title'
+import { useSiteData } from '@/contexts/site-data-provider'
 import { cn } from '@/lib/utils'
 
 interface SectionHeadingProps {
@@ -66,17 +68,26 @@ export function FadeIn({ children, delay = 0, className }: FadeInProps) {
 
 interface PageHeaderProps {
   title: string
+  titleLine2?: string
   subtitle?: string
   image?: string
+  path?: string
 }
 
-export function PageHeader({ title, subtitle, image }: PageHeaderProps) {
+export function PageHeader({ title, titleLine2, subtitle, image, path }: PageHeaderProps) {
+  const { getPageBanner } = useSiteData()
+  const cms = path ? getPageBanner(path) : undefined
+  const resolvedTitle = cms?.title || title
+  const resolvedTitleLine2 = cms?.titleLine2 || titleLine2
+  const resolvedSubtitle = cms?.description || subtitle
+  const resolvedImage = cms?.imageUrl || image
+
   return (
-    <section className="relative overflow-hidden py-16 text-primary-foreground md:py-20">
-      {image ? (
+    <section className="relative overflow-hidden py-12 text-primary-foreground md:py-16">
+      {resolvedImage ? (
         <>
           <img
-            src={image}
+            src={resolvedImage}
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
             loading="eager"
@@ -93,26 +104,29 @@ export function PageHeader({ title, subtitle, image }: PageHeaderProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-3 md:mb-4"
+          className="mb-2 md:mb-3"
         >
-          <BannerArchdioceseTitle />
+          <BannerArchdioceseTitle className="text-base sm:text-lg md:text-xl lg:text-2xl" />
         </motion.div>
-        <motion.h1
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="text-3xl font-bold md:text-5xl"
         >
-          {title}
-        </motion.h1>
-        {subtitle && (
+          <BannerHeadingTitle
+            title={resolvedTitle}
+            titleLine2={resolvedTitleLine2}
+            className="text-2xl font-bold leading-tight md:text-4xl"
+          />
+        </motion.div>
+        {resolvedSubtitle && (
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="mx-auto mt-4 max-w-2xl text-lg opacity-90"
+            className="mx-auto mt-3 max-w-2xl text-sm opacity-90 md:mt-4 md:text-base"
           >
-            {subtitle}
+            {resolvedSubtitle}
           </motion.p>
         )}
       </div>

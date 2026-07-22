@@ -13,13 +13,15 @@ const defaultNetworks: { id: SocialNetwork; name: string; url: string }[] = [
 
 interface SocialLinksProps {
   variant?: 'footer' | 'icons'
-  size?: 'sm' | 'md'
+  size?: 'sm' | 'md' | 'topBar'
   tone?: 'default' | 'onDark'
+  nowrap?: boolean
   className?: string
 }
 
 const iconSizes = {
   sm: { button: 'h-7 w-7', img: 'h-3.5 w-3.5', imgPx: 14 },
+  topBar: { button: 'h-8 w-8', img: 'h-3.5 w-3.5', imgPx: 14 },
   md: { button: 'h-10 w-10', img: 'h-5 w-5', imgPx: 20 },
 } as const
 
@@ -27,6 +29,7 @@ export function SocialLinks({
   variant = 'footer',
   size = 'md',
   tone = 'default',
+  nowrap = false,
   className,
 }: SocialLinksProps) {
   const { siteInfo } = useSiteData()
@@ -38,12 +41,12 @@ export function SocialLinks({
   const dims = iconSizes[size]
   const iconButtonClass =
     tone === 'onDark'
-      ? 'bg-white/10 ring-white/20 hover:bg-white/20 hover:ring-white/40'
+      ? 'bg-[var(--chrome-pill)] ring-[var(--chrome-pill-ring)] hover:bg-white/12 hover:ring-white/20'
       : 'bg-background ring-border hover:shadow-md'
 
   if (variant === 'icons') {
     return (
-      <div className={cn('flex flex-wrap items-center gap-2', className)}>
+      <div className={cn('flex items-center gap-2', nowrap ? 'flex-nowrap' : 'flex-wrap', className)}>
         {socialNetworks.map((network) => (
           <a
             key={network.id}
@@ -52,7 +55,7 @@ export function SocialLinks({
             rel="noopener noreferrer"
             aria-label={network.name}
             className={cn(
-              'flex items-center justify-center rounded-full shadow-sm ring-1 transition-transform hover:scale-105',
+              'flex shrink-0 items-center justify-center rounded-full shadow-sm ring-1 transition-colors hover:scale-105 active:scale-95',
               dims.button,
               iconButtonClass
             )}

@@ -12,7 +12,7 @@ export function SubNav({ items }: SubNavProps) {
   const location = useLocation()
 
   return (
-    <div className="border-b bg-muted/40">
+    <div className="border-b bg-muted/40 dark:bg-muted/20">
       <div className="container-wide overflow-x-auto px-4 md:px-8">
         <nav className="flex gap-1 py-2" aria-label={t('common.subNavigation')}>
           {items.map((item) => (
@@ -22,7 +22,7 @@ export function SubNav({ items }: SubNavProps) {
               className={cn(
                 'shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors',
                 location.pathname === item.href
-                  ? 'bg-primary text-primary-foreground'
+                  ? 'bg-primary/15 text-primary ring-1 ring-primary/20'
                   : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
               )}
             >

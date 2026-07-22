@@ -40,18 +40,18 @@ export function FeaturedBanner() {
       <div className="container-wide">
         <div className="grid gap-6 lg:grid-cols-3">
           <FadeIn className="lg:col-span-2">
-            <div className="relative overflow-hidden rounded-2xl bg-primary p-8 text-primary-foreground md:p-12">
-              <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-gold/10" />
-              <div className="absolute -bottom-12 -left-12 h-56 w-56 rounded-full bg-gold/5" />
+            <div className="relative overflow-hidden rounded-2xl bg-primary p-8 text-primary-foreground dark:border dark:border-border dark:bg-card dark:text-foreground md:p-12">
+              <div className="absolute -right-8 -top-8 h-40 w-40 rounded-full bg-gold/10 dark:bg-primary/5" />
+              <div className="absolute -bottom-12 -left-12 h-56 w-56 rounded-full bg-gold/5 dark:bg-primary/5" />
               <div className="relative">
-                <p className="text-sm font-medium uppercase tracking-wider text-gold">
+                <p className="text-sm font-medium uppercase tracking-wider text-gold dark:text-primary">
                   {theme.subtitle}
                 </p>
                 <h2 className="mt-3 text-3xl font-bold md:text-4xl">{theme.title}</h2>
-                <p className="mt-4 max-w-xl text-primary-foreground/85 leading-relaxed">
+                <p className="mt-4 max-w-xl leading-relaxed text-primary-foreground/85 dark:text-muted-foreground">
                   {theme.description}
                 </p>
-                <Button variant="gold" className="mt-8" asChild>
+                <Button variant="outline" className="mt-8 dark:border-primary/30 dark:bg-primary/10 dark:text-primary dark:hover:bg-primary/15" asChild>
                   <a href={theme.ctaHref}>
                     {theme.ctaLabel}
                     <ArrowRight className="h-4 w-4" />
@@ -63,7 +63,7 @@ export function FeaturedBanner() {
 
           <FadeIn delay={0.1}>
             <div className="flex h-full flex-col rounded-2xl border bg-card p-6 shadow-sm">
-              <div className="mb-4 flex items-center gap-2 text-primary dark:text-gold">
+              <div className="mb-4 flex items-center gap-2 text-primary">
                 <CalendarDays className="h-5 w-5" />
                 <h3 className="font-semibold">{t('liturgy.nextEvent')}</h3>
               </div>
@@ -81,7 +81,7 @@ export function FeaturedBanner() {
                       key={unit.value}
                       initial={{ scale: 0.9, opacity: 0.5 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      className="text-2xl font-bold text-primary dark:text-gold"
+                      className="text-2xl font-bold text-primary"
                     >
                       {String(unit.value).padStart(2, '0')}
                     </motion.p>

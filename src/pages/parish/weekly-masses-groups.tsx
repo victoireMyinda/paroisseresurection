@@ -35,7 +35,7 @@ export function ParishWeeklyPage() {
                 ) : (
                   day.activities.map((act) => (
                     <div key={act.title + act.time} className="border-l-2 border-gold/40 pl-3">
-                      <p className="text-sm font-semibold text-primary dark:text-gold">{act.time}</p>
+                      <p className="text-sm font-semibold text-primary">{act.time}</p>
                       <p className="font-medium">{act.title}</p>
                       <p className="text-xs text-muted-foreground">{act.location}</p>
                     </div>
@@ -67,7 +67,7 @@ export function ParishMassesPage() {
           <FadeIn key={schedule.category} delay={i * 0.06}>
             <Card className="h-full">
               <CardHeader>
-                <CardTitle className="text-lg text-primary dark:text-gold">{schedule.category}</CardTitle>
+                <CardTitle className="text-lg text-primary">{schedule.category}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
                 {schedule.items.map((item) => (

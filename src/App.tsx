@@ -40,7 +40,7 @@ function PageLoader() {
   const { t } = useLanguage()
   return (
     <div className="flex min-h-[50vh] items-center justify-center" role="status" aria-label={t('common.loading')}>
-      <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent dark:border-gold dark:border-t-transparent" />
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
     </div>
   )
 }
@@ -58,7 +58,7 @@ function FirebaseGate({ children }: { children: ReactNode }) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background" role="status">
         <div className="text-center">
-          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent dark:border-gold dark:border-t-transparent" />
+          <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
           <p className="mt-4 text-sm text-muted-foreground">{t('common.loading')}</p>
         </div>
       </div>

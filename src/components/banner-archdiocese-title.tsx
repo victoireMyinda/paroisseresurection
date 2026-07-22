@@ -1,3 +1,4 @@
+import { useSiteData } from '@/contexts/site-data-provider'
 import { useLanguage } from '@/i18n/language-provider'
 import { cn } from '@/lib/utils'
 
@@ -7,7 +8,9 @@ interface BannerArchdioceseTitleProps {
 
 /** Titre d'archidiocèse affiché en tête des bannières (hero, pages intérieures). */
 export function BannerArchdioceseTitle({ className }: BannerArchdioceseTitleProps) {
+  const { siteInfo } = useSiteData()
   const { t } = useLanguage()
+  const title = siteInfo.archdioceseBannerTitle || t('site.archdioceseBanner')
 
   return (
     <p
@@ -17,7 +20,7 @@ export function BannerArchdioceseTitle({ className }: BannerArchdioceseTitleProp
         className,
       )}
     >
-      {t('site.archdioceseBanner')}
+      {title}
     </p>
   )
 }

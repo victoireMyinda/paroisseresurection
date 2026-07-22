@@ -92,7 +92,7 @@ function HomilyCard({
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        <h3 className="text-lg font-bold text-primary dark:text-gold">{homily.heading}</h3>
+        <h3 className="text-lg font-bold text-primary">{homily.heading}</h3>
         {homily.excerpt ? (
           <p className="text-base leading-relaxed text-muted-foreground">{homily.excerpt}</p>
         ) : null}
@@ -131,7 +131,7 @@ function WordCard({
         <blockquote className="border-l-4 border-gold pl-4 text-base italic leading-relaxed text-muted-foreground">
           &laquo; {gospel.text} &raquo;
         </blockquote>
-        <cite className="mt-3 block text-sm font-semibold not-italic text-primary dark:text-gold">
+        <cite className="mt-3 block text-sm font-semibold not-italic text-primary">
           — {gospel.reference}
         </cite>
       </CardContent>

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { parishImages } from '@/assets/parish-images'
 import { BannerArchdioceseTitle } from '@/components/banner-archdiocese-title'
+import { BannerHeadingTitle } from '@/components/banner-heading-title'
 import { useLanguage } from '@/i18n/language-provider'
 import { useSiteData } from '@/contexts/site-data-provider'
 
@@ -29,8 +30,8 @@ export function HeroCarousel() {
     return [
       {
         image: siteInfo.logoUrl || parishImages.eglise,
-        title: siteInfo.primaryTitle || t('site.name'),
-        titleLine2: siteInfo.secondaryTitle || undefined,
+        title: siteInfo.primaryTitle || t('home.heroTitleLine1'),
+        titleLine2: t('home.heroTitleLine2'),
         subtitle: t('home.heroFaith'),
         ctaLabel: t('home.discoverParish'),
         href: '#annonces',
@@ -77,7 +78,7 @@ export function HeroCarousel() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="container-wide relative z-10 flex min-h-[40vh] flex-col items-center justify-center px-4 py-10 text-center text-white md:min-h-[70vh] md:px-8 md:py-20 lg:min-h-[88vh] lg:py-24">
+      <div className="container-wide relative z-10 flex min-h-[40vh] flex-col items-center justify-start px-4 pb-16 pt-5 text-center text-white sm:pt-6 md:min-h-[70vh] md:justify-center md:px-8 md:py-14 md:pb-20 lg:min-h-[88vh] lg:py-20">
         <motion.div
           key={`content-${current}`}
           initial={{ opacity: 0, y: 24 }}
@@ -85,29 +86,17 @@ export function HeroCarousel() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="max-w-4xl"
         >
-          <BannerArchdioceseTitle className="mb-3 md:mb-5" />
-          <h1 className="text-2xl font-bold leading-tight sm:text-3xl md:text-5xl lg:text-7xl">
-            {slide.featured && heroSlides.length === 0 ? (
-              <>
-                {t('home.heroTitleLine1')}
-                <br />
-                <span className="gold-gradient">{t('home.heroTitleLine2')}</span>
-              </>
-            ) : slide.titleLine2 ? (
-              <>
-                {slide.title}
-                <br />
-                <span className="gold-gradient">{slide.titleLine2}</span>
-              </>
-            ) : (
-              slide.title
-            )}
-          </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-white/90 md:mt-6 md:text-xl">
+          <BannerArchdioceseTitle className="mb-1.5 text-sm sm:text-base md:mb-3 md:text-xl lg:text-2xl" />
+          <BannerHeadingTitle
+            title={slide.title}
+            titleLine2={slide.titleLine2}
+            className="text-lg font-bold leading-tight sm:text-xl md:text-3xl lg:text-4xl"
+          />
+          <p className="mx-auto mt-2 max-w-2xl text-sm leading-snug text-white/90 md:mt-4 md:text-base lg:text-lg">
             {slide.subtitle}
           </p>
-          <div className="mt-5 md:mt-10">
-            <Button variant="gold" size="lg" className="min-h-11" asChild>
+          <div className="mt-3 md:mt-5">
+            <Button variant="gold" size="default" className="min-h-10 md:min-h-11 md:px-8 md:text-base" asChild>
               {slide.href.startsWith('/') ? (
                 <Link to={slide.href}>{slide.ctaLabel}</Link>
               ) : (
@@ -135,14 +124,14 @@ export function HeroCarousel() {
         <ChevronRight className="h-6 w-6" />
       </button>
 
-      <div className="absolute bottom-8 left-1/2 z-20 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 gap-2.5 sm:bottom-7 md:bottom-10">
         {slides.map((_, i) => (
           <button
             key={i}
             type="button"
             onClick={() => setCurrent(i)}
-            className={`h-2 rounded-full transition-all ${
-              i === current ? 'w-8 bg-gold' : 'w-2 bg-white/50 hover:bg-white/80'
+            className={`h-2.5 rounded-full transition-all ${
+              i === current ? 'w-9 bg-gold' : 'w-2.5 bg-white/50 hover:bg-white/80'
             }`}
             aria-label={`${t('common.goToSlide')} ${i + 1}`}
           />

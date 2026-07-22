@@ -45,7 +45,7 @@ export function HomeExploreSection() {
                 <article
                   className={cn(
                     'flex h-full flex-col rounded-xl border bg-card p-4 shadow-sm',
-                    group.priority && 'border-primary/20 dark:border-gold/20',
+                    group.priority && 'border-primary/20 dark:border-primary/20',
                   )}
                 >
                   <div className="mb-3 flex items-start gap-3">
@@ -53,7 +53,7 @@ export function HomeExploreSection() {
                       className={cn(
                         'flex h-10 w-10 shrink-0 items-center justify-center rounded-lg',
                         group.priority
-                          ? 'bg-primary/10 text-primary dark:bg-gold/10 dark:text-gold'
+                          ? 'bg-primary/10 text-primary'
                           : 'bg-muted text-muted-foreground',
                       )}
                     >
@@ -63,7 +63,7 @@ export function HomeExploreSection() {
                       {group.href ? (
                         <Link
                           to={group.href}
-                          className="group/title flex items-center gap-1 text-base font-bold leading-snug hover:text-primary dark:hover:text-gold"
+                          className="group/title flex items-center gap-1 text-base font-bold leading-snug hover:text-primary dark:hover:text-primary"
                         >
                           {t(group.key)}
                           <ChevronRight
@@ -93,7 +93,7 @@ export function HomeExploreSection() {
                       <li>
                         <Link
                           to={group.href}
-                          className="flex min-h-10 items-center rounded-md px-2 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-accent dark:text-gold"
+                          className="flex min-h-10 items-center rounded-md px-2 py-1.5 text-sm font-medium text-primary transition-colors hover:bg-accent"
                         >
                           {t('common.seeAll')}
                         </Link>

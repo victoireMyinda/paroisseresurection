@@ -29,7 +29,7 @@ export function PageShell({
   return (
     <>
       <SEO title={seoTitle ?? title} description={seoDescription ?? subtitle} path={path} />
-      <PageHeader title={title} subtitle={subtitle} image={image} />
+      <PageHeader title={title} subtitle={subtitle} image={image} path={path} />
       {subNav && <SubNav items={subNav} />}
       <section className="section-padding">
         <div className="container-wide">{children}</div>
@@ -48,7 +48,7 @@ export function ContentBlocks({ blocks }: ContentBlocksProps) {
       {blocks.map((block, i) => (
         <article key={i}>
           {block.heading && (
-            <h2 className="mb-4 text-2xl font-bold text-primary dark:text-gold">{block.heading}</h2>
+            <h2 className="mb-4 text-2xl font-bold text-primary">{block.heading}</h2>
           )}
           <div className="space-y-4 text-muted-foreground leading-relaxed">
             {block.paragraphs.map((p, j) => (

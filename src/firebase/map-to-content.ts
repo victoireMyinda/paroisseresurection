@@ -28,6 +28,11 @@ export interface SiteInfo {
   logoUrl: string
   primaryTitle: string
   secondaryTitle: string
+  archdioceseBannerTitle: string
+  headerArchdiocese: string
+  headerDeanery: string
+  headerParish: string
+  headerLocation: string
 }
 
 export interface PaymentMethodsGroup {
@@ -42,7 +47,7 @@ export interface MappedSiteData {
   heroSlides: HomeHeroSlideRecord[]
   galleryImages: GalleryImage[]
   galleryVideos: GalleryVideoItem[]
-  pageBanners: Record<string, string>
+  pageBanners: Record<string, PageBannerContent>
   commissionImageMap: Record<string, string>
   liveStreamConfig: LiveStreamConfig
   paymentMethods: PaymentMethodsGroup
@@ -59,6 +64,13 @@ export interface GalleryVideoItem {
   videoUrl?: string
 }
 
+export interface PageBannerContent {
+  imageUrl: string
+  title: string
+  titleLine2?: string
+  description: string
+}
+
 export const emptySiteInfo: SiteInfo = {
   phone: '',
   phoneDisplay: '',
@@ -71,6 +83,11 @@ export const emptySiteInfo: SiteInfo = {
   logoUrl: '',
   primaryTitle: '',
   secondaryTitle: '',
+  archdioceseBannerTitle: '',
+  headerArchdiocese: '',
+  headerDeanery: '',
+  headerParish: '',
+  headerLocation: '',
 }
 
 export const emptyLiveConfig: LiveStreamConfig = {
@@ -139,15 +156,22 @@ function buildGalleryVideos(videos: CmsDatabase['mediaVideos']): GalleryVideoIte
   })
 }
 
-function buildPageBanners(banners: CmsDatabase['pageBanners']): Record<string, string> {
-  const map: Record<string, string> = {}
+function buildPageBanners(banners: CmsDatabase['pageBanners']): Record<string, PageBannerContent> {
+  const map: Record<string, PageBannerContent> = {}
   for (const banner of banners) {
-    const key = banner.pagePath.replace(/^\//, '').replace(/\//g, '-') || banner.id
-    if (banner.imageUrl) {
-      map[key] = banner.imageUrl
-      map[banner.id] = banner.imageUrl
-      map[banner.pagePath] = banner.imageUrl
+    if (!banner.imageUrl) continue
+
+    const content: PageBannerContent = {
+      imageUrl: banner.imageUrl,
+      title: banner.title,
+      titleLine2: banner.titleLine2,
+      description: banner.description,
     }
+    const key = banner.pagePath.replace(/^\//, '').replace(/\//g, '-') || banner.id
+    map[key] = content
+    map[banner.id] = content
+    map[banner.pagePath] = content
+    map[banner.pagePath.replace(/^\//, '')] = content
   }
   return map
 }
@@ -158,6 +182,22 @@ function buildCommissionImageMap(commissions: CmsDatabase['parishCommissions']):
     if (c.imageUrl) map[c.id] = c.imageUrl
   }
   return map
+}
+
+const PARISH_LOGO_HEADER_DEFAULTS = {
+  headerArchdiocese: 'Archidiocèse de Kinshasa',
+  headerDeanery: 'Doyenné Elimo Santu',
+  headerParish: 'PAROISSE DE LA RESURRECTION',
+  headerLocation: 'Lemba/Salongo',
+  archdioceseBannerTitle: 'Archidiocèse de Kinshasa',
+} as const
+
+function resolveLogoHeaderField(
+  value: string | undefined,
+  fallback: string,
+): string {
+  const trimmed = value?.trim()
+  return trimmed || fallback
 }
 
 function buildSiteInfo(data: Partial<CmsDatabase>): SiteInfo {
@@ -183,6 +223,26 @@ function buildSiteInfo(data: Partial<CmsDatabase>): SiteInfo {
     logoUrl: logo?.imageUrl ?? '',
     primaryTitle: logo?.primaryTitle ?? '',
     secondaryTitle: logo?.secondaryTitle ?? '',
+    archdioceseBannerTitle: resolveLogoHeaderField(
+      logo?.archdioceseBannerTitle,
+      PARISH_LOGO_HEADER_DEFAULTS.archdioceseBannerTitle,
+    ),
+    headerArchdiocese: resolveLogoHeaderField(
+      logo?.headerArchdiocese,
+      PARISH_LOGO_HEADER_DEFAULTS.headerArchdiocese,
+    ),
+    headerDeanery: resolveLogoHeaderField(
+      logo?.headerDeanery,
+      PARISH_LOGO_HEADER_DEFAULTS.headerDeanery,
+    ),
+    headerParish: resolveLogoHeaderField(
+      logo?.headerParish,
+      PARISH_LOGO_HEADER_DEFAULTS.headerParish,
+    ),
+    headerLocation: resolveLogoHeaderField(
+      logo?.headerLocation,
+      PARISH_LOGO_HEADER_DEFAULTS.headerLocation,
+    ),
   }
 }
 
@@ -401,14 +461,21 @@ export function mapCmsToSiteData(data: Partial<CmsDatabase>): MappedSiteData {
   }
 }
 
-export function getBannerForPath(banners: Record<string, string>, path: string, fallback: string): string {
+export function getPageBannerForPath(
+  banners: Record<string, PageBannerContent>,
+  path: string,
+): PageBannerContent | undefined {
   const normalized = path.replace(/^\//, '')
   return (
     banners[normalized] ??
     banners[normalized.replace(/\//g, '-')] ??
     banners[path] ??
-    fallback
+    undefined
   )
+}
+
+export function getBannerForPath(banners: Record<string, PageBannerContent>, path: string, fallback: string): string {
+  return getPageBannerForPath(banners, path)?.imageUrl || fallback
 }
 
 export function getCurateMessageImage(data: Partial<CmsDatabase>, fallback: string): string {

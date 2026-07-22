@@ -48,6 +48,7 @@ export function ContactPage() {
         title={t('common.contact')}
         subtitle={t('visitorMessage.subtitle')}
         image={getBanner('/contact')}
+        path="/contact"
       />
 
       <section className="section-padding">
@@ -58,7 +59,7 @@ export function ContactPage() {
                 <Card className="h-full">
                   <CardContent className="flex items-start gap-4 p-6">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                      <item.icon className="h-5 w-5 text-primary dark:text-gold" />
+                      <item.icon className="h-5 w-5 text-primary" />
                     </div>
                     <div>
                       <h3 className="font-semibold">{item.title}</h3>

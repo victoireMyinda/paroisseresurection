@@ -112,7 +112,7 @@ export function MediaPage() {
   return (
     <>
       <SEO title={t('nav.media')} description={t('home.gallery')} path="/medias" />
-      <PageHeader title={t('nav.media')} subtitle={t('home.gallery')} image={getBanner('/medias', parishImages.chorale)} />
+      <PageHeader title={t('nav.media')} subtitle={t('home.gallery')} image={getBanner('/medias', parishImages.chorale)} path="/medias" />
 
       <section className="section-padding">
         <div className="container-wide">

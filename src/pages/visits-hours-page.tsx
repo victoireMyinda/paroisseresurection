@@ -34,23 +34,23 @@ function VisitSlotCard({ slot, accent }: { slot: VisitSlot; accent: 'royal' | 'g
 
         <div className="grid gap-3 sm:grid-cols-2">
           <div className="flex items-start gap-3">
-            <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary dark:text-gold" aria-hidden />
+            <CalendarDays className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t('visitsPage.day')}</p>
               <p className="mt-0.5 font-medium">{slot.day}</p>
             </div>
           </div>
           <div className="flex items-start gap-3">
-            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary dark:text-gold" aria-hidden />
+            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t('visitsPage.hours')}</p>
-              <p className="mt-0.5 font-semibold text-primary dark:text-gold">{slot.timeRange}</p>
+              <p className="mt-0.5 font-semibold text-primary">{slot.timeRange}</p>
             </div>
           </div>
         </div>
 
         <div className="flex items-start gap-3">
-          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary dark:text-gold" aria-hidden />
+          <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t('visitsPage.location')}</p>
             <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">{slot.location}</p>
@@ -59,7 +59,7 @@ function VisitSlotCard({ slot, accent }: { slot: VisitSlot; accent: 'royal' | 'g
 
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border/60 pt-4">
           <div className="flex items-center gap-2 text-sm">
-            <Phone className="h-4 w-4 text-primary dark:text-gold" aria-hidden />
+            <Phone className="h-4 w-4 text-primary" aria-hidden />
             <span className="font-medium">{slot.phone}</span>
           </div>
           {tel && (
