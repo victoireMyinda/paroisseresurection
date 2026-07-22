@@ -1,6 +1,6 @@
 export const siteConfig = {
-  name: 'Portail paroissial',
-  shortName: 'Portail paroissial',
+  name: 'Paroissedelaresurrection',
+  shortName: 'Paroissedelaresurrection',
   description:
     'Une communauté de foi, d\'espérance et de charité au cœur de la Paroisse, Kinshasa (RDC).',
   url: 'https://paroisseresurrection-kinshasa.org',

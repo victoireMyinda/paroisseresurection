@@ -145,8 +145,8 @@ const fr: TranslationDict = {
     myWeek: 'Ma semaine',
   },
   site: {
-    name: 'Portail paroissial',
-    shortName: 'Portail paroissial',
+    name: 'Paroissedelaresurrection',
+    shortName: 'Paroissedelaresurrection',
     tagline: 'Une communauté de foi, d\'espérance et de charité au cœur de la Paroisse, Kinshasa (RDC).',
     location: 'Kinshasa, RDC',
     locationShort: 'Kinshasa, RDC',
