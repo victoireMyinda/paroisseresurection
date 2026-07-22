@@ -156,6 +156,7 @@ const fr: TranslationDict = {
       'Une paroisse de l\'Archidiocèse de Kinshasa au service des fidèles de la Paroisse.',
     copyright: 'Tous droits réservés.',
     archdiocese: 'Archidiocèse de Kinshasa — République Démocratique du Congo',
+    archdioceseBanner: 'Archidiocèse de Kinshasa',
   },
   footer: {
     navigation: 'Navigation',
@@ -437,6 +438,7 @@ const en: TranslationDict = {
       'A parish of the Archdiocese of Kinshasa serving the faithful of Salongo-Sud.',
     copyright: 'All rights reserved.',
     archdiocese: 'Archdiocese of Kinshasa — Democratic Republic of the Congo',
+    archdioceseBanner: 'Archdiocese of Kinshasa',
   },
   footer: {
     navigation: 'Navigation',
@@ -636,6 +638,7 @@ const ln: TranslationDict = {
       'Paroisse ya Archidiocèse ya Kinshasa oyo esalaka mpo na bandeko ya Salongo-Sud.',
     copyright: 'Makoki nyonso batiyi.',
     archdiocese: 'Archidiocèse ya Kinshasa — République Démocratique du Congo',
+    archdioceseBanner: 'Archidiocèse ya Kinshasa',
   },
   footer: {
     navigation: 'Kobanda',
@@ -777,6 +780,7 @@ const lua: TranslationDict = {
       'Paroisse wa Archidiocèse wa Kinshasa udi usungila bantu ba Salongo-Sud.',
     copyright: 'Makabu yonso abikilwe.',
     archdiocese: 'Archidiocèse wa Kinshasa — République Démocratique du Congo',
+    archdioceseBanner: 'Archidiocèse wa Kinshasa',
   },
   footer: {
     navigation: 'Kutungila',
@@ -902,6 +906,7 @@ const kg: TranslationDict = {
       'Paroisse ya Archidiocèse ya Kinshasa kele kusala mpo na bantu ya Salongo-Sud.',
     copyright: 'Makabu yonso me beti.',
     archdiocese: 'Archidiocèse ya Kinshasa — République Démocratique du Congo',
+    archdioceseBanner: 'Archidiocèse ya Kinshasa',
   },
   footer: {
     navigation: 'Kutuka',
@@ -1060,6 +1065,7 @@ const sw: TranslationDict = {
       'Parokia ya Jimbo Kuu la Kinshasa inayowahudumia waumini wa Salongo-Sud.',
     copyright: 'Haki zote zimehifadhiwa.',
     archdiocese: 'Jimbo Kuu la Kinshasa — Jamhuri ya Kidemokrasia ya Kongo',
+    archdioceseBanner: 'Jimbo Kuu la Kinshasa',
   },
   footer: {
     navigation: 'Urambazaji',

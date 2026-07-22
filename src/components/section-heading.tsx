@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
+import { BannerArchdioceseTitle } from '@/components/banner-archdiocese-title'
 import { cn } from '@/lib/utils'
 
 interface SectionHeadingProps {
@@ -89,9 +90,17 @@ export function PageHeader({ title, subtitle, image }: PageHeaderProps) {
         </>
       )}
       <div className="container-wide relative px-4 text-center md:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-3 md:mb-4"
+        >
+          <BannerArchdioceseTitle />
+        </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
           className="text-3xl font-bold md:text-5xl"
         >
           {title}

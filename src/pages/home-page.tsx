@@ -52,8 +52,56 @@ export function HomePage() {
       <HeroCarousel />
       <QuickAccessBar />
 
-      {/* 1. Annonces — priorité mobile */}
-      <section id="annonces" className="section-padding pt-8 md:pt-12">
+      {/* 1. Mot du Curé */}
+      <section id="mot-du-cure" className="section-padding pt-8 md:pt-12">
+        <div className="container-wide">
+          <Badge variant="gold" className="mb-4">
+            {t('home.curateMessage')}
+          </Badge>
+          <div className="grid items-start gap-6 lg:grid-cols-5 lg:gap-8">
+            <FadeIn className="lg:col-span-2">
+              <img
+                src={curateMessageImage}
+                alt={t('home.churchAlt')}
+                className="mx-auto aspect-[4/3] w-full max-w-xs rounded-2xl object-cover sm:max-w-sm lg:aspect-[4/5] lg:max-w-none"
+              />
+            </FadeIn>
+            <FadeIn delay={0.1} className="lg:col-span-3">
+              <h2 className="text-2xl font-bold md:text-3xl">{content.parish.curateMessage.title}</h2>
+              <p className="mt-3 text-lg font-bold text-primary dark:text-gold">
+                {content.parish.curateMessage.name}
+              </p>
+              <p className="text-sm font-medium text-muted-foreground">{content.parish.curateMessage.role}</p>
+              <p className="mt-4 text-base font-semibold">{content.parish.curateMessage.greeting}</p>
+              <div
+                className={`mt-4 space-y-4 text-base leading-relaxed text-muted-foreground ${
+                  !curateExpanded ? 'line-clamp-6 lg:line-clamp-none' : ''
+                }`}
+              >
+                {curateParagraphs.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+              <div className="mt-4 lg:hidden">
+                <Button
+                  variant="outline"
+                  className="min-h-11"
+                  onClick={() => setCurateExpanded((v) => !v)}
+                  aria-expanded={curateExpanded}
+                >
+                  {curateExpanded ? t('home.showLess') : t('common.readMore')}
+                </Button>
+              </div>
+              <p className="mt-6 font-display text-lg italic text-primary dark:text-gold">
+                {content.parish.curateMessage.signature}
+              </p>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Annonces */}
+      <section id="annonces" className="section-padding">
         <div className="container-wide">
           <SectionHeading title={t('home.latestNews')} subtitle={t('home.latestNewsSub')} />
           <div className="grid gap-4">
@@ -99,7 +147,7 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 2. Notre paroisse */}
+      {/* 3. Notre paroisse */}
       <section id="notre-paroisse" className="section-padding bg-muted/50">
         <div className="container-wide">
           <SectionHeading title={t('home.about')} subtitle={t('home.parishIntroSub')} />
@@ -160,54 +208,6 @@ export function HomePage() {
                 <Link to="/notre-paroisse/messes">{t('nav.parish.masses')}</Link>
               </Button>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Mot du Curé */}
-      <section id="mot-du-cure" className="section-padding">
-        <div className="container-wide">
-          <Badge variant="gold" className="mb-4">
-            {t('home.curateMessage')}
-          </Badge>
-          <div className="grid items-start gap-6 lg:grid-cols-5 lg:gap-8">
-            <FadeIn className="lg:col-span-2">
-              <img
-                src={curateMessageImage}
-                alt={t('home.churchAlt')}
-                className="mx-auto aspect-[4/3] w-full max-w-xs rounded-2xl object-cover sm:max-w-sm lg:aspect-[4/5] lg:max-w-none"
-              />
-            </FadeIn>
-            <FadeIn delay={0.1} className="lg:col-span-3">
-              <h2 className="text-2xl font-bold md:text-3xl">{content.parish.curateMessage.title}</h2>
-              <p className="mt-3 text-lg font-bold text-primary dark:text-gold">
-                {content.parish.curateMessage.name}
-              </p>
-              <p className="text-sm font-medium text-muted-foreground">{content.parish.curateMessage.role}</p>
-              <p className="mt-4 text-base font-semibold">{content.parish.curateMessage.greeting}</p>
-              <div
-                className={`mt-4 space-y-4 text-base leading-relaxed text-muted-foreground ${
-                  !curateExpanded ? 'line-clamp-6 lg:line-clamp-none' : ''
-                }`}
-              >
-                {curateParagraphs.map((para, i) => (
-                  <p key={i}>{para}</p>
-                ))}
-              </div>
-              <div className="mt-4 lg:hidden">
-                <Button
-                  variant="outline"
-                  className="min-h-11"
-                  onClick={() => setCurateExpanded((v) => !v)}
-                  aria-expanded={curateExpanded}
-                >
-                  {curateExpanded ? t('home.showLess') : t('common.readMore')}
-                </Button>
-              </div>
-              <p className="mt-6 font-display text-lg italic text-primary dark:text-gold">
-                {content.parish.curateMessage.signature}
-              </p>
-            </FadeIn>
           </div>
         </div>
       </section>

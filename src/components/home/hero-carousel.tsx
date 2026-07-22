@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { parishImages } from '@/assets/parish-images'
+import { BannerArchdioceseTitle } from '@/components/banner-archdiocese-title'
 import { useLanguage } from '@/i18n/language-provider'
 import { useSiteData } from '@/contexts/site-data-provider'
 
@@ -85,9 +85,7 @@ export function HeroCarousel() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="max-w-4xl"
         >
-          <Badge className="mb-3 border-gold/50 bg-gold/20 text-gold md:mb-6">
-            {siteInfo.secondaryTitle || t('site.location')}
-          </Badge>
+          <BannerArchdioceseTitle className="mb-3 md:mb-5" />
           <h1 className="text-2xl font-bold leading-tight sm:text-3xl md:text-5xl lg:text-7xl">
             {slide.featured && heroSlides.length === 0 ? (
               <>
